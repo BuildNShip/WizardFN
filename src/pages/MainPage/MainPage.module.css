@@ -1,0 +1,55 @@
+.projectsSideBarContainer {
+  background-color: var(--primary-color);
+  width: fit-content;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.projectsSideBar {
+  padding: 1.5rem;
+}
+
+.projectsSideBarHeading {
+  color: var(--text-white);
+  font-size: 1rem;
+}
+.projects {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.project {
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  background-color: var(--tertiary-color);
+  border-radius: 0.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addProjects {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 4rem;
+  width: 4rem;
+
+  font-size: 2rem;
+  gap: 1rem;
+  background-color: var(--secondary-color);
+  color: var(--text-white);
+
+  border-radius: 0.5rem;
+  border: 2px solid var(--text-white);
+}
