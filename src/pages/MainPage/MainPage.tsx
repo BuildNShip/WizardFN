@@ -65,7 +65,7 @@ const MainPage = () => {
                                         </div>
                                         <div>
                                             <div className={styles.responseActive}>
-                                                <img src="/assets/active.png" alt="" className={styles.responseActiveDot} />
+                                               <div className={styles.responseActiveDot}></div>
                                             </div>
                                         </div>
                                     </div>

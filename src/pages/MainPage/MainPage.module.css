@@ -318,7 +318,44 @@
 .responseDeleteButton {
   background-color: #fc5753;
   padding: 0.3rem 0.8rem;
-  color: white;
+  font-weight: 600;
 
+  border-radius: 0.25rem;
+  color: white;
+  border: none;
   font-family: "Inter", sans-serif;
+}
+
+.responseActive {
+  width: 25px;
+  height: 25px;
+  border: 2px solid rgb(249, 238, 197, 0.5);
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.responseActiveDot {
+  animation: pulse 2s infinite;
+  width: 10px;
+  height: 10px;
+  background-color: var(--tertiary-color);
+
+  border-radius: 50%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgb(249, 238, 197, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgb(249, 238, 197, 0);
+  }
+  100% {
+    transform: scale(0.9);
+  }
 }
