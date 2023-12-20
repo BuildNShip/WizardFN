@@ -1,15 +1,15 @@
 .collectionsContainer {
   height: 100vh;
-  width: 20rem;
+  width: 28rem;
   background-color: var(--secondary-color);
 }
 
 .collectionsTopbar {
   padding: 1.5rem;
   display: flex;
-  flex-direction: row;
+  
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .collectionsTopbarUsername {
@@ -20,9 +20,9 @@
   padding-left: 0.5rem;
 
   display: flex;
-  flex-direction: row;
+  
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 
   border-radius: 0.5rem;
 }
@@ -42,15 +42,15 @@
 .collectionsMenuContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   padding: 1.5rem;
 }
 
 .searchMenu {
   display: flex;
-  flex-direction: row;
+  
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: 90%;
 
   border-radius: 0.5rem;
