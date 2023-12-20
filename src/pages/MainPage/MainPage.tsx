@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import styles from './MainPage.module.css'
 
 import { LuUploadCloud } from "react-icons/lu";
+import { PiFloppyDiskBack } from "react-icons/pi";
 
 const MainPage = () => {
     return (
@@ -38,6 +39,14 @@ const MainPage = () => {
                         <button className={styles.saveToWorkspace}><LuUploadCloud className={styles.saveButton} /> Save My Workspace</button>
                         <button className={styles.logoutButton}>Logout</button>
                     </div>
+                </div>
+
+
+                <div className={styles.urlContainer}>
+                    <p className={styles.urlLabel}>URL</p>
+                    <input className={styles.urlInput} placeholder="https://www.example.com" />
+                    <button className={styles.urlSendButton}>Send</button>
+                    <button className={styles.urlEditButton}><PiFloppyDiskBack className={styles.saveButton} size={20}/>Edit</button>
                 </div>
             </div>
         </div>
