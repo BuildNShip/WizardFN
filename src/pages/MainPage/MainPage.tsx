@@ -46,7 +46,44 @@ const MainPage = () => {
                     <p className={styles.urlLabel}>URL</p>
                     <input className={styles.urlInput} placeholder="https://www.example.com" />
                     <button className={styles.urlSendButton}>Send</button>
-                    <button className={styles.urlEditButton}><PiFloppyDiskBack className={styles.saveButton} size={20}/>Edit</button>
+                    <button className={styles.urlEditButton}><PiFloppyDiskBack className={styles.saveButton} size={20} />Edit</button>
+                </div>
+
+                <div className={styles.responsesViewContainer}>
+                    <div className={styles.responsesTypes}>
+                        <div className={`${styles.responseType} ${styles.active}`}>Type 1</div>
+                        <div className={styles.responseType}>Analytics</div>
+                    </div>
+                    <div className={styles.responseView}>
+                        <div className={styles.responseViewInnerContainer}>
+                            <div className={styles.response}>
+                                <div className={styles.responseTopBar}>
+                                    <div className={styles.responseTopBarButtons}>
+                                        <div>
+                                            <img src="/assets/close.png" alt="" className={styles.responseTopBarButton} />
+                                            <img src="/assets/maxmize.png" alt="" className={styles.responseTopBarButton} />
+                                        </div>
+                                        <div>
+                                            <div className={styles.responseActive}>
+                                                <img src="/assets/active.png" alt="" className={styles.responseActiveDot} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={styles.responseTopBarBButtons}>
+                                        <div className={styles.row}>
+                                            <select className={styles.selectButton} name="" id="">
+                                                <option value="">Type 1</option>
+                                                <option value="">Type 2</option>
+                                                <option value="">Type 3</option>
+                                            </select>
+                                            <div className={styles.responseTopBarButton}>View Desc</div>
+                                        </div>
+                                        <button className={styles.responseDeleteButton}>Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

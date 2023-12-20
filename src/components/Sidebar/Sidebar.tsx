@@ -7,9 +7,9 @@ const Sidebar = () => {
                 <p className={styles.projectsSideBarHeading}>Projects</p>
                 <div className={styles.projects}>
                     <div className={styles.project}>AB</div>
-                    <div className={styles.project}>CD</div>
-                    <div className={styles.project}>EF</div>
-                    <div className={styles.project}>GH</div>
+                    <div style={{ backgroundColor: "#4592FF", color: "#FFFFFF" }} className={styles.project}>CD</div>
+                    <div style={{ backgroundColor: "#997FFF", color: "#FFFFFF" }} className={styles.project}>EF</div>
+                    <div style={{ backgroundColor: "#00D8FF" }} className={styles.project}>GH</div>
                 </div>
                 <div className={styles.addProjects}>
                     <p className={styles.addProjectsPlus}>+</p>
