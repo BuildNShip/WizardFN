@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from "./Collections.module.css"
 import { buttons } from "./CollectionsData.ts"
-
-import { BiMenuAltRight } from "react-icons/bi";
 import { IoIosMenu } from "react-icons/io";
 
 

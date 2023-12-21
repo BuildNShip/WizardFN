@@ -65,7 +65,7 @@ const MainPage = () => {
                                         </div>
                                         <div>
                                             <div className={styles.responseActive}>
-                                               <div className={styles.responseActiveDot}></div>
+                                                <div className={styles.responseActiveDot}></div>
                                             </div>
                                         </div>
                                     </div>
@@ -81,6 +81,8 @@ const MainPage = () => {
                                         <button className={styles.responseDeleteButton}>Delete</button>
                                     </div>
                                 </div>
+
+                                <textarea className={styles.responseTextArea} placeholder="Response" />
                             </div>
                         </div>
                     </div>

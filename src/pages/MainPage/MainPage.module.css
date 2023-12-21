@@ -259,8 +259,8 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
 }
 
 .response {
@@ -270,6 +270,8 @@
   min-height: 20rem;
   overflow: hidden; /*add this*/
   border-radius: 0.5rem;
+
+  margin: 2rem;
 }
 
 .responseTopBar {
@@ -358,4 +360,20 @@
   100% {
     transform: scale(0.9);
   }
+}
+
+.responseTextArea {
+  width: 100%;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  color: var(--tertiary-color);
+  resize: none;
+}
+
+.responseTextArea:focus {
+  outline: none;
 }
