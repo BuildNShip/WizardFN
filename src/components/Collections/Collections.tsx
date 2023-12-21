@@ -1,6 +1,9 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import styles from "./Collections.module.css"
 import { buttons } from "./CollectionsData.ts"
+
+import { BiMenuAltRight } from "react-icons/bi";
+import { IoIosMenu } from "react-icons/io";
 
 
 const Collections = () => {
@@ -21,16 +24,19 @@ const Collections = () => {
 
     const renderSubMenu = (submenu: any[], level = 2) => {
         return (
-          <ul className={`submenu level-${level}`}>
-            {submenu.map((item, subIndex) => (
-              <li key={subIndex}>
-                {item.title}
-                {item.children && openMenus.includes(subIndex) && renderSubMenu(item.children, level + 1)}
-              </li>
-            ))}
-          </ul>
+            <ul className={`submenuLevel${level}`} style={{ margin: "1rem" }}>
+                {submenu.map((item, subIndex) => (
+                    <li className={styles.listItem} key={subIndex} style={{ margin: "1rem" }}>
+                        <p onClick={() => handleSubMenuToggle(subIndex)}>
+                            {item.title}
+                            {item.children && <IoIosMenu size={15} />}
+                        </p>
+                        {item.children && openMenus.includes(subIndex) && renderSubMenu(item.children, level + 1)}
+                    </li>
+                ))}
+            </ul>
         );
-      };
+    };
 
     return (
         <div className={styles.collectionsContainer}>
@@ -46,12 +52,16 @@ const Collections = () => {
                 </div>
                 <div className={styles.collectionsMenu}>
                     <nav>
-                        <ul className="menu">
+                        <ul className={styles.menu}>
                             {buttons.map((button, index) => (
-                                <li key={index}>
+                                <li className={styles.listItem} key={index} style={{ margin: "1rem", marginLeft: 0 }}>
                                     <p onClick={() => handleSubMenuToggle(index)}>
-                                        {button.title}
+                                        <div className={styles.row}>
+                                            <i className={`${button.icon} ${styles.listIcon}`} />{button.title}
+                                        </div>
+                                        {button.children && <IoIosMenu size={20} />}
                                     </p>
+
                                     {button.children && openMenus.includes(index) && renderSubMenu(button.children)}
                                 </li>
                             ))}

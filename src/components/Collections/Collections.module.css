@@ -7,7 +7,7 @@
 .collectionsTopbar {
   padding: 1.5rem;
   display: flex;
-  
+
   align-items: center;
   gap: 0.25rem;
 }
@@ -20,7 +20,7 @@
   padding-left: 0.5rem;
 
   display: flex;
-  
+
   align-items: center;
   gap: 0.25rem;
 
@@ -48,7 +48,7 @@
 
 .searchMenu {
   display: flex;
-  
+
   align-items: center;
   gap: 0.25rem;
   width: 90%;
@@ -57,4 +57,45 @@
   border: none !important;
 
   padding: 0.75rem 0.5rem;
+}
+
+.collectionsMenu {
+  display: flex;
+  flex-direction: column;
+  margin: 0rem;
+  margin-top: 1rem;
+}
+
+.menu {
+  list-style: none;
+  color: white;
+
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+li {
+  list-style: none;
+}
+
+.listIcon {
+  margin: 0 0.5rem;
+  font-size: 1.25rem;
+
+  color: var(--tertiary-color);
+}
+
+.listItem p{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
