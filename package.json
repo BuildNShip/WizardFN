@@ -1,5 +1,5 @@
 {
-  "hostname": "https://wizard.buildnship.in",
+  "hostname": "https://wizardapi.buildnship.in",
   "name": "wizard-frontend",
   "private": true,
   "version": "0.0.0",
