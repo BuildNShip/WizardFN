@@ -24,7 +24,7 @@ const Collections = () => {
         return (
             <ul className={`submenuLevel${level}`} style={{ margin: "1rem" }}>
                 {submenu.map((item, subIndex) => (
-                    <li className={styles.listItem} key={subIndex} style={{ margin: "1rem" }}>
+                    <li className={styles.listItem} key={subIndex} style={{ margin: "1.5rem 2.5rem" }}>
                         <p onClick={() => handleSubMenuToggle(subIndex)}>
                             {item.title}
                             {item.children && <IoIosMenu size={15} />}
@@ -55,7 +55,7 @@ const Collections = () => {
                                 <li className={styles.listItem} key={index} style={{ margin: "1rem", marginLeft: 0 }}>
                                     <p onClick={() => handleSubMenuToggle(index)}>
                                         <div className={styles.row}>
-                                            <i className={`${button.icon} ${styles.listIcon}`} />{button.title}
+                                            <div className={`${button.icon} ${styles.listIcon}`} />{button.title}
                                         </div>
                                         {button.children && <IoIosMenu size={20} />}
                                     </p>

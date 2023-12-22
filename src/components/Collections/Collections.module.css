@@ -64,6 +64,10 @@
   flex-direction: column;
   margin: 0rem;
   margin-top: 1rem;
+
+  height: 72.5vh;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .menu {
@@ -80,20 +84,20 @@ li {
 }
 
 .listIcon {
-  margin: 0 0.5rem;
-  font-size: 1.25rem;
-
-  color: var(--tertiary-color);
+  margin: 0 1rem;
+  width: 10px;
+  height: 10px;
 }
 
-.listItem p{
+.listItem p {
   display: flex;
   align-items: center;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.75rem;
 }
 
-.row{
+.row {
   display: flex;
   align-items: center;
   justify-content: space-between;

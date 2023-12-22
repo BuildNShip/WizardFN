@@ -1,15 +1,63 @@
 * {
   padding: 0;
   margin: 0;
+  
 }
 
 :root {
   --primary-color: #262626;
-  --secondary-color: #1F1F1F;
-  --tertiary-color: #F9EEC5;
+  --secondary-color: #1f1f1f;
+  --tertiary-color: #f9eec5;
 
   --light-skin: #706c5f;
 
   --text-white: #e6e6e6;
+  --red: #F24822;
+  --blue: #007BE5;
+  --yellow: #F3C11B;
+  --purple: #9747FF;
+  --grey: #667799;
 }
 
+.red{
+  color: var(--red);
+  background-color: var(--red);
+}
+
+.blue{
+  color: var(--blue);
+  background-color: var(--blue);
+}
+
+.yellow{
+  color: var(--yellow);
+  background-color: var(--yellow);
+}
+
+.purple{
+  color: var(--purple);
+  background-color: var(--purple);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333333;
+  padding: 1px;
+ 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #121212;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
