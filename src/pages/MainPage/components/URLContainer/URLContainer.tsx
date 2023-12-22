@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './URLContainer.module.css'
 import { PiFloppyDiskBack } from 'react-icons/pi'
 
