@@ -4,7 +4,7 @@ import ResponseContainer from "./components/ResponseContainer/ResponseContainer"
 import { useState } from "react";
 
 const ResponseView = () => {
-    const [responseCount, setResponseCount] = useState(1);
+    const [responseCount, setResponseCount] = useState(10);
     return (
         <div className={styles.responsesViewContainer}>
             <div className={styles.responsesTypes}>

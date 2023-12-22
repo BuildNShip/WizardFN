@@ -1,8 +1,7 @@
 .urlContainer {
-  padding: 0 2rem;
   display: flex;
   align-items: center;
-
+  padding-left: 2rem;
   height: 8vh;
 }
 
