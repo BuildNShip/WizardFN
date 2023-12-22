@@ -2,6 +2,8 @@
   height: 100vh;
   width: 28rem;
   background-color: var(--secondary-color);
+
+  border-right: 0.01px solid #413e36;
 }
 
 .collectionsTopbar {

@@ -3,6 +3,8 @@
   width: fit-content;
   height: 100vh;
   font-family: "Inter", sans-serif;
+
+  border-right: 0.01px solid #413e36;
 }
 
 .projectsSideBar {
