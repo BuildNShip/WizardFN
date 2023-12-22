@@ -39,6 +39,11 @@
   background-color: var(--purple);
 }
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;

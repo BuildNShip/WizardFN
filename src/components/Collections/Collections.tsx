@@ -5,6 +5,14 @@ import { IoIosMenu } from "react-icons/io";
 
 
 const Collections = () => {
+
+    type Button = {
+        url: string;
+        title: string;
+        icon?: string;
+        children?: Button[];
+    };
+    
     const [openMenus, setOpenMenus] = useState<number[]>([]);
 
     const handleSubMenuToggle = (index: number) => {
@@ -20,7 +28,7 @@ const Collections = () => {
         setOpenMenus(updatedMenus);
     };
 
-    const renderSubMenu = (submenu: any[], level = 2) => {
+    const renderSubMenu = (submenu: Button[], level = 2) => {
         return (
             <ul className={`submenuLevel${level}`} style={{ margin: "1rem" }}>
                 {submenu.map((item, subIndex) => (
