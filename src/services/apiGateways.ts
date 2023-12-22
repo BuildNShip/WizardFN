@@ -1,5 +1,4 @@
 import axios from "axios";
-import toast from "react-hot-toast";
 
 export const publicGateway = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL as string,
@@ -47,3 +46,4 @@ privateGateway.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+

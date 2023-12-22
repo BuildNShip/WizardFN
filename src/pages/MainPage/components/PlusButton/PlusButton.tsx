@@ -1,9 +1,11 @@
 import styles from './PlusButton.module.css'
 
-const PlusButton = () => {
+const PlusButton = ({ setResponseCount, responseCount }: { setResponseCount: (count: number) => void, responseCount: number }) => {
     return (
         <>
-            <div className={styles.plusButtonContainer}>
+            <div onClick={() => {
+                setResponseCount(responseCount + 1)
+            }} className={styles.plusButtonContainer}>
 
                 <div className={styles.line}></div>
                 <div className={styles.plusButton}>+</div>

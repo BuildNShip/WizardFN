@@ -17,11 +17,6 @@ const MainPage = () => {
                 <TopBar />
                 <URLContainer />
                 <ResponseView />
-
-
-
-
-
             </div>
         </div>
     )
