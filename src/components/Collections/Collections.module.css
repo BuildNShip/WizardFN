@@ -4,14 +4,18 @@
   background-color: var(--secondary-color);
 
   border-right: 0.01px solid #413e36;
+  height: 100vh;
 }
 
 .collectionsTopbar {
   padding: 1.5rem;
+  padding-bottom: none;
   display: flex;
 
   align-items: center;
   gap: 0.25rem;
+
+  height: 5vh;
 }
 
 .collectionsTopbarUsername {
@@ -46,6 +50,8 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 1.5rem;
+  padding-bottom: 0;
+  height: 85vh;
 }
 
 .searchMenu {
@@ -55,10 +61,14 @@
   gap: 0.25rem;
   width: 90%;
 
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   border: none !important;
 
   padding: 0.75rem 0.5rem;
+}
+
+.searchMenu:focus {
+  outline: none;
 }
 
 .collectionsMenu {
@@ -67,7 +77,7 @@
   margin: 0rem;
   margin-top: 1rem;
 
-  height: 72.5vh;
+
   overflow: auto;
   overflow-x: hidden;
 }

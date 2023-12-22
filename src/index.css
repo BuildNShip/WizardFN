@@ -1,7 +1,6 @@
 * {
   padding: 0;
   margin: 0;
-  
 }
 
 :root {
@@ -12,29 +11,29 @@
   --light-skin: #706c5f;
 
   --text-white: #e6e6e6;
-  --red: #F24822;
-  --blue: #007BE5;
-  --yellow: #F3C11B;
-  --purple: #9747FF;
+  --red: #f24822;
+  --blue: #007be5;
+  --yellow: #f3c11b;
+  --purple: #9747ff;
   --grey: #667799;
 }
 
-.red{
+.red {
   color: var(--red);
   background-color: var(--red);
 }
 
-.blue{
+.blue {
   color: var(--blue);
   background-color: var(--blue);
 }
 
-.yellow{
+.yellow {
   color: var(--yellow);
   background-color: var(--yellow);
 }
 
-.purple{
+.purple {
   color: var(--purple);
   background-color: var(--purple);
 }
@@ -46,7 +45,8 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
+  margin: 1rem;
   border-radius: 8px;
 }
 
@@ -54,7 +54,6 @@
 ::-webkit-scrollbar-track {
   background: #333333;
   padding: 1px;
- 
 }
 
 /* Handle */
