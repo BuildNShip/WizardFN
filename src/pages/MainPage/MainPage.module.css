@@ -271,6 +271,7 @@
   border-radius: 0.5rem;
 
   margin: 2rem;
+  margin-right: 0;
 }
 
 .responseTopBar {
@@ -375,4 +376,10 @@
 
 .responseTextArea:focus {
   outline: none;
+}
+
+.responseWithPlus{
+  display: flex;
+  align-items: center;
+
 }
