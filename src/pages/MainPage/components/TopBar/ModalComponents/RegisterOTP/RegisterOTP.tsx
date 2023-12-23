@@ -1,16 +1,19 @@
 //React Imports
-import { useState } from "react";
+import React, { useState } from "react";
 
 //Component Imports
-import Modal from "../../Modal/Modal";
+import Modal from "../../../Modal/Modal";
 
 //Styles Import
 import styles from "./RegisterOTP.module.css"
 
 //API Calling Fuctions
-import { preRegister, register } from "../../../../../apis/authentication";
+import { preRegister, register } from "../../../../../../apis/authentication";
 
-const RegisterOTP = ({ isModalOpen, setModalOpen }: { isModalOpen: boolean, setModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const RegisterOTP = ({ isModalOpen, setModalOpen, setLoginModalOpen }: {
+    isModalOpen: boolean, setModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
 
     const [showOTP, setShowOTP] = useState(false);
 
@@ -53,6 +56,10 @@ const RegisterOTP = ({ isModalOpen, setModalOpen }: { isModalOpen: boolean, setM
                                     {showOTP ? 'Verify OTP' : 'Send OTP'}
                                 </button>
                             </div>
+                            <p onClick={() => {
+                                setLoginModalOpen(true);
+                                setModalOpen(false);
+                            }} className={styles.subText}>Already have a Account? Login</p>
                         </div>
                     </Modal >
                 )

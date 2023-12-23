@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import styles from './TopBar.module.css'
 import { LuUploadCloud } from 'react-icons/lu'
-import RegisterOTP from './RegisterOTP/RegisterOTP';
+import RegisterOTP from './ModalComponents/RegisterOTP/RegisterOTP';
+import LoginPassword from './ModalComponents/LoginPassword/LoginPassword';
+import ForgetPassword from './ModalComponents/ForgetPassword/ForgetPassword';
 
 const TopBar = () => {
-    const [isModalOpen, setModalOpen] = useState(true);
+    const [isRegisterModalOpen, setRegisterModalOpen] = useState(true);
+    const [isLoginModalOpen, setLoginModalOpen] = useState(true);
+    const [isForgetPasswordModalOpen, setForgetPasswordModalOpen] = useState(false);
 
     return (
         <>
-            <RegisterOTP isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+            <RegisterOTP isModalOpen={isRegisterModalOpen} setModalOpen={setRegisterModalOpen} setLoginModalOpen={setLoginModalOpen} />
+            <LoginPassword isModalOpen={isLoginModalOpen} setModalOpen={setLoginModalOpen} setRegisterModalOpen={setRegisterModalOpen} setForgetPasswordModalOpen={setForgetPasswordModalOpen} />
+            <ForgetPassword isModalOpen={isForgetPasswordModalOpen} setModalOpen={setForgetPasswordModalOpen} setLoginModalOpen={setLoginModalOpen} />
             <div className={styles.mainAppTopbar}>
 
                 <div className={styles.topbarTabsContainer}>
@@ -34,8 +40,8 @@ const TopBar = () => {
                 <div className={styles.topbarActions}>
                     <button className={styles.saveToWorkspace}><LuUploadCloud className={styles.saveButton} /> Save My Workspace</button>
                     <button className={styles.logoutButton} onClick={() => {
-                        setModalOpen(true)
-                    }}>Login</button>
+                        setRegisterModalOpen(true)
+                    }}>Register</button>
                 </div>
             </div>
         </>

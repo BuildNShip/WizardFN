@@ -6,7 +6,9 @@ import { Toaster } from 'react-hot-toast'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Toaster />
+    <Toaster containerStyle={{
+      fontFamily: "Inter, sans-serif",
+    }} position='bottom-center' />
     <App />
   </React.StrictMode>,
 )
