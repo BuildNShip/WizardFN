@@ -3,7 +3,7 @@
 
   justify-content: space-between;
   align-items: center;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   padding-right: 2rem;
   height: 12vh;
 }
@@ -21,7 +21,7 @@
 .topbarTab {
   padding: 1rem 2rem;
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
 
@@ -32,7 +32,7 @@
   padding: 1rem 2rem;
 
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
   background-color: #242424;
@@ -52,7 +52,7 @@
   width: 3rem;
   font-size: 1.5rem;
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   background-color: var(--secondary-color);
 
@@ -67,7 +67,7 @@
   height: 1.75rem;
 
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   background-color: var(--tertiary-color);
   color: var(--secondary-color);
@@ -106,7 +106,7 @@
 .logoutButton {
   padding: 0.6rem 1rem;
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   background-color: var(--tertiary-color);
   color: var(--secondary-color);
@@ -121,4 +121,15 @@
   gap: 0.25rem;
 
   border: none;
+}
+
+/* Modal Styles */
+
+.modalContent {
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: start;
 }

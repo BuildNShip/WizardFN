@@ -6,4 +6,7 @@ export const buildVerse = {
   resetPassword: "/buildverse/reset-password/",
   updateProfile: "/buildverse/update-profile/",
   info: "/buildverse/info/",
+  guestRegister: "/buildverse/guest-register/",
+
+  getAccessToken: "/buildverse/get-access-token/",
 };

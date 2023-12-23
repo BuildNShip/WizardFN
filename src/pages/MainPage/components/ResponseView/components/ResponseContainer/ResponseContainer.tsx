@@ -4,7 +4,7 @@ import styles from './ResponseContainer.module.css'
 import { Editor } from "json5-editor"
 
 const ResponseContainer = () => {
-    const [jsonData, setJsonData] = useState(`
+  const [jsonData, setJsonData] = useState(`
     {
         "characters": [
           {
@@ -45,37 +45,40 @@ const ResponseContainer = () => {
         ]
       }
       `)
-    return (
-        <div className={styles.response}>
-            <div className={styles.responseTopBar}>
-                <div className={styles.responseTopBarButtons}>
-                    <div>
-                        <img src="/assets/close.png" alt="" className={styles.responseTopBarButton} />
-                        <img src="/assets/maxmize.png" alt="" className={styles.responseTopBarButton} />
-                    </div>
-                    <div>
-                        <div className={styles.responseActive}>
-                            <div className={styles.responseActiveDot}></div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.responseTopBarBButtons}>
-                    <div className={styles.row}>
-                        <select className={styles.selectButton} name="" id="">
-                            <option value="">Type 1</option>
-                            <option value="">Type 2</option>
-                            <option value="">Type 3</option>
-                        </select>
-                        <div className={styles.responseTopBarButton}>View Desc</div>
-                    </div>
-                    <button className={styles.responseDeleteButton}>Delete</button>
-                </div>
+  return (
+    <div className={styles.response}>
+      <div className={styles.responseTopBar}>
+        <div className={styles.responseTopBarButtons}>
+          <div>
+            <img src="/assets/close.png" alt="" className={styles.responseTopBarButton} />
+            <img src="/assets/maxmize.png" alt="" className={styles.responseTopBarButton} />
+          </div>
+          <div>
+            <div className={styles.responseActive}>
+              <div className={styles.responseActiveDot}></div>
             </div>
-            <Editor showLineNumber style={{
-                backgroundColor: "#1e1e1e",
-            }} value={jsonData} onChange={setJsonData} />
+          </div>
         </div>
-    )
+        <div className={styles.responseTopBarBButtons}>
+          <div className={styles.row}>
+            <select className={styles.selectButton} name="" id="">
+              <option value="">Type 1</option>
+              <option value="">Type 2</option>
+              <option value="">Type 3</option>
+            </select>
+            <div className={styles.responseTopBarButton}>View Desc</div>
+          </div>
+          <button className={styles.responseDeleteButton}>Delete</button>
+        </div>
+      </div>
+      <div className={styles.editorContainer}>
+        <Editor showLineNumber style={{
+          backgroundColor: "#1e1e1e",
+          zIndex: 0,
+        }} value={jsonData} onChange={setJsonData} />
+      </div>
+    </div>
+  )
 }
 
 export default ResponseContainer

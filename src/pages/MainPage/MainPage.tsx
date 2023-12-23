@@ -7,6 +7,7 @@ import URLContainer from './components/URLContainer/URLContainer'
 
 
 const MainPage = () => {
+   
     return (
         <div className={styles.mainContainer}>
             <Sidebar />
