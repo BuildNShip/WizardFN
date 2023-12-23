@@ -8,6 +8,7 @@
 }
 
 .projectsSideBar {
+  width:  4rem;
   padding: 1rem;
   height: 89vh;
 }
@@ -22,11 +23,14 @@
 .projectsContainer {
   margin-top: 2vh;
   height: 90vh;
+  overflow: hidden;
+}
+
+.projectsContainer:hover {
   overflow: auto;
 }
 
 .projects {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,12 +40,13 @@
 }
 
 .project {
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 3rem;
+  width: 3rem;
   text-align: center;
   background-color: var(--tertiary-color);
   border-radius: 0.25rem;
   font-size: 0.9rem;
+  margin: 0.5rem;
 
   display: flex;
   justify-content: center;
@@ -55,8 +60,8 @@
   justify-content: center;
   align-items: center;
 
-  height: 3.25rem;
-  width: 3.25rem;
+  height: 3rem;
+  width: 3rem;
 
   font-size: 1.5rem;
   gap: 1rem;

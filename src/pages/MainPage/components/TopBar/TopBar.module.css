@@ -71,7 +71,7 @@
   font-weight: 600;
   background-color: var(--tertiary-color);
   color: var(--secondary-color);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 
   display: flex;
   justify-content: center;
@@ -93,7 +93,7 @@
   background-color: #504e45;
   border: none;
   border: var(--tertiary-color) 2px solid;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   color: var(--tertiary-color);
 
   text-align: center;

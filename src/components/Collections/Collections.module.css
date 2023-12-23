@@ -8,11 +8,13 @@
 }
 
 .collectionsTopbar {
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
+  padding-left: 1.5rem;
   padding-bottom: none;
   display: flex;
 
   align-items: center;
+  justify-content: space-between;
   gap: 0.25rem;
 
   height: 5vh;
@@ -20,9 +22,9 @@
 
 .collectionsTopbarUsername {
   background-color: var(--tertiary-color);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-family: "Inter", sans-serif;
-  padding: 0.25rem 1.5rem;
+  padding: 0.15rem 1.15rem;
   padding-left: 0.5rem;
 
   display: flex;
@@ -30,7 +32,12 @@
   align-items: center;
   gap: 0.25rem;
 
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.exclamationMark {
+  color: var(--text-white);
+  margin-left: 0.25rem;
 }
 
 .collectionTopbarAvatar {
@@ -43,6 +50,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.addButton {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-white);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .collectionsMenuContainer {
@@ -76,7 +94,6 @@
   flex-direction: column;
   margin: 0rem;
   margin-top: 1rem;
-
 
   overflow: auto;
   overflow-x: hidden;

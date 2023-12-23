@@ -3,6 +3,8 @@ import styles from "./Collections.module.css"
 import { buttons } from "./CollectionsData.ts"
 import { IoIosMenu } from "react-icons/io";
 
+import { FaTriangleExclamation } from "react-icons/fa6";
+
 
 const Collections = () => {
 
@@ -12,7 +14,7 @@ const Collections = () => {
         icon?: string;
         children?: Button[];
     };
-    
+
     const [openMenus, setOpenMenus] = useState<number[]>([]);
 
     const handleSubMenuToggle = (index: number) => {
@@ -49,10 +51,14 @@ const Collections = () => {
 
 
             <div className={styles.collectionsTopbar}>
-                <div className={styles.collectionsTopbarUsername}>
-                    <div className={styles.collectionTopbarAvatar}>S</div>
-                    <div className={styles.collectionTopbarName}>Salman Faariz</div>
+                <div className={styles.row}>
+                    <div className={styles.collectionsTopbarUsername}>
+                        <div className={styles.collectionTopbarAvatar}>S</div>
+                        <div className={styles.collectionTopbarName}>Salman Faariz</div>
+                    </div>
+                    <FaTriangleExclamation size={25} className={styles.exclamationMark} />
                 </div>
+                <button className={styles.addButton}>+</button>
             </div>
 
 
@@ -61,7 +67,7 @@ const Collections = () => {
                     <input className={styles.searchMenu} type="text" placeholder="Search files, teams or people" />
                 </div>
 
-                
+
                 <div className={styles.collectionsMenu}>
                     <nav>
                         <ul className={styles.menu}>

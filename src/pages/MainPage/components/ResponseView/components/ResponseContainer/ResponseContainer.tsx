@@ -74,7 +74,6 @@ const ResponseContainer = () => {
             <Editor showLineNumber style={{
                 backgroundColor: "#1e1e1e",
             }} value={jsonData} onChange={setJsonData} />
-            <textarea className={styles.responseTextArea} placeholder="Response" />
         </div>
     )
 }
