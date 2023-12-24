@@ -9,12 +9,10 @@ import styles from "./LoginPassword.module.css"
 
 //API Calling Functions
 import { login } from "../../../../../../apis/authentication";
+import { ModalTriggersType } from "../../types";
 
-const LoginPassword = ({ isModalOpen, setModalOpen, setRegisterModalOpen, setForgetPasswordModalOpen }: {
-    isModalOpen: boolean,
-    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setRegisterModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setForgetPasswordModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
 }) => {
 
     const [email, setEmail] = useState('');
@@ -23,8 +21,8 @@ const LoginPassword = ({ isModalOpen, setModalOpen, setRegisterModalOpen, setFor
     return (
         <>
             {
-                isModalOpen && (
-                    <Modal isModalOpen={isModalOpen} setModalOpen={setModalOpen} >
+                modalTriggers[Modalname as keyof ModalTriggersType] && (
+                    <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
                                 Login
@@ -50,14 +48,19 @@ const LoginPassword = ({ isModalOpen, setModalOpen, setRegisterModalOpen, setFor
                                 </button>
                             </div>
                             <p onClick={() => {
-                                setRegisterModalOpen(true);
-                                setModalOpen(false);
+                                setModalTriggers({
+                                    ...modalTriggers,
+                                    isLoginModalOpen: false,
+                                    isRegisterModalOpen: true
+                                })
                             }} className={styles.subText}>Don't have an account? Register</p>
 
                             <p onClick={() => {
-                                setModalOpen(false);
-                                setForgetPasswordModalOpen(true);
-
+                                setModalTriggers({
+                                    ...modalTriggers,
+                                    isLoginModalOpen: false,
+                                    isForgetPasswordModalOpen: true
+                                })
                             }} className={styles.forgetPassword}>
                                 Forget Password? Click Here to Reset.
                             </p>

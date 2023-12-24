@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { forgetPassword, generateOTP, resetPassword } from "../../../../../../apis/authentication";
+import { forgetPassword, resetPassword } from "../../../../../../apis/authentication";
 import Modal from "../../../Modal/Modal";
 import styles from "./ForgetPassword.module.css"
+import { ModalTriggersType } from "../../types";
 
-const ForgetPassword = (
-    {
-        isModalOpen,
-        setModalOpen,
-        setLoginModalOpen
-    }: {
-        isModalOpen: boolean,
-        setModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-        setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    }
-) => {
+const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
+}) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
@@ -24,8 +17,8 @@ const ForgetPassword = (
     return (
         <>
             {
-                isModalOpen && (
-                    <Modal isModalOpen={isModalOpen} setModalOpen={setModalOpen} >
+                modalTriggers[Modalname as keyof ModalTriggersType] && (
+                    <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
                                 Forget Password
@@ -87,8 +80,11 @@ const ForgetPassword = (
                                 </button>
                             </div>
                             <p onClick={() => {
-                                setLoginModalOpen(true);
-                                setModalOpen(false);
+                                setModalTriggers({
+                                    ...modalTriggers,
+                                    isForgetPasswordModalOpen: false,
+                                    isLoginModalOpen: true
+                                })
                             }} className={styles.subText}>Remembered your password? Login</p>
                         </div>
                     </Modal >

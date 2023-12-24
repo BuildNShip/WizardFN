@@ -9,21 +9,22 @@ import styles from "./RegisterOTP.module.css"
 
 //API Calling Fuctions
 import { preRegister, register } from "../../../../../../apis/authentication";
+import { ModalTriggersType } from "../../types";
 
-const RegisterOTP = ({ isModalOpen, setModalOpen, setLoginModalOpen }: {
-    isModalOpen: boolean, setModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+
+const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
 }) => {
 
     const [showOTP, setShowOTP] = useState(false);
-
     const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
+    
     return (
         <>
             {
-                isModalOpen && (
-                    <Modal isModalOpen={isModalOpen} setModalOpen={setModalOpen} >
+                modalTriggers[Modalname as keyof ModalTriggersType] && (
+                    <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
                                 Register Now
@@ -57,11 +58,15 @@ const RegisterOTP = ({ isModalOpen, setModalOpen, setLoginModalOpen }: {
                                 </button>
                             </div>
                             <p onClick={() => {
-                                setLoginModalOpen(true);
-                                setModalOpen(false);
+                                setModalTriggers({
+                                    ...modalTriggers,
+                                    isRegisterModalOpen: false,
+                                    isLoginModalOpen: true,
+                                    isForgetPasswordModalOpen: false
+                                })
                             }} className={styles.subText}>Already have a Account? Login</p>
                         </div>
-                    </Modal >
+                    </Modal>
                 )
             }</>
     )

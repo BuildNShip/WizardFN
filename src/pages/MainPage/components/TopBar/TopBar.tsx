@@ -4,17 +4,21 @@ import { LuUploadCloud } from 'react-icons/lu'
 import RegisterOTP from './ModalComponents/RegisterOTP/RegisterOTP';
 import LoginPassword from './ModalComponents/LoginPassword/LoginPassword';
 import ForgetPassword from './ModalComponents/ForgetPassword/ForgetPassword';
+import { ModalTriggersType } from './types';
 
 const TopBar = () => {
-    const [isRegisterModalOpen, setRegisterModalOpen] = useState(true);
-    const [isLoginModalOpen, setLoginModalOpen] = useState(true);
-    const [isForgetPasswordModalOpen, setForgetPasswordModalOpen] = useState(false);
+    const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
+        isRegisterModalOpen: true,
+        isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false
+    });
+
 
     return (
         <>
-            <RegisterOTP isModalOpen={isRegisterModalOpen} setModalOpen={setRegisterModalOpen} setLoginModalOpen={setLoginModalOpen} />
-            <LoginPassword isModalOpen={isLoginModalOpen} setModalOpen={setLoginModalOpen} setRegisterModalOpen={setRegisterModalOpen} setForgetPasswordModalOpen={setForgetPasswordModalOpen} />
-            <ForgetPassword isModalOpen={isForgetPasswordModalOpen} setModalOpen={setForgetPasswordModalOpen} setLoginModalOpen={setLoginModalOpen} />
+            <RegisterOTP modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" />
+            <LoginPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
+            <ForgetPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" />
             <div className={styles.mainAppTopbar}>
 
                 <div className={styles.topbarTabsContainer}>
@@ -40,7 +44,12 @@ const TopBar = () => {
                 <div className={styles.topbarActions}>
                     <button className={styles.saveToWorkspace}><LuUploadCloud className={styles.saveButton} /> Save My Workspace</button>
                     <button className={styles.logoutButton} onClick={() => {
-                        setRegisterModalOpen(true)
+                        setModalTriggers({
+                            ...modalTriggers,
+                            isRegisterModalOpen: true,
+                            isLoginModalOpen: false,
+                            isForgetPasswordModalOpen: false
+                        })
                     }}>Register</button>
                 </div>
             </div>
