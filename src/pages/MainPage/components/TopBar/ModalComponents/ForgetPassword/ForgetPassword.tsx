@@ -3,21 +3,22 @@ import { forgetPassword, resetPassword } from "../../../../../../apis/authentica
 import Modal from "../../../Modal/Modal";
 import styles from "./ForgetPassword.module.css"
 import { ModalTriggersType } from "../../types";
+import toast from "react-hot-toast";
 
-const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
-        modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
-    }) => {
+const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }: {
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, resetKey?: string | null
+}) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
-    const [otpSent, setOtpSent] = useState(false);
-    const [id, setId] = useState('');
+    const [otpSent, setOtpSent] = useState(resetKey ? true : false);
+    const [id, setId] = useState(resetKey);
     const [password, setPassword] = useState('');
 
     return (
         <>
             {
-                 modalTriggers[Modalname as keyof ModalTriggersType] && (
+                modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
@@ -54,14 +55,6 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                 </div>
                                 <div className={styles.modalInputContainer}>
                                     <div className={styles.modalInputLabel}>
-                                        ID
-                                    </div>
-                                    <input onChange={(e) => {
-                                        setId(e.target.value);
-                                    }} className={styles.modalInput} type="text" />
-                                </div>
-                                <div className={styles.modalInputContainer}>
-                                    <div className={styles.modalInputLabel}>
                                         Enter Password
                                     </div>
                                     <input onChange={(e) => {
@@ -74,7 +67,10 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                     if (!otpSent)
                                         forgetPassword(email, setOtpSent);
                                     else
-                                        resetPassword(email, name, profilePic, id, password);
+                                        if (id)
+                                            resetPassword(email, name, profilePic, id, password);
+                                        else
+                                            toast.error("Password Reset Faild")
                                 }} className={styles.modalButton}>
                                     {otpSent ? 'Reset Password' : 'Send Reset Link'}
                                 </button>

@@ -47,7 +47,7 @@ export const register = async (
       console.log(response);
     })
     .catch((error) => {
-      toast.error('Something Went Wrong');
+     toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -78,7 +78,7 @@ export const login = async (
       console.log(response);
     })
     .catch((error) => {
-      toast.error('Something Went Wrong');
+     toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -94,7 +94,7 @@ export const generateOTP = async (email: string) => {
       console.log(response);
     })
     .catch((error) => {
-      toast.error('Something Went Wrong');
+     toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -115,7 +115,7 @@ export const forgetPassword = async (
       console.log(response);
     })
     .catch((error) => {
-      toast.error('Something Went Wrong');
+     toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -150,7 +150,7 @@ export const resetPassword = async (
       console.log(response);
     })
     .catch((error) => {
-      toast.error('Something Went Wrong');
+     toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
