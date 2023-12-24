@@ -24,9 +24,9 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                 modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
-                            {/* <div className={styles.modalTitle}>
+                            <div className={styles.modalTitle}>
                                 Login
-                            </div> */}
+                            </div>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
@@ -55,7 +55,12 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                     Login with OTP
                                 </button>
                             </div>
-                            <div className={styles.modalFooter}>
+
+
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <hr className={styles.horizonalLine} />
+                            <div className={styles.subTexts}>
                                 <p onClick={() => {
                                     setModalTriggers({
                                         ...modalTriggers,
@@ -74,7 +79,6 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                     <span>Reset Password</span>
                                 </p>
                             </div>
-
                         </div>
                     </Modal >
                 )

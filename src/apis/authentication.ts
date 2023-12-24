@@ -39,6 +39,9 @@ export const preRegister = async (
 export const register = async (
   email: string,
   otp: string,
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
 ) => {
   publicGateway
     .post(buildVerse.register, {
@@ -46,8 +49,14 @@ export const register = async (
       otp: otp,
     })
     .then((response) => {
-      toast.success('Registered');
+      toast.success('Your are Registered');
       console.log(response);
+      setModalTriggers({
+        isRegisterModalOpen: false,
+        isLoginModalOpen: false,
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
+      });
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);

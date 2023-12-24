@@ -19,23 +19,20 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                 modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
-                            {/* <div className={styles.modalTitle}>
+                            <div className={styles.modalTitle}>
                                 {modalType === 'loginWithOTP' ? 'Login' : 'Register'} with OTP
                             </div>
-                            <div className={styles.modalSubtitle}>
-                                Enter in your email to generate OTP
-                            </div> */}
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
-                                <input onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
+                                <input placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
                             </div>
                             {showOTP && <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Enter OTP
                                 </div>
-                                <input onChange={(e) => {
+                                <input placeholder="Enter the OTP you received" onChange={(e) => {
                                     setOTP(e.target.value);
                                 }} className={styles.modalInput} type="number" />
                             </div>}
@@ -50,32 +47,39 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                                         if (modalType === 'loginWithOTP')
                                             login(email, otp, 'loginWithOTP')
                                         else
-                                            register(email, otp)
+                                            register(email, otp, setModalTriggers)
                                 }} className={styles.modalButton}>
                                     {showOTP ? 'Verify OTP' : 'Send OTP'}
                                 </button>
                             </div>
-                            {modalType != 'loginWithOTP' ? <p onClick={() => {
-                                setModalTriggers({
-                                    ...modalTriggers,
-                                    isRegisterModalOpen: false,
-                                    isLoginModalOpen: true,
-                                    isForgetPasswordModalOpen: false
-                                })
-                            }} className={styles.subText}>Already have a Account? Login</p> :
-                                <p onClick={() => {
 
+
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <hr className={styles.horizontalLine} />
+                            <div className={styles.subTexts}>
+                                {modalType != 'loginWithOTP' ? <p onClick={() => {
                                     setModalTriggers({
                                         ...modalTriggers,
                                         isRegisterModalOpen: false,
                                         isLoginModalOpen: true,
                                         isForgetPasswordModalOpen: false
                                     })
+                                }} className={styles.subText}>Already have a Account? <span>Login</span></p> :
+                                    <p onClick={() => {
+
+                                        setModalTriggers({
+                                            ...modalTriggers,
+                                            isRegisterModalOpen: false,
+                                            isLoginModalOpen: true,
+                                            isForgetPasswordModalOpen: false
+                                        })
 
 
-                                }} className={styles.forgetPassword}>
-                                    Login with Password
-                                </p>}
+                                    }} className={styles.subText}>
+                                        Login with <span>Password</span>
+                                    </p>}
+                            </div>
                         </div>
                     </Modal>
                 )

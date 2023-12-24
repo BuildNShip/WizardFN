@@ -21,27 +21,25 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                 modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
-                            {/* <div className={styles.modalTitle}>
+                            <div className={styles.modalTitle}>
                                 Forget Password
                             </div>
-                            <div className={styles.modalSubtitle}>
-                                Enter your email to reset your password
-                            </div> */}
+
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
-                                <input onChange={(e) => {
+                                <input placeholder="Enter your email address" onChange={(e) => {
                                     setEmail(e.target.value);
                                 }} className={styles.modalInput} type="text" />
                             </div>
 
                             {otpSent && <>
-                                <div className={styles.modalInputContainer}>
+                                {/* <div className={styles.modalInputContainer}>
                                     <div className={styles.modalInputLabel}>
                                         Name
                                     </div>
-                                    <input onChange={(e) => {
+                                    <input placeholder="Enter your Name" onChange={(e) => {
                                         setName(e.target.value);
                                     }} className={styles.modalInput} type="text" />
                                 </div>
@@ -52,12 +50,12 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                     <input onChange={(e) => {
                                         setProfilePic(e.target.value);
                                     }} className={styles.modalInput} type="text" />
-                                </div>
+                                </div> */}
                                 <div className={styles.modalInputContainer}>
                                     <div className={styles.modalInputLabel}>
                                         Enter Password<span>*</span>
                                     </div>
-                                    <input onChange={(e) => {
+                                    <input placeholder="Enter your new Password" onChange={(e) => {
                                         setPassword(e.target.value);
                                     }} className={styles.modalInput} type="password" />
                                 </div>
@@ -81,13 +79,18 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                     {otpSent ? 'Reset Password' : 'Send Reset Link'}
                                 </button>
                             </div>
-                            <p onClick={() => {
-                                setModalTriggers({
-                                    ...modalTriggers,
-                                    isForgetPasswordModalOpen: false,
-                                    isLoginModalOpen: true
-                                })
-                            }} className={styles.subText}>Remembered your password? Login</p>
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <hr className={styles.horizontalLine} />
+                            <div className={styles.subTexts}>
+                                <p onClick={() => {
+                                    setModalTriggers({
+                                        ...modalTriggers,
+                                        isForgetPasswordModalOpen: false,
+                                        isLoginModalOpen: true
+                                    })
+                                }} className={styles.subText}>Remembered your password? <span>Login</span></p>
+                            </div>
                         </div>
                     </Modal >
                 )
