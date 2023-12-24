@@ -12,11 +12,20 @@ const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
         isRegisterModalOpen: false,
         isLoginModalOpen: false,
-        isForgetPasswordModalOpen: false
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false
     });
 
     const [searchParams] = useSearchParams();
+    const [modalType, setModalType] = useState('' as string);
     const [resetKey] = useState(searchParams.get('resetPassword'));
+
+    useEffect(() => {
+        if (modalTriggers.isLoginWithOTPModalOpen)
+            setModalType('loginWithOTP')
+        else
+            setModalType('registerWithOTP')
+    }, [modalTriggers])
 
     useEffect(() => {
         if (searchParams.get('resetPassword')) {
@@ -34,7 +43,7 @@ const TopBar = () => {
 
     return (
         <>
-            <RegisterOTP modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" />
+            <RegisterOTP modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
             <LoginPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
             <ForgetPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" resetKey={resetKey} />
             <div className={styles.mainAppTopbar}>

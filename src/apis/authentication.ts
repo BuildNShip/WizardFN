@@ -6,7 +6,9 @@ import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
 export const preRegister = async (
   email: string,
   setShowOTP: React.Dispatch<React.SetStateAction<boolean>>,
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
 ) => {
   console.log(
     import.meta.env.VITE_BACKEND_URL +
@@ -28,6 +30,7 @@ export const preRegister = async (
         isRegisterModalOpen: false,
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
       });
       return error.response.data;
     });
@@ -47,7 +50,7 @@ export const register = async (
       console.log(response);
     })
     .catch((error) => {
-     toast.error(error.response.data.message.general[0]);
+      toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -55,6 +58,7 @@ export const register = async (
 export const login = async (
   email: string,
   password: string,
+  type?: string,
 ) => {
   const config = {
     headers: {
@@ -64,37 +68,56 @@ export const login = async (
     },
   };
 
+  let data;
+
+  if (type === 'loginWithOTP') {
+    data = {
+      email: email,
+      otp: password,
+    };
+  } else {
+    data = {
+      email: email,
+      password: password,
+    };
+  }
+
   publicGateway
-    .post(
-      buildVerse.login,
-      {
-        email: email,
-        password: password,
-      },
-      config,
-    )
+    .post(buildVerse.login, data, config)
     .then((response) => {
       toast.success('Logged In');
       console.log(response);
     })
     .catch((error) => {
-     toast.error(error.response.data.message.general[0]);
+      toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
 
-export const generateOTP = async (email: string) => {
+export const generateOTP = async (
+  email: string,
+  setShowOTP: React.Dispatch<React.SetStateAction<boolean>>,
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
+) => {
   publicGateway
     .post(buildVerse.generateOTP, {
       email: email,
     })
     .then((response) => {
       toast.success('OTP sent to your email');
-
+      setShowOTP(true);
+      setModalTriggers({
+        isRegisterModalOpen: true,
+        isLoginModalOpen: false,
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: true,
+      });
       console.log(response);
     })
     .catch((error) => {
-     toast.error(error.response.data.message.general[0]);
+      toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -115,7 +138,7 @@ export const forgetPassword = async (
       console.log(response);
     })
     .catch((error) => {
-     toast.error(error.response.data.message.general[0]);
+      toast.error(error.response.data.message.general[0]);
       console.log(error);
     });
 };
@@ -126,7 +149,9 @@ export const resetPassword = async (
   profilePic: string,
   unqiueString: string,
   password: string,
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
   setOtpSent: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const formData = new FormData();
@@ -153,13 +178,14 @@ export const resetPassword = async (
         isRegisterModalOpen: false,
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
       });
-      
+
       console.log(response);
     })
     .catch((error) => {
-     toast.error(error.response.data.message.general[0]);
-     setOtpSent(false);
+      toast.error(error.response.data.message.general[0]);
+      setOtpSent(false);
       console.log(error);
     });
 };

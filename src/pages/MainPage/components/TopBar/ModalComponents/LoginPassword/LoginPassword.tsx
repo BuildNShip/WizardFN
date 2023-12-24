@@ -64,6 +64,17 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                             }} className={styles.forgetPassword}>
                                 Forget Password? Click Here to Reset.
                             </p>
+
+                            <p onClick={() => {
+                                setModalTriggers({
+                                    isRegisterModalOpen: true,
+                                    isLoginModalOpen: false,
+                                    isForgetPasswordModalOpen: false,
+                                    isLoginWithOTPModalOpen: true
+                                })
+                            }} className={styles.forgetPassword}>
+                                Login with OTP
+                            </p>
                         </div>
                     </Modal >
                 )

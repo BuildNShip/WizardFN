@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Modal from "../../../Modal/Modal";
 import styles from "./RegisterOTP.module.css"
-import { preRegister, register } from "../../../../../../apis/authentication";
+import { generateOTP, login, preRegister, register } from "../../../../../../apis/authentication";
 import { ModalTriggersType } from "../../types";
 
 
-const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
-    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
+const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: {
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, modalType: string
 }) => {
 
     const [showOTP, setShowOTP] = useState(false);
@@ -20,10 +20,10 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
-                                Register Now
+                                {modalType === 'loginWithOTP' ? 'Login' : 'Register'} with OTP
                             </div>
                             <div className={styles.modalSubtitle}>
-                                Create an account to save your workspace
+                                Enter in your email to generate OTP
                             </div>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
@@ -42,21 +42,40 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
                             <div className={styles.modalButtonContainer}>
                                 <button onClick={() => {
                                     if (!showOTP)
-                                        preRegister(email, setShowOTP, setModalTriggers);
+                                        if (modalType === 'loginWithOTP')
+                                            generateOTP(email, setShowOTP, setModalTriggers);
+                                        else
+                                            preRegister(email, setShowOTP, setModalTriggers);
                                     else
-                                        register(email, otp)
+                                        if (modalType === 'loginWithOTP')
+                                            login(email, otp, 'loginWithOTP')
+                                        else
+                                            register(email, otp)
                                 }} className={styles.modalButton}>
                                     {showOTP ? 'Verify OTP' : 'Send OTP'}
                                 </button>
                             </div>
-                            <p onClick={() => {
+                            {modalType != 'loginWithOTP' ? <p onClick={() => {
                                 setModalTriggers({
                                     ...modalTriggers,
                                     isRegisterModalOpen: false,
                                     isLoginModalOpen: true,
                                     isForgetPasswordModalOpen: false
                                 })
-                            }} className={styles.subText}>Already have a Account? Login</p>
+                            }} className={styles.subText}>Already have a Account? Login</p> :
+                                <p onClick={() => {
+
+                                    setModalTriggers({
+                                        ...modalTriggers,
+                                        isRegisterModalOpen: false,
+                                        isLoginModalOpen: true,
+                                        isForgetPasswordModalOpen: false
+                                    })
+
+
+                                }} className={styles.forgetPassword}>
+                                    Login with Password
+                                </p>}
                         </div>
                     </Modal>
                 )
