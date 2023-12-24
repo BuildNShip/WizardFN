@@ -12,7 +12,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
     const [otpSent, setOtpSent] = useState(resetKey ? true : false);
-    const [id, setId] = useState(resetKey);
+    const [id] = useState(resetKey);
     const [password, setPassword] = useState('');
 
     return (
@@ -64,11 +64,17 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                             </>}
                             <div className={styles.modalButtonContainer}>
                                 <button onClick={() => {
-                                    if (!otpSent)
+                                    if (!otpSent) {
                                         forgetPassword(email, setOtpSent);
+                                        setModalTriggers({
+                                            ...modalTriggers,
+                                            isForgetPasswordModalOpen: false,
+                                            isLoginModalOpen: false
+                                        })
+                                    }
                                     else
                                         if (id)
-                                            resetPassword(email, name, profilePic, id, password);
+                                            resetPassword(email, name, profilePic, id, password, setModalTriggers, setOtpSent);
                                         else
                                             toast.error("Password Reset Faild")
                                 }} className={styles.modalButton}>

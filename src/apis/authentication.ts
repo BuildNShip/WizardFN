@@ -126,6 +126,8 @@ export const resetPassword = async (
   profilePic: string,
   unqiueString: string,
   password: string,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
+  setOtpSent: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const formData = new FormData();
   formData.append('email', email);
@@ -147,10 +149,17 @@ export const resetPassword = async (
     )
     .then((response) => {
       toast.success('Password Resetted Successfully');
+      setModalTriggers({
+        isRegisterModalOpen: false,
+        isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false,
+      });
+      
       console.log(response);
     })
     .catch((error) => {
      toast.error(error.response.data.message.general[0]);
+     setOtpSent(false);
       console.log(error);
     });
 };
