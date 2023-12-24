@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
         isRegisterModalOpen: false,
-        isLoginModalOpen: true,
+        isLoginModalOpen: false,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false
     });
@@ -73,11 +73,11 @@ const TopBar = () => {
                     <button className={styles.logoutButton} onClick={() => {
                         setModalTriggers({
                             ...modalTriggers,
-                            isRegisterModalOpen: true,
-                            isLoginModalOpen: false,
+                            isRegisterModalOpen: false,
+                            isLoginModalOpen: true,
                             isForgetPasswordModalOpen: false
                         })
-                    }}>Register</button>
+                    }}>Login</button>
                 </div>
             </div>
         </>
