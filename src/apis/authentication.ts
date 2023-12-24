@@ -67,6 +67,9 @@ export const register = async (
 export const login = async (
   email: string,
   password: string,
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
   type?: string,
 ) => {
   const config = {
@@ -95,10 +98,22 @@ export const login = async (
     .post(buildVerse.login, data, config)
     .then((response) => {
       toast.success('Logged In');
+      setModalTriggers({
+        isRegisterModalOpen: false,
+        isLoginModalOpen: false,
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
+      });
       console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
+      setModalTriggers({
+        isRegisterModalOpen: false,
+        isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
+      });
       console.log(error);
     });
 };
@@ -109,41 +124,33 @@ export const generateOTP = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  type?: string,
 ) => {
   publicGateway
     .post(buildVerse.generateOTP, {
       email: email,
+      type: type,
     })
     .then((response) => {
       toast.success('OTP sent to your email');
       setShowOTP(true);
-      setModalTriggers({
-        isRegisterModalOpen: true,
-        isLoginModalOpen: false,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: true,
-      });
-      console.log(response);
-    })
-    .catch((error) => {
-      toast.error(error.response.data.message.general[0]);
-      console.log(error);
-    });
-};
 
-export const forgetPassword = async (
-  email: string,
-  setOtpSent: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
-  publicGateway
-    .post(buildVerse.forgetPassword, {
-      email: email,
-    })
-    .then((response) => {
-      toast.success(
-        'Reset Password Link Sent to your email',
-      );
-      setOtpSent(true);
+      if (type === 'Login')
+        setModalTriggers({
+          isRegisterModalOpen: true,
+          isLoginModalOpen: false,
+          isForgetPasswordModalOpen: false,
+          isLoginWithOTPModalOpen: true,
+        });
+      else {
+        setModalTriggers({
+          isRegisterModalOpen: false,
+          isLoginModalOpen: false,
+          isForgetPasswordModalOpen: false,
+          isLoginWithOTPModalOpen: false,
+        });
+      }
+
       console.log(response);
     })
     .catch((error) => {

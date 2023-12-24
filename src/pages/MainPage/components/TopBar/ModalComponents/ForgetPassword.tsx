@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { forgetPassword, resetPassword } from "../../../../../apis/authentication";
+import { generateOTP, resetPassword } from "../../../../../apis/authentication";
 import Modal from "../../Modal/Modal";
 import styles from "./ModalContentStyles.module.css"
 import { ModalTriggersType } from "../types";
@@ -46,12 +46,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton onClick={() => {
                                     if (!otpSent) {
-                                        forgetPassword(email, setOtpSent);
-                                        setModalTriggers({
-                                            ...modalTriggers,
-                                            isForgetPasswordModalOpen: false,
-                                            isLoginModalOpen: false
-                                        })
+                                        generateOTP(email, setOtpSent, setModalTriggers, "Forget Password");
                                     }
                                     else
                                         if (id)

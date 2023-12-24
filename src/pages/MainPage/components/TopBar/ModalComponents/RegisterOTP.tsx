@@ -41,12 +41,14 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                                 <PrimaryButton onClick={() => {
                                     if (!showOTP)
                                         if (modalType === 'loginWithOTP')
-                                            generateOTP(email, setShowOTP, setModalTriggers);
+                                            generateOTP(email, setShowOTP, setModalTriggers, "Login");
                                         else
                                             preRegister(email, setShowOTP, setModalTriggers);
                                     else
-                                        if (modalType === 'loginWithOTP')
-                                            login(email, otp, 'loginWithOTP')
+                                        if (modalType === 'loginWithOTP') {
+                                            login(email, otp, setModalTriggers, 'loginWithOTP')
+                                            setShowOTP(false);
+                                        }
                                         else
                                             register(email, otp, setModalTriggers)
                                 }}
