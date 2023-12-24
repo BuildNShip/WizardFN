@@ -8,9 +8,9 @@ import { ModalTriggersType } from './types';
 
 const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
-        isRegisterModalOpen: true,
-        isLoginModalOpen: true,
-        isForgetPasswordModalOpen: false
+        isRegisterModalOpen: false,
+        isLoginModalOpen: false,
+        isForgetPasswordModalOpen: true
     });
 
 

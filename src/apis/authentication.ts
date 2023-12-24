@@ -1,8 +1,13 @@
 import toast from 'react-hot-toast';
 import { publicGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
+import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
 
-export const preRegister = async (email: string) => {
+export const preRegister = async (
+  email: string,
+  setShowOTP: React.Dispatch<React.SetStateAction<boolean>>,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void
+) => {
   console.log(
     import.meta.env.VITE_BACKEND_URL +
       buildVerse.preRegister,
@@ -14,10 +19,16 @@ export const preRegister = async (email: string) => {
     })
     .then((response) => {
       toast.success('OTP sent to your email');
+      setShowOTP(true);
       return response.data;
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
+      setModalTriggers({
+        isRegisterModalOpen: false,
+        isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false,
+      });
       return error.response.data;
     });
 };
@@ -45,19 +56,23 @@ export const login = async (
   email: string,
   password: string,
 ) => {
-
   const config = {
     headers: {
-      'timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
-      'product': 'buildverse',
+      timezone:
+        Intl.DateTimeFormat().resolvedOptions().timeZone,
+      product: 'buildverse',
     },
   };
 
   publicGateway
-    .post(buildVerse.login, {
-      email: email,
-      password: password,
-    }, config)
+    .post(
+      buildVerse.login,
+      {
+        email: email,
+        password: password,
+      },
+      config,
+    )
     .then((response) => {
       toast.success('Logged In');
       console.log(response);
@@ -125,7 +140,11 @@ export const resetPassword = async (
   };
 
   publicGateway
-    .post(buildVerse.resetPassword + unqiueString + '/', formData, config)
+    .post(
+      buildVerse.resetPassword + unqiueString + '/',
+      formData,
+      config,
+    )
     .then((response) => {
       toast.success('Password Resetted Successfully');
       console.log(response);

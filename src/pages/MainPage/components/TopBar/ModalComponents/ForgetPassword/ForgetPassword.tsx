@@ -5,8 +5,8 @@ import styles from "./ForgetPassword.module.css"
 import { ModalTriggersType } from "../../types";
 
 const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
-    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
-}) => {
+        modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
+    }) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [profilePic, setProfilePic] = useState('');
@@ -17,7 +17,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
     return (
         <>
             {
-                modalTriggers[Modalname as keyof ModalTriggersType] && (
+                 modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>

@@ -1,13 +1,6 @@
-//React Imports
-import React, { useState } from "react";
-
-//Component Imports
+import { useState } from "react";
 import Modal from "../../../Modal/Modal";
-
-//Styles Import
 import styles from "./RegisterOTP.module.css"
-
-//API Calling Fuctions
 import { preRegister, register } from "../../../../../../apis/authentication";
 import { ModalTriggersType } from "../../types";
 
@@ -19,7 +12,7 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
     const [showOTP, setShowOTP] = useState(false);
     const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
-    
+
     return (
         <>
             {
@@ -49,10 +42,9 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname }: {
                             <div className={styles.modalButtonContainer}>
                                 <button onClick={() => {
                                     if (!showOTP)
-                                        preRegister(email);
+                                        preRegister(email, setShowOTP, setModalTriggers);
                                     else
                                         register(email, otp)
-                                    setShowOTP(true);
                                 }} className={styles.modalButton}>
                                     {showOTP ? 'Verify OTP' : 'Send OTP'}
                                 </button>
