@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from './TopBar.module.css'
 import { LuUploadCloud } from 'react-icons/lu'
-import RegisterOTP from './ModalComponents/RegisterOTP/RegisterOTP';
-import LoginPassword from './ModalComponents/LoginPassword/LoginPassword';
-import ForgetPassword from './ModalComponents/ForgetPassword/ForgetPassword';
+import RegisterOTP from './ModalComponents/RegisterOTP';
+import LoginPassword from './ModalComponents/LoginPassword';
+import ForgetPassword from './ModalComponents/ForgetPassword';
 import { ModalTriggersType } from './types';
 
 import { useSearchParams } from "react-router-dom";

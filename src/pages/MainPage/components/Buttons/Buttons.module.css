@@ -1,0 +1,36 @@
+.secondaryButton {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+
+  background-color: #504e45;
+  border: none;
+  border: var(--tertiary-color) 2px solid;
+  border-radius: 0.25rem;
+  color: var(--tertiary-color);
+
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.primaryButton {
+  padding: 0.6rem 1rem;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  border-radius: 0.25rem;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  border: none;
+}

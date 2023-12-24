@@ -2,14 +2,16 @@
 import { useState } from "react";
 
 //Component Imports
-import Modal from "../../../Modal/Modal";
+import Modal from "../../Modal/Modal";
 
 //Styles Import
-import styles from "./LoginPassword.module.css"
+import styles from "./ModalContentStyles.module.css"
 
 //API Calling Functions
-import { login } from "../../../../../../apis/authentication";
-import { ModalTriggersType } from "../../types";
+import { login } from "../../../../../apis/authentication";
+import { ModalTriggersType } from "../types";
+import PrimaryButton from "../../Buttons/PrimaryButton";
+import SecondaryButton from "../../Buttons/SecondaryButton";
 
 const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
@@ -40,26 +42,22 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                 <input placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} className={styles.modalInput} type="password" />
                             </div>
                             <div className={styles.modalButtonContainer}>
-                                <button onClick={() => login(email, password)} className={styles.modalButton}>
-                                    Login
-                                </button>
+                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password)} />
 
-                                <button onClick={() => {
+                                <SecondaryButton onClick={() => {
                                     setModalTriggers({
                                         isRegisterModalOpen: true,
                                         isLoginModalOpen: false,
                                         isForgetPasswordModalOpen: false,
                                         isLoginWithOTPModalOpen: true
                                     })
-                                }} className={styles.secondaryButton}>
-                                    Login with OTP
-                                </button>
+                                }} ButtonText="Login with OTP" />
                             </div>
 
 
                         </div>
                         <div className={styles.modalFooter}>
-                            <hr className={styles.horizonalLine} />
+                            <hr className={styles.horizontalLine} />
                             <div className={styles.subTexts}>
                                 <p onClick={() => {
                                     setModalTriggers({

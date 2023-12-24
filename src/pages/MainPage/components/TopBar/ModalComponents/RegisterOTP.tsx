@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Modal from "../../../Modal/Modal";
-import styles from "./RegisterOTP.module.css"
-import { generateOTP, login, preRegister, register } from "../../../../../../apis/authentication";
-import { ModalTriggersType } from "../../types";
+import Modal from "../../Modal/Modal";
+import styles from "./ModalContentStyles.module.css"
+import { generateOTP, login, preRegister, register } from "../../../../../apis/authentication";
+import { ModalTriggersType } from "../types";
+import PrimaryButton from "../../Buttons/PrimaryButton";
 
 
 const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: {
@@ -37,7 +38,7 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                                 }} className={styles.modalInput} type="number" />
                             </div>}
                             <div className={styles.modalButtonContainer}>
-                                <button onClick={() => {
+                                <PrimaryButton onClick={() => {
                                     if (!showOTP)
                                         if (modalType === 'loginWithOTP')
                                             generateOTP(email, setShowOTP, setModalTriggers);
@@ -48,9 +49,8 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                                             login(email, otp, 'loginWithOTP')
                                         else
                                             register(email, otp, setModalTriggers)
-                                }} className={styles.modalButton}>
-                                    {showOTP ? 'Verify OTP' : 'Send OTP'}
-                                </button>
+                                }}
+                                    ButtonText={showOTP ? 'Verify OTP' : 'Send OTP'} />
                             </div>
 
 

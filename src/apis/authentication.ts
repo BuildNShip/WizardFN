@@ -154,8 +154,6 @@ export const forgetPassword = async (
 
 export const resetPassword = async (
   email: string,
-  name: string,
-  profilePic: string,
   unqiueString: string,
   password: string,
   setModalTriggers: (
@@ -165,8 +163,6 @@ export const resetPassword = async (
 ) => {
   const formData = new FormData();
   formData.append('email', email);
-  formData.append('name', name);
-  formData.append('profile_pic', profilePic);
   formData.append('password', password);
 
   const config = {

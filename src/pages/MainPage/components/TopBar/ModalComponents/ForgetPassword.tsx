@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { forgetPassword, resetPassword } from "../../../../../../apis/authentication";
-import Modal from "../../../Modal/Modal";
-import styles from "./ForgetPassword.module.css"
-import { ModalTriggersType } from "../../types";
+import { forgetPassword, resetPassword } from "../../../../../apis/authentication";
+import Modal from "../../Modal/Modal";
+import styles from "./ModalContentStyles.module.css"
+import { ModalTriggersType } from "../types";
 import toast from "react-hot-toast";
+import PrimaryButton from "../../Buttons/PrimaryButton";
 
 const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }: {
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, resetKey?: string | null
 }) => {
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [profilePic, setProfilePic] = useState('');
     const [otpSent, setOtpSent] = useState(resetKey ? true : false);
     const [id] = useState(resetKey);
     const [password, setPassword] = useState('');
@@ -35,22 +34,6 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                             </div>
 
                             {otpSent && <>
-                                {/* <div className={styles.modalInputContainer}>
-                                    <div className={styles.modalInputLabel}>
-                                        Name
-                                    </div>
-                                    <input placeholder="Enter your Name" onChange={(e) => {
-                                        setName(e.target.value);
-                                    }} className={styles.modalInput} type="text" />
-                                </div>
-                                <div className={styles.modalInputContainer}>
-                                    <div className={styles.modalInputLabel}>
-                                        Profile Picture
-                                    </div>
-                                    <input onChange={(e) => {
-                                        setProfilePic(e.target.value);
-                                    }} className={styles.modalInput} type="text" />
-                                </div> */}
                                 <div className={styles.modalInputContainer}>
                                     <div className={styles.modalInputLabel}>
                                         Enter Password<span>*</span>
@@ -61,7 +44,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                 </div>
                             </>}
                             <div className={styles.modalButtonContainer}>
-                                <button onClick={() => {
+                                <PrimaryButton onClick={() => {
                                     if (!otpSent) {
                                         forgetPassword(email, setOtpSent);
                                         setModalTriggers({
@@ -72,12 +55,10 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                     }
                                     else
                                         if (id)
-                                            resetPassword(email, name, profilePic, id, password, setModalTriggers, setOtpSent);
+                                            resetPassword(email, id, password, setModalTriggers, setOtpSent);
                                         else
                                             toast.error("Password Reset Faild")
-                                }} className={styles.modalButton}>
-                                    {otpSent ? 'Reset Password' : 'Send Reset Link'}
-                                </button>
+                                }} ButtonText={otpSent ? 'Reset Password' : 'Send Reset Link'} />
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
