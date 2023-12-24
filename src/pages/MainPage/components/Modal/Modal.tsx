@@ -17,14 +17,18 @@ const Modal = ({ modalTriggers, setModalTriggers, Modalname, children }: {
             {modalTriggers[Modalname as keyof ModalTriggersType] && (
                 <div className={styles.modalOverlay}>
                     <div className={styles.modal}>
-                        <button className={styles.closeButton} onClick={() => {
-                            setModalTriggers({
-                                ...modalTriggers,
-                                [Modalname]: false
-                            })
-                        }}>
-                            <IoClose size={18} />
-                        </button>
+                        <div className={styles.modalTopbar}>
+                            <button className={styles.closeButton} onClick={() => {
+                                setModalTriggers({
+                                    ...modalTriggers,
+                                    [Modalname]: false
+                                })
+                            }}>
+                                <IoClose size={18} />
+                            </button>
+
+                            <hr className={styles.horizonalLine} />
+                        </div>
                         <div className={styles.modalContent}>
                             {children}
                         </div>

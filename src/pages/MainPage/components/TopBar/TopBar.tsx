@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
         isRegisterModalOpen: false,
-        isLoginModalOpen: false,
+        isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false
     });

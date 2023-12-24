@@ -21,15 +21,15 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                 modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
-                            <div className={styles.modalTitle}>
+                            {/* <div className={styles.modalTitle}>
                                 Forget Password
                             </div>
                             <div className={styles.modalSubtitle}>
                                 Enter your email to reset your password
-                            </div>
+                            </div> */}
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
-                                    Email
+                                    Email Address<span>*</span>
                                 </div>
                                 <input onChange={(e) => {
                                     setEmail(e.target.value);
@@ -55,7 +55,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                 </div>
                                 <div className={styles.modalInputContainer}>
                                     <div className={styles.modalInputLabel}>
-                                        Enter Password
+                                        Enter Password<span>*</span>
                                     </div>
                                     <input onChange={(e) => {
                                         setPassword(e.target.value);
