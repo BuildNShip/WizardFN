@@ -44,7 +44,7 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                                 <input placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} className={styles.modalInput} type="password" />
                             </div>
                             <div className={styles.modalButtonContainer}>
-                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password, setModalTriggers, 'loginWithPassword')} />
+                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password, setModalTriggers, modalTriggers, 'loginWithPassword')} />
 
                                 <SecondaryButton onClick={() => {
                                     setModalTriggers({

@@ -5,10 +5,11 @@ import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
 
 export const preRegister = async (
   email: string,
-  setShowOTP: React.Dispatch<React.SetStateAction<boolean>>,
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  modalTriggers: ModalTriggersType,
+  setShowOTP?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   console.log(
     import.meta.env.VITE_BACKEND_URL +
@@ -21,17 +22,20 @@ export const preRegister = async (
     })
     .then((response) => {
       toast.success('OTP sent to your email');
+      if (setShowOTP) 
       setShowOTP(true);
+      setModalTriggers({
+        ...modalTriggers,
+        isRegisterModalOpen: true,
+        showBinaryPopup: false,
+      });
       return response.data;
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
       setModalTriggers({
-        isRegisterModalOpen: false,
+        ...modalTriggers,
         isLoginModalOpen: true,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
-        isEmailValidated: false,
         showBinaryPopup: false,
       });
       return error.response.data;
@@ -44,6 +48,7 @@ export const register = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  modalTriggers: ModalTriggersType,
 ) => {
   publicGateway
     .post(buildVerse.register, {
@@ -54,12 +59,8 @@ export const register = async (
       toast.success('Your are Registered');
       console.log(response);
       setModalTriggers({
+        ...modalTriggers,
         isRegisterModalOpen: false,
-        isLoginModalOpen: false,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
-        isEmailValidated: false,
-        showBinaryPopup: false,
       });
     })
     .catch((error) => {
@@ -74,7 +75,8 @@ export const login = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
-  type?: string
+  modalTriggers: ModalTriggersType,
+  type?: string,
 ) => {
   let data;
 
@@ -95,24 +97,16 @@ export const login = async (
     .then((response) => {
       toast.success('Logged In');
       setModalTriggers({
-        isRegisterModalOpen: false,
+        ...modalTriggers,
         isLoginModalOpen: false,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
-        isEmailValidated: false,
-        showBinaryPopup: false,
       });
       console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
       setModalTriggers({
-        isRegisterModalOpen: false,
+        ...modalTriggers,
         isLoginModalOpen: true,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
-        isEmailValidated: false,
-        showBinaryPopup: false,
       });
       console.log(error);
     });
@@ -124,6 +118,7 @@ export const generateOTP = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  modalTriggers: ModalTriggersType,
   type?: string,
 ) => {
   publicGateway
@@ -137,21 +132,13 @@ export const generateOTP = async (
 
       if (type === 'Login')
         setModalTriggers({
+          ...modalTriggers,
           isRegisterModalOpen: true,
-          isLoginModalOpen: false,
-          isForgetPasswordModalOpen: false,
-          isLoginWithOTPModalOpen: true,
-          isEmailValidated: false,
-          showBinaryPopup: false,
         });
       else {
         setModalTriggers({
+          ...modalTriggers,
           isRegisterModalOpen: false,
-          isLoginModalOpen: false,
-          isForgetPasswordModalOpen: false,
-          isLoginWithOTPModalOpen: false,
-          isEmailValidated: false,
-          showBinaryPopup: false,
         });
       }
 
@@ -170,6 +157,7 @@ export const resetPassword = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  modalTriggers: ModalTriggersType,
   setOtpSent: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const formData = new FormData();
@@ -191,12 +179,8 @@ export const resetPassword = async (
     .then((response) => {
       toast.success('Password Resetted Successfully');
       setModalTriggers({
-        isRegisterModalOpen: false,
+        ...modalTriggers,
         isLoginModalOpen: true,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
-        isEmailValidated: false,
-        showBinaryPopup: false,
       });
 
       console.log(response);
@@ -210,9 +194,10 @@ export const resetPassword = async (
 
 export const validateEmail = async (
   email: string,
-  setModalTriggers?: (
+  setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
+  modalTriggers: ModalTriggersType,
 ) => {
   publicGateway
     .post(buildVerse.validateEmail, {
@@ -220,27 +205,19 @@ export const validateEmail = async (
     })
     .then((response) => {
       toast.success('Email Validated');
-      if (setModalTriggers)
-        setModalTriggers({
-          isRegisterModalOpen: false,
-          isLoginModalOpen: false,
-          isForgetPasswordModalOpen: false,
-          isLoginWithOTPModalOpen: true,
-          isEmailValidated: false,
-          showBinaryPopup: false,
-        });
+      setModalTriggers({
+        ...modalTriggers,
+        isEmailValidated: false,
+        isLoginWithOTPModalOpen: true,
+      });
       console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      if (setModalTriggers)
       setModalTriggers({
-        isRegisterModalOpen: true,
-        isLoginModalOpen: false,
-        isForgetPasswordModalOpen: false,
-        isLoginWithOTPModalOpen: false,
+        ...modalTriggers,
+        showBinaryPopup: true,
         isEmailValidated: false,
-        showBinaryPopup: false,
       });
       console.log(error);
     });

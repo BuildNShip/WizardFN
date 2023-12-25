@@ -10,7 +10,4 @@ export const buildVerse = {
   login: '/buildverse/login/',
   getAccessToken: '/buildverse/get-access-token/',
   validateEmail: '/buildverse/check-email-status/',
-
-
-  
 };

@@ -8,7 +8,6 @@ import { ModalTriggersType } from './types';
 
 import { useSearchParams } from "react-router-dom";
 import ValidateEmail from './ModalComponents/ValidateEmail';
-import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
 
 const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
@@ -50,8 +49,8 @@ const TopBar = () => {
 
     return (
         <>
-            <BinaryPopup modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="showBinaryPopup" />
-            <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />
+            
+            <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated"/>
             <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
             <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
             <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" resetKey={resetKey} />

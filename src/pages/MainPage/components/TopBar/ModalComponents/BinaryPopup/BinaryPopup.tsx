@@ -1,16 +1,27 @@
 import { IoClose } from 'react-icons/io5'
 import styles from './BinaryPopup.module.css'
-import SecondaryButton from '../../../Buttons/SecondaryButton'
 import PrimaryButton from '../../../Buttons/PrimaryButton'
+import { ModalTriggersType } from '../../types';
 
 const BinaryPopup = ({
-    modalTriggers, setModalTriggers, Modalname
+    onClick,
+    content,
+    buttonText,
+    modalTriggers,
+    setModalTriggers,
+    Modalname
+
 }: {
-    modalTriggers: any, setModalTriggers: any, Modalname: string
+    onClick: () => void;
+    content: string;
+    buttonText: string;
+    modalTriggers: ModalTriggersType;
+    setModalTriggers: (modalTriggers: ModalTriggersType) => void;
+    Modalname: string;
 }) => {
     return (
         <>
-            <div>
+            {modalTriggers[Modalname as keyof ModalTriggersType] && <div>
                 <div className={styles.modalOverlay}>
                     <div className={styles.modal}>
                         <div className={styles.modalTopbar}>
@@ -24,26 +35,25 @@ const BinaryPopup = ({
 
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
-                                Login
+                                Oh Snap!
                             </div>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
-                                    It seems you are facing troble while trying to login, why don't you try with OTP or reset your password
-                                    with One-Click.
+                                    {content}
                                 </div>
 
                             </div>
                             <div className={styles.modalButtonContainer}>
-                                <PrimaryButton ButtonText="Login with OTP" onClick={() => { }} />
+                                <PrimaryButton ButtonText={buttonText} onClick={() => { onClick() }} />
 
-                                <SecondaryButton ButtonText="Reset Password" onClick={() => { }} />
+                                {/* <SecondaryButton ButtonText="Reset Password" onClick={() => { }} /> */}
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-            </div >
+            </div >}
         </>
     )
 }

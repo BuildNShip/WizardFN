@@ -46,11 +46,11 @@ const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Moda
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton onClick={() => {
                                     if (!otpSent) {
-                                        generateOTP(email, setOtpSent, setModalTriggers, "Forget Password");
+                                        generateOTP(email, setOtpSent, setModalTriggers,modalTriggers,  "Forget Password");
                                     }
                                     else
                                         if (id)
-                                            resetPassword(email, id, password, setModalTriggers, setOtpSent);
+                                            resetPassword(email, id, password, setModalTriggers, modalTriggers, setOtpSent);
                                         else
                                             toast.error("Password Reset Faild")
                                 }} ButtonText={otpSent ? 'Reset Password' : 'Send Reset Link'} />

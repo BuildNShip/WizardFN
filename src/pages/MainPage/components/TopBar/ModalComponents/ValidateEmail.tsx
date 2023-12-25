@@ -1,9 +1,9 @@
-import React from 'react'
 import { ModalTriggersType } from '../types'
 import styles from "./ModalContentStyles.module.css"
 import PrimaryButton from '../../Buttons/PrimaryButton'
 import Modal from '../../Modal/Modal'
-import { validateEmail } from '../../../../../apis/authentication'
+import { preRegister, validateEmail } from '../../../../../apis/authentication'
+import BinaryPopup from './BinaryPopup/BinaryPopup'
 
 const ValidateEmail = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
   email: string, setEmail: (email: string) => void,
@@ -12,6 +12,19 @@ const ValidateEmail = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
 ) => {
   return (
     <>
+      {
+        modalTriggers.showBinaryPopup && (
+          <BinaryPopup onClick={() => {
+            preRegister(email, setModalTriggers, modalTriggers)
+          }}
+            content={"It looks like you haven't registered with us, Register Now"}
+            buttonText={"Register Now"}
+            modalTriggers={modalTriggers}
+            setModalTriggers={setModalTriggers}
+            Modalname={"showBinaryPopup"}
+          />
+        )
+      }
       {modalTriggers && modalTriggers[Modalname as keyof ModalTriggersType] && (
         <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
           <div className={styles.modalContent}>
@@ -25,7 +38,7 @@ const ValidateEmail = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
               <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
             </div>
             <div className={styles.modalButtonContainer}>
-              <PrimaryButton ButtonText="Validate Email" onClick={() => { validateEmail(email, setModalTriggers) }} />
+              <PrimaryButton ButtonText="Validate Email" onClick={() => { validateEmail(email, setModalTriggers, modalTriggers) }} />
             </div>
           </div>
         </Modal >

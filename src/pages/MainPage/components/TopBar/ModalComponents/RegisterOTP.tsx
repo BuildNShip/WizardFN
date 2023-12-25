@@ -15,10 +15,10 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
     const [otp, setOTP] = useState('');
 
     useEffect(() => {
-        if (email && modalTriggers[Modalname as keyof ModalTriggersType])
-            preRegister(email, setShowOTP, setModalTriggers);
-    }, [email, modalTriggers])
-
+        if (email) {
+            setShowOTP(true);
+        }
+    }, [email])
 
     return (
         <>
@@ -47,16 +47,16 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
                                 <PrimaryButton onClick={() => {
                                     if (!showOTP)
                                         if (modalType === 'loginWithOTP')
-                                            generateOTP(email, setShowOTP, setModalTriggers, "Login");
+                                            generateOTP(email, setShowOTP, setModalTriggers, modalTriggers, "Login");
                                         else
-                                            preRegister(email, setShowOTP, setModalTriggers);
+                                            preRegister(email, setModalTriggers, modalTriggers, setShowOTP,);
                                     else
                                         if (modalType === 'loginWithOTP') {
-                                            login(email, otp, setModalTriggers, 'loginWithOTP')
+                                            login(email, otp, setModalTriggers, modalTriggers, 'loginWithOTP')
                                             setShowOTP(false);
                                         }
                                         else
-                                            register(email, otp, setModalTriggers)
+                                            register(email, otp, setModalTriggers, modalTriggers)
                                 }}
                                     ButtonText={showOTP ? 'Verify OTP' : 'Send OTP'} />
                             </div>
