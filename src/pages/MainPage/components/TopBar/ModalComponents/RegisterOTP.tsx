@@ -11,14 +11,22 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, modalType: string
 }) => {
 
-    const [showOTP, setShowOTP] = useState(false);
     const [otp, setOTP] = useState('');
 
+
     useEffect(() => {
-        if (email) {
-            setShowOTP(true);
+        if (!otp || otp.length === 0) {
+            if (modalTriggers[Modalname as keyof ModalTriggersType] || modalType === 'loginWithOTP') {
+                if (modalType === 'loginWithOTP')
+                    generateOTP(email, setModalTriggers, modalTriggers, "Login");
+                else
+                    preRegister(email, setModalTriggers, modalTriggers);
+            }
         }
-    }, [email])
+        else {
+            setOTP('');
+        }
+    }, [modalType])
 
     return (
         <>
@@ -35,37 +43,25 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
                                 </div>
                                 <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
                             </div>
-                            {showOTP && <div className={styles.modalInputContainer}>
+                            <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Enter OTP
                                 </div>
                                 <input placeholder="Enter the OTP you received" onChange={(e) => {
                                     setOTP(e.target.value);
                                 }} className={styles.modalInput} type="number" />
-                            </div>}
+                            </div>
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton onClick={() => {
-                                    if (!showOTP)
-                                        if (modalType === 'loginWithOTP')
-                                            generateOTP(email, setShowOTP, setModalTriggers, modalTriggers, "Login");
-                                        else
-                                            preRegister(email, setModalTriggers, modalTriggers, setShowOTP,);
+                                    if (modalType === 'loginWithOTP')
+                                        login(email, otp, setModalTriggers, modalTriggers, 'loginWithOTP')
                                     else
-                                        if (modalType === 'loginWithOTP') {
-                                            login(email, otp, setModalTriggers, modalTriggers, 'loginWithOTP')
-                                            setShowOTP(false);
-                                        }
-                                        else
-                                            register(email, otp, setModalTriggers, modalTriggers)
+                                        register(email, otp, setModalTriggers, modalTriggers)
                                 }}
-                                    ButtonText={showOTP ? 'Verify OTP' : 'Send OTP'} />
-                            </div>
-
-                            <div className={styles.helperText}>
-                                It seems like you are new here, please enter the <span>OTP we sent to your mail to continue</span>
+                                    ButtonText="Verify OTP" />
                             </div>
                         </div>
-                        <div className={styles.modalFooter}>
+                        {/* <div className={styles.modalFooter}>
                             <hr className={styles.horizontalLine} />
                             <div className={styles.subTexts}>
                                 {modalType != 'loginWithOTP' ? <p onClick={() => {
@@ -90,7 +86,7 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
                                         Login with <span>Password</span>
                                     </p>}
                             </div>
-                        </div>
+                        </div> */}
                     </Modal>
                 )
             }</>

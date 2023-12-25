@@ -26,6 +26,12 @@ const BinaryPopup = ({
                     <div className={styles.modal}>
                         <div className={styles.modalTopbar}>
                             <button className={styles.closeButton}
+                                onClick={() => {
+                                    setModalTriggers({
+                                        ...modalTriggers,
+                                        [Modalname]: false,
+                                    })
+                                }}
                             >
                                 <IoClose size={18} />
                             </button>

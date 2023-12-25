@@ -9,7 +9,6 @@ export const preRegister = async (
     modalTriggers: ModalTriggersType,
   ) => void,
   modalTriggers: ModalTriggersType,
-  setShowOTP?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   console.log(
     import.meta.env.VITE_BACKEND_URL +
@@ -22,8 +21,6 @@ export const preRegister = async (
     })
     .then((response) => {
       toast.success('OTP sent to your email');
-      if (setShowOTP) 
-      setShowOTP(true);
       setModalTriggers({
         ...modalTriggers,
         isRegisterModalOpen: true,
@@ -36,6 +33,7 @@ export const preRegister = async (
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: true,
+        isRegisterModalOpen: false,
         showBinaryPopup: false,
       });
       return error.response.data;
@@ -65,6 +63,10 @@ export const register = async (
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
+      setModalTriggers({
+        ...modalTriggers,
+        isRegisterModalOpen: false,
+      });
       console.log(error);
     });
 };
@@ -99,6 +101,8 @@ export const login = async (
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: false,
+        isLoginWithOTPModalOpen: false,
+        isRegisterModalOpen: false,
       });
       console.log(response);
     })
@@ -107,6 +111,7 @@ export const login = async (
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: true,
+        isLoginWithOTPModalOpen: false,
       });
       console.log(error);
     });
@@ -114,7 +119,6 @@ export const login = async (
 
 export const generateOTP = async (
   email: string,
-  setShowOTP: React.Dispatch<React.SetStateAction<boolean>>,
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
@@ -128,7 +132,6 @@ export const generateOTP = async (
     })
     .then((response) => {
       toast.success('OTP sent to your email');
-      setShowOTP(true);
 
       if (type === 'Login')
         setModalTriggers({
@@ -208,7 +211,8 @@ export const validateEmail = async (
       setModalTriggers({
         ...modalTriggers,
         isEmailValidated: false,
-        isLoginWithOTPModalOpen: true,
+        isLoginModalOpen: true,
+        showBinaryPopup: false,
       });
       console.log(response);
     })

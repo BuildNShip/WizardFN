@@ -17,7 +17,7 @@ const ValidateEmail = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
           <BinaryPopup onClick={() => {
             preRegister(email, setModalTriggers, modalTriggers)
           }}
-            content={"It looks like you haven't registered with us, Register Now"}
+            content={"It looks like you haven't registered with us, Register Now with a single click."}
             buttonText={"Register Now"}
             modalTriggers={modalTriggers}
             setModalTriggers={setModalTriggers}

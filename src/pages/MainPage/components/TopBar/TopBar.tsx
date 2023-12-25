@@ -16,7 +16,6 @@ const TopBar = () => {
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
         isEmailValidated: false,
-
         showBinaryPopup: false,
     });
 
@@ -24,7 +23,7 @@ const TopBar = () => {
     const [modalType, setModalType] = useState('' as string);
     const [resetKey] = useState(searchParams.get('resetPassword'));
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('aswinasokofficial@gmail.com');
 
     useEffect(() => {
         if (modalTriggers.isLoginWithOTPModalOpen)

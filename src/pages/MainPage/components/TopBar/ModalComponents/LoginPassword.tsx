@@ -60,7 +60,7 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
 
 
                         </div>
-                        <div className={styles.modalFooter}>
+                        {/* <div className={styles.modalFooter}>
                             <hr className={styles.horizontalLine} />
                             <div className={styles.subTexts}>
                                 <p onClick={() => {
@@ -81,7 +81,7 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                                     <span>Reset Password</span>
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                     </Modal >
                     )}
 

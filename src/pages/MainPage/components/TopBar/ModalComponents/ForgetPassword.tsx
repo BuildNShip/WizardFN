@@ -46,7 +46,7 @@ const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Moda
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton onClick={() => {
                                     if (!otpSent) {
-                                        generateOTP(email, setOtpSent, setModalTriggers,modalTriggers,  "Forget Password");
+                                        generateOTP(email, setModalTriggers,modalTriggers,  "Forget Password");
                                     }
                                     else
                                         if (id)
