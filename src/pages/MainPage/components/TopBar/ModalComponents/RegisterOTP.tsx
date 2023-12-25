@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../Modal/Modal";
 import styles from "./ModalContentStyles.module.css"
 import { generateOTP, login, preRegister, register } from "../../../../../apis/authentication";
@@ -13,6 +13,12 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
 
     const [showOTP, setShowOTP] = useState(false);
     const [otp, setOTP] = useState('');
+
+    useEffect(() => {
+        if (email && modalTriggers[Modalname as keyof ModalTriggersType])
+            preRegister(email, setShowOTP, setModalTriggers);
+    }, [email, modalTriggers])
+
 
     return (
         <>
@@ -55,7 +61,9 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
                                     ButtonText={showOTP ? 'Verify OTP' : 'Send OTP'} />
                             </div>
 
-
+                            <div className={styles.helperText}>
+                                It seems like you are new here, please enter the <span>OTP we sent to your mail to continue</span>
+                            </div>
                         </div>
                         <div className={styles.modalFooter}>
                             <hr className={styles.horizontalLine} />

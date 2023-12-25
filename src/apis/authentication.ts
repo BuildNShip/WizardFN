@@ -31,6 +31,8 @@ export const preRegister = async (
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
       });
       return error.response.data;
     });
@@ -56,6 +58,8 @@ export const register = async (
         isLoginModalOpen: false,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
       });
     })
     .catch((error) => {
@@ -70,19 +74,8 @@ export const login = async (
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
-  type?: string,
-  setShowBinaryPopup?: React.Dispatch<
-    React.SetStateAction<boolean>
-  >,
+  type?: string
 ) => {
-  const config = {
-    headers: {
-      timezone:
-        Intl.DateTimeFormat().resolvedOptions().timeZone,
-      product: 'buildverse',
-    },
-  };
-
   let data;
 
   if (type === 'loginWithOTP') {
@@ -98,7 +91,7 @@ export const login = async (
   }
 
   publicGateway
-    .post(buildVerse.login, data, config)
+    .post(buildVerse.login, data)
     .then((response) => {
       toast.success('Logged In');
       setModalTriggers({
@@ -106,6 +99,8 @@ export const login = async (
         isLoginModalOpen: false,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
       });
       console.log(response);
     })
@@ -116,9 +111,9 @@ export const login = async (
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
       });
-      if (setShowBinaryPopup && type !== 'loginWithOTP')
-        setShowBinaryPopup(true);
       console.log(error);
     });
 };
@@ -146,6 +141,8 @@ export const generateOTP = async (
           isLoginModalOpen: false,
           isForgetPasswordModalOpen: false,
           isLoginWithOTPModalOpen: true,
+          isEmailValidated: false,
+          showBinaryPopup: false,
         });
       else {
         setModalTriggers({
@@ -153,6 +150,8 @@ export const generateOTP = async (
           isLoginModalOpen: false,
           isForgetPasswordModalOpen: false,
           isLoginWithOTPModalOpen: false,
+          isEmailValidated: false,
+          showBinaryPopup: false,
         });
       }
 
@@ -196,6 +195,8 @@ export const resetPassword = async (
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
       });
 
       console.log(response);
@@ -203,6 +204,44 @@ export const resetPassword = async (
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
       setOtpSent(false);
+      console.log(error);
+    });
+};
+
+export const validateEmail = async (
+  email: string,
+  setModalTriggers?: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
+) => {
+  publicGateway
+    .post(buildVerse.validateEmail, {
+      email: email,
+    })
+    .then((response) => {
+      toast.success('Email Validated');
+      if (setModalTriggers)
+        setModalTriggers({
+          isRegisterModalOpen: false,
+          isLoginModalOpen: false,
+          isForgetPasswordModalOpen: false,
+          isLoginWithOTPModalOpen: true,
+          isEmailValidated: false,
+          showBinaryPopup: false,
+        });
+      console.log(response);
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message.general[0]);
+      if (setModalTriggers)
+      setModalTriggers({
+        isRegisterModalOpen: true,
+        isLoginModalOpen: false,
+        isForgetPasswordModalOpen: false,
+        isLoginWithOTPModalOpen: false,
+        isEmailValidated: false,
+        showBinaryPopup: false,
+      });
       console.log(error);
     });
 };

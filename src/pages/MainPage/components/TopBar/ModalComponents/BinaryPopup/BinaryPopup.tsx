@@ -3,7 +3,11 @@ import styles from './BinaryPopup.module.css'
 import SecondaryButton from '../../../Buttons/SecondaryButton'
 import PrimaryButton from '../../../Buttons/PrimaryButton'
 
-const BinaryPopup = () => {
+const BinaryPopup = ({
+    modalTriggers, setModalTriggers, Modalname
+}: {
+    modalTriggers: any, setModalTriggers: any, Modalname: string
+}) => {
     return (
         <>
             <div>

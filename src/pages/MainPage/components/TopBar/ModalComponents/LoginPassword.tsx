@@ -12,7 +12,7 @@ import { login } from "../../../../../apis/authentication";
 import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
-import BinaryPopup from "./BinaryPopup/BinaryPopup";
+
 
 const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
     email: string, setEmail: (email: string) => void,
@@ -21,13 +21,11 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
 
     const [password, setPassword] = useState('');
 
-    const [showBinaryPopup, setShowBinaryPopup] = useState(false);
-
     return (
         <>
             {
                 <>
-                    modalTriggers[Modalname as keyof ModalTriggersType] && (
+                    {modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
@@ -46,14 +44,16 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                                 <input placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} className={styles.modalInput} type="password" />
                             </div>
                             <div className={styles.modalButtonContainer}>
-                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password, setModalTriggers, 'loginWithPassword', setShowBinaryPopup)} />
+                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password, setModalTriggers, 'loginWithPassword')} />
 
                                 <SecondaryButton onClick={() => {
                                     setModalTriggers({
                                         isRegisterModalOpen: true,
                                         isLoginModalOpen: false,
                                         isForgetPasswordModalOpen: false,
-                                        isLoginWithOTPModalOpen: true
+                                        isLoginWithOTPModalOpen: true,
+                                        isEmailValidated: false,
+                                        showBinaryPopup: false,
                                     })
                                 }} ButtonText="Login with OTP" />
                             </div>
@@ -83,9 +83,9 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                             </div>
                         </div>
                     </Modal >
-                    )
+                    )}
 
-                    {showBinaryPopup && <BinaryPopup />}
+                    {/* {showBinaryPopup && <BinaryPopup />} */}
                 </>
             }</>
     )

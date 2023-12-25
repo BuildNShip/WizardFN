@@ -86,3 +86,13 @@
 
   border: none;
 }
+
+.helperText{
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  max-width: 18rem;
+}
+
+.helperText span {
+  color: var(--tertiary-color);
+}

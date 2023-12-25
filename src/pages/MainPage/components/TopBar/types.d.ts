@@ -3,4 +3,7 @@ export interface ModalTriggersType {
   isLoginModalOpen: boolean;
   isForgetPasswordModalOpen: boolean;
   isLoginWithOTPModalOpen: boolean;
+  isEmailValidated: boolean;
+
+  showBinaryPopup: boolean;
 }
