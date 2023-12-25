@@ -40,10 +40,10 @@ const TopBar = () => {
             {
                 modalTriggers.askMergePopup && (
                     <BinaryPopup onClick={() => {
-                        mergeAccount(email, true, setModalTriggers, modalTriggers)
+                        mergeAccount(true, setModalTriggers, modalTriggers)
                     }}
                         onClickCancel={() => {
-                            mergeAccount(email, false, setModalTriggers, modalTriggers)
+                            mergeAccount(false, setModalTriggers, modalTriggers)
                         }}
                         content={"There could be data associated with this temporary account. Do you want to merge it with your new account?"}
                         buttonText={"Merge Accounts"}

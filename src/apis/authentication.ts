@@ -1,10 +1,31 @@
 import toast from 'react-hot-toast';
-import { privateGateway, publicGateway } from '../services/apiGateways';
+import {
+  privateGateway,
+  publicGateway,
+} from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
+import { AxiosResponse } from 'axios';
+
+const mergeRefreshTokens = (
+  response: AxiosResponse<any, any>,
+) => {
+  if (
+    response.data.response &&
+    response.data.response.access_token
+  ) {
+    localStorage.setItem(
+      'accessToken',
+      response.data.response.access_token,
+    );
+    localStorage.setItem(
+      'refreshToken',
+      response.data.response.refresh_token,
+    );
+  }
+};
 
 export const mergeAccount = async (
-  email: string,
   transfer: boolean,
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
@@ -13,17 +34,18 @@ export const mergeAccount = async (
 ) => {
   privateGateway
     .post(buildVerse.mergeAccount, {
-      email: email,
       old_token: localStorage.getItem('old_refresh_token'),
       transfer: transfer,
     })
-    .then((response) => {
-      toast.success('Account Merged');
+    .then(() => {
+      if (transfer)
+        toast.success("Account's merged successfully");
+      else toast.success("Account's not merged");
       setModalTriggers({
         ...modalTriggers,
         askMergePopup: false,
       });
-      console.log(response);
+      localStorage.removeItem('old_refresh_token');
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -31,7 +53,6 @@ export const mergeAccount = async (
         ...modalTriggers,
         askMergePopup: false,
       });
-      console.log(error);
     });
 };
 
@@ -39,25 +60,10 @@ export const guestRegister = async () => {
   publicGateway
     .post(buildVerse.guestRegister)
     .then((response) => {
-      if (
-        response.data.response &&
-        response.data.response.access_token
-      ) {
-        localStorage.setItem(
-          'accessToken',
-          response.data.response.access_token,
-        );
-        localStorage.setItem(
-          'refreshToken',
-          response.data.response.refresh_token,
-        );
-      }
-
-      return response.data.response;
+      mergeRefreshTokens(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      return error.response.data;
     });
 };
 
@@ -78,7 +84,8 @@ export const preRegister = async (
       email: email,
     })
     .then((response) => {
-      toast.success('OTP sent to your email');
+      console.log(response);
+      toast.success(response.data.message.general[0]);
       setModalTriggers({
         ...modalTriggers,
         isRegisterModalOpen: true,
@@ -94,7 +101,6 @@ export const preRegister = async (
         isRegisterModalOpen: false,
         showBinaryPopup: false,
       });
-      return error.response.data;
     });
 };
 
@@ -112,22 +118,9 @@ export const register = async (
       otp: otp,
     })
     .then((response) => {
-      toast.success('Your are Registered');
+      toast.success(response.data.message.general[0]);
 
-      if (localStorage.getItem('refreshToken') !== null) {
-        localStorage.setItem(
-          'old_refresh_token',
-          localStorage.getItem('refreshToken') as string,
-        );
-        localStorage.setItem(
-          'refreshToken',
-          response.data.response.refresh_token,
-        );
-        localStorage.setItem(
-          'accessToken',
-          response.data.response.access_token,
-        );
-      }
+      mergeRefreshTokens(response);
 
       setModalTriggers({
         ...modalTriggers,
@@ -137,11 +130,6 @@ export const register = async (
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      // setModalTriggers({
-      //   ...modalTriggers,
-      //   isRegisterModalOpen: false,
-      // });
-      console.log(error);
     });
 };
 
@@ -171,7 +159,7 @@ export const login = async (
   publicGateway
     .post(buildVerse.login, data)
     .then((response) => {
-      toast.success('Logged In');
+      toast.success(response.data.message.general[0]);
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: false,
@@ -203,7 +191,6 @@ export const login = async (
         isLoginWithOTPModalOpen: false,
         isRegisterModalOpen: false,
       });
-      console.log(error);
     });
 };
 
@@ -221,7 +208,7 @@ export const generateOTP = async (
       type: type,
     })
     .then((response) => {
-      toast.success('OTP sent to your email');
+      toast.success(response.data.message.general[0]);
 
       if (type === 'Login')
         setModalTriggers({
@@ -234,12 +221,9 @@ export const generateOTP = async (
           isRegisterModalOpen: false,
         });
       }
-
-      console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      console.log(error);
     });
 };
 
@@ -259,7 +243,7 @@ export const resetPassword = async (
       password: password,
     })
     .then((response) => {
-      toast.success('Password Resetted Successfully');
+      toast.success(response.data.message.general[0]);
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: false,
@@ -281,8 +265,6 @@ export const resetPassword = async (
           response.data.response.access_token,
         );
       }
-
-      console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -291,7 +273,6 @@ export const resetPassword = async (
         isLoginModalOpen: true,
         isForgetPasswordModalOpen: false,
       });
-      console.log(error);
     });
 };
 
@@ -307,14 +288,13 @@ export const validateEmail = async (
       email: email,
     })
     .then((response) => {
-      toast.success('Email Validated');
+      toast.success(response.data.message.general[0]);
       setModalTriggers({
         ...modalTriggers,
         isEmailValidated: false,
         isLoginModalOpen: true,
         showBinaryPopup: false,
       });
-      console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -323,6 +303,5 @@ export const validateEmail = async (
         showBinaryPopup: true,
         isEmailValidated: false,
       });
-      console.log(error);
     });
 };
