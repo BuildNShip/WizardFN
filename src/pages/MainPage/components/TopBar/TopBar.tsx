@@ -25,6 +25,8 @@ const TopBar = () => {
     useEffect(() => {
         if (modalTriggers.isLoginWithOTPModalOpen)
             setModalType('loginWithOTP')
+        if (modalTriggers.isForgetPasswordModalOpen)
+            setModalType('forgetPassword')
         else
             setModalType('registerWithOTP')
     }, [modalTriggers])
@@ -32,13 +34,14 @@ const TopBar = () => {
     return (
         <>
 
-            {modalTriggers.isEmailValidated && <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />}
+            <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />
 
-            {modalTriggers.isRegisterModalOpen && <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />}
+            <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
 
-            {(modalTriggers.isLoginModalOpen || modalTriggers.isLoginWithOTPModalOpen) && <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />}
+            <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
 
-            {modalTriggers.isForgetPasswordModalOpen && <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" />}
+            <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" modalType={modalType} />
+
             <div className={styles.mainAppTopbar}>
 
                 <div className={styles.topbarTabsContainer}>

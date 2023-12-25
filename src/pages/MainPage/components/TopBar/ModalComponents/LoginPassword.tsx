@@ -31,12 +31,13 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                             <div className={styles.modalTitle}>
                                 Login
                             </div>
-                            <div className={styles.modalInputContainer}>
+                            {/* <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
                                 <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
-                            </div>
+                            </div> */}
+                            <p className={styles.emailLabel}>{email}</p>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Password<span>*</span>

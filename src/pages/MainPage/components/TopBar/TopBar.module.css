@@ -123,3 +123,9 @@
   border: none;
 }
 
+.emailLabel{
+  font-size: 0.8rem;
+  color: var(--tertiary-color);
+  margin-right: 0.5rem;
+}
+

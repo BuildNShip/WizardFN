@@ -96,3 +96,9 @@
 .helperText span {
   color: var(--tertiary-color);
 }
+
+.emailLabel{
+  font-size: 0.8rem;
+  color: var(--tertiary-color);
+  margin-right: 0.5rem;
+}

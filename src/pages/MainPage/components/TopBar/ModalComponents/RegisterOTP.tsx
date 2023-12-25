@@ -17,7 +17,7 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
             if (modalTriggers[Modalname as keyof ModalTriggersType] || modalType === 'loginWithOTP') {
                 if (modalType === 'loginWithOTP')
                     generateOTP(email, setModalTriggers, modalTriggers, "Login");
-                else
+                if (modalType === 'registerWithOTP')
                     preRegister(email, setModalTriggers, modalTriggers);
             }
         }
@@ -35,12 +35,13 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
                             <div className={styles.modalTitle}>
                                 {modalType === 'loginWithOTP' ? 'Login' : 'Register'} with OTP
                             </div>
-                            <div className={styles.modalInputContainer}>
+                            {/* <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
                                 <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
-                            </div>
+                            </div> */}
+                            <p className={styles.emailLabel}>{email}</p>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Enter OTP

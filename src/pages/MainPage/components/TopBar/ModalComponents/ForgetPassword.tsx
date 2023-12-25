@@ -5,21 +5,22 @@ import styles from "./ModalContentStyles.module.css"
 import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
-const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
+const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, modalType }: {
     email: string, setEmail: (email: string) => void,
-    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string,
+    modalType: string
 }) => {
     const [otp, setOTP] = useState('');
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        if (modalTriggers[Modalname as keyof ModalTriggersType]) {
+        if (modalTriggers[Modalname as keyof ModalTriggersType] || modalType === 'forgetPassword') {
             generateOTP(email, setModalTriggers, modalTriggers, "Forget Password");
         }
         else {
             setOTP('');
         }
-    }, [])
+    }, [modalType])
 
 
     return (
@@ -32,14 +33,15 @@ const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Moda
                                 Forget Password
                             </div>
 
-                            <div className={styles.modalInputContainer}>
+                            {/* <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
                                 <input value={email} placeholder="Enter your email address" onChange={(e) => {
                                     setEmail(e.target.value);
                                 }} className={styles.modalInput} type="text" />
-                            </div>
+                            </div> */}
+                            <p className={styles.emailLabel}>{email}</p>
 
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>

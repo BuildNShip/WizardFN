@@ -38,7 +38,7 @@ const ValidateEmail = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
               <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
             </div>
             <div className={styles.modalButtonContainer}>
-              <PrimaryButton ButtonText="Validate Email" onClick={() => { validateEmail(email, setModalTriggers, modalTriggers) }} />
+              <PrimaryButton ButtonText="Login/SignUp" onClick={() => { validateEmail(email, setModalTriggers, modalTriggers) }} />
             </div>
           </div>
         </Modal >
