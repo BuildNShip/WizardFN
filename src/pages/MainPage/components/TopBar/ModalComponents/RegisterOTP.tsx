@@ -6,8 +6,8 @@ import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
 
-const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, modalType }: {
-    email: string, setEmail: (email: string) => void,
+const RegisterOTP = ({ email, modalTriggers, setModalTriggers, Modalname, modalType }: {
+    email: string,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, modalType: string
 }) => {
 

@@ -36,11 +36,11 @@ const TopBar = () => {
 
             <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />
 
-            <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
+            <RegisterOTP email={email}  modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
 
-            <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
+            <LoginPassword modalTriggers={modalTriggers} email={email} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
 
-            <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" modalType={modalType} />
+            <ForgetPassword modalTriggers={modalTriggers} email={email} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" modalType={modalType} />
 
             <div className={styles.mainAppTopbar}>
 

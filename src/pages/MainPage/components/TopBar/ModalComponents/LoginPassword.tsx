@@ -14,8 +14,8 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 
 
-const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
-    email: string, setEmail: (email: string) => void,
+const LoginPassword = ({ email, modalTriggers, setModalTriggers, Modalname }: {
+    email: string,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
 }) => {
 

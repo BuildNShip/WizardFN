@@ -5,8 +5,8 @@ import styles from "./ModalContentStyles.module.css"
 import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
-const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, modalType }: {
-    email: string, setEmail: (email: string) => void,
+const ForgetPassword = ({ email, modalTriggers, setModalTriggers, Modalname, modalType }: {
+    email: string,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string,
     modalType: string
 }) => {
