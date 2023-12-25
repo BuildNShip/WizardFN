@@ -7,6 +7,8 @@ import ForgetPassword from './ModalComponents/ForgetPassword';
 import { ModalTriggersType } from './types';
 
 import ValidateEmail from './ModalComponents/ValidateEmail';
+import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
+import { mergeAccount } from '../../../../apis/authentication';
 
 const TopBar = () => {
     const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
@@ -16,6 +18,8 @@ const TopBar = () => {
         isLoginWithOTPModalOpen: false,
         isEmailValidated: false,
         showBinaryPopup: false,
+
+        askMergePopup: false,
     });
 
     const [modalType, setModalType] = useState('' as string);
@@ -33,10 +37,27 @@ const TopBar = () => {
 
     return (
         <>
+            {
+                modalTriggers.askMergePopup && (
+                    <BinaryPopup onClick={() => {
+                        mergeAccount(email, true, setModalTriggers, modalTriggers)
+                    }}
+                        onClickCancel={() => {
+                            mergeAccount(email, false, setModalTriggers, modalTriggers)
+                        }}
+                        content={"There could be data associated with this temporary account. Do you want to merge it with your new account?"}
+                        buttonText={"Merge Accounts"}
+                        modalTriggers={modalTriggers}
+                        setModalTriggers={setModalTriggers}
+                        Modalname={"askMergePopup"}
+                    />
+                )
+            }
+
 
             <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />
 
-            <RegisterOTP email={email}  modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
+            <RegisterOTP email={email} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
 
             <LoginPassword modalTriggers={modalTriggers} email={email} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
 

@@ -55,6 +55,7 @@ const LoginPassword = ({ email, modalTriggers, setModalTriggers, Modalname }: {
                                         isLoginWithOTPModalOpen: true,
                                         isEmailValidated: false,
                                         showBinaryPopup: false,
+                                        askMergePopup: false,
                                     })
                                 }} ButtonText="Login with OTP" />
                             </div>

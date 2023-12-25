@@ -6,8 +6,10 @@ export const buildVerse = {
   resetPassword: '/buildverse/reset-password/',
   updateProfile: '/buildverse/update-profile/',
   info: '/buildverse/info/',
-  guestRegister: '/buildverse/guest-register/',
   login: '/buildverse/login/',
   getAccessToken: '/buildverse/get-access-token/',
   validateEmail: '/buildverse/check-email-status/',
+
+  guestRegister: '/wizardapi/guest-register/',
+  mergeAccount: '/wizardapi/switch-to-login/',
 };

@@ -6,4 +6,5 @@ export interface ModalTriggersType {
   isEmailValidated: boolean;
 
   showBinaryPopup: boolean;
+  askMergePopup: boolean;
 }

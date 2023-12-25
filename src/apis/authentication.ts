@@ -1,7 +1,65 @@
 import toast from 'react-hot-toast';
-import { publicGateway } from '../services/apiGateways';
+import { privateGateway, publicGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
+
+export const mergeAccount = async (
+  email: string,
+  transfer: boolean,
+  setModalTriggers: (
+    modalTriggers: ModalTriggersType,
+  ) => void,
+  modalTriggers: ModalTriggersType,
+) => {
+  privateGateway
+    .post(buildVerse.mergeAccount, {
+      email: email,
+      old_token: localStorage.getItem('old_refresh_token'),
+      transfer: transfer,
+    })
+    .then((response) => {
+      toast.success('Account Merged');
+      setModalTriggers({
+        ...modalTriggers,
+        askMergePopup: false,
+      });
+      console.log(response);
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message.general[0]);
+      setModalTriggers({
+        ...modalTriggers,
+        askMergePopup: false,
+      });
+      console.log(error);
+    });
+};
+
+export const guestRegister = async () => {
+  publicGateway
+    .post(buildVerse.guestRegister)
+    .then((response) => {
+      if (
+        response.data.response &&
+        response.data.response.access_token
+      ) {
+        localStorage.setItem(
+          'accessToken',
+          response.data.response.access_token,
+        );
+        localStorage.setItem(
+          'refreshToken',
+          response.data.response.refresh_token,
+        );
+      }
+
+      return response.data.response;
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message.general[0]);
+      return error.response.data;
+    });
+};
 
 export const preRegister = async (
   email: string,
@@ -55,10 +113,26 @@ export const register = async (
     })
     .then((response) => {
       toast.success('Your are Registered');
-      console.log(response);
+
+      if (localStorage.getItem('refreshToken') !== null) {
+        localStorage.setItem(
+          'old_refresh_token',
+          localStorage.getItem('refreshToken') as string,
+        );
+        localStorage.setItem(
+          'refreshToken',
+          response.data.response.refresh_token,
+        );
+        localStorage.setItem(
+          'accessToken',
+          response.data.response.access_token,
+        );
+      }
+
       setModalTriggers({
         ...modalTriggers,
         isRegisterModalOpen: false,
+        askMergePopup: true,
       });
     })
     .catch((error) => {
@@ -103,8 +177,23 @@ export const login = async (
         isLoginModalOpen: false,
         isLoginWithOTPModalOpen: false,
         isRegisterModalOpen: false,
+        askMergePopup: true,
       });
-      console.log(response);
+
+      if (localStorage.getItem('refreshToken') !== null) {
+        localStorage.setItem(
+          'old_refresh_token',
+          localStorage.getItem('refreshToken') as string,
+        );
+        localStorage.setItem(
+          'refreshToken',
+          response.data.response.refresh_token,
+        );
+        localStorage.setItem(
+          'accessToken',
+          response.data.response.access_token,
+        );
+      }
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -173,9 +262,25 @@ export const resetPassword = async (
       toast.success('Password Resetted Successfully');
       setModalTriggers({
         ...modalTriggers,
-        isLoginModalOpen: true,
+        isLoginModalOpen: false,
         isForgetPasswordModalOpen: false,
+        askMergePopup: true,
       });
+
+      if (localStorage.getItem('refreshToken') !== null) {
+        localStorage.setItem(
+          'old_refresh_token',
+          localStorage.getItem('refreshToken') as string,
+        );
+        localStorage.setItem(
+          'refreshToken',
+          response.data.response.refresh_token,
+        );
+        localStorage.setItem(
+          'accessToken',
+          response.data.response.access_token,
+        );
+      }
 
       console.log(response);
     })

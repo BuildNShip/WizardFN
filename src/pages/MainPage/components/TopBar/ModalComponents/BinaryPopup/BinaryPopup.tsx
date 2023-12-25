@@ -2,6 +2,7 @@ import { IoClose } from 'react-icons/io5'
 import styles from './BinaryPopup.module.css'
 import PrimaryButton from '../../../Buttons/PrimaryButton'
 import { ModalTriggersType } from '../../types';
+import SecondaryButton from '../../../Buttons/SecondaryButton';
 
 const BinaryPopup = ({
     onClick,
@@ -9,7 +10,8 @@ const BinaryPopup = ({
     buttonText,
     modalTriggers,
     setModalTriggers,
-    Modalname
+    Modalname,
+    onClickCancel,
 
 }: {
     onClick: () => void;
@@ -18,6 +20,7 @@ const BinaryPopup = ({
     modalTriggers: ModalTriggersType;
     setModalTriggers: (modalTriggers: ModalTriggersType) => void;
     Modalname: string;
+    onClickCancel?: () => void;
 }) => {
     return (
         <>
@@ -52,7 +55,8 @@ const BinaryPopup = ({
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton ButtonText={buttonText} onClick={() => { onClick() }} />
 
-                                {/* <SecondaryButton ButtonText="Reset Password" onClick={() => { }} /> */}
+
+                                {onClickCancel && <SecondaryButton ButtonText="Don't Merge" onClick={() => { onClickCancel() }} />}
                             </div>
 
                         </div>
