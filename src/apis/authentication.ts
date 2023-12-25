@@ -112,6 +112,7 @@ export const login = async (
         ...modalTriggers,
         isLoginModalOpen: true,
         isLoginWithOTPModalOpen: false,
+        isRegisterModalOpen: false,
       });
       console.log(error);
     });
@@ -155,42 +156,36 @@ export const generateOTP = async (
 
 export const resetPassword = async (
   email: string,
-  unqiueString: string,
+  otp: string,
   password: string,
   setModalTriggers: (
     modalTriggers: ModalTriggersType,
   ) => void,
   modalTriggers: ModalTriggersType,
-  setOtpSent: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const formData = new FormData();
-  formData.append('email', email);
-  formData.append('password', password);
-
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  };
-
   publicGateway
-    .post(
-      buildVerse.resetPassword + unqiueString + '/',
-      formData,
-      config,
-    )
+    .post(buildVerse.resetPassword, {
+      email: email,
+      otp: otp,
+      password: password,
+    })
     .then((response) => {
       toast.success('Password Resetted Successfully');
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false,
       });
 
       console.log(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      setOtpSent(false);
+      setModalTriggers({
+        ...modalTriggers,
+        isLoginModalOpen: true,
+        isForgetPasswordModalOpen: false,
+      });
       console.log(error);
     });
 };

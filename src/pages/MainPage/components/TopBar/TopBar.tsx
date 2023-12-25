@@ -6,7 +6,6 @@ import LoginPassword from './ModalComponents/LoginPassword';
 import ForgetPassword from './ModalComponents/ForgetPassword';
 import { ModalTriggersType } from './types';
 
-import { useSearchParams } from "react-router-dom";
 import ValidateEmail from './ModalComponents/ValidateEmail';
 
 const TopBar = () => {
@@ -19,9 +18,7 @@ const TopBar = () => {
         showBinaryPopup: false,
     });
 
-    const [searchParams] = useSearchParams();
     const [modalType, setModalType] = useState('' as string);
-    const [resetKey] = useState(searchParams.get('resetPassword'));
 
     const [email, setEmail] = useState('aswinasokofficial@gmail.com');
 
@@ -32,27 +29,16 @@ const TopBar = () => {
             setModalType('registerWithOTP')
     }, [modalTriggers])
 
-    useEffect(() => {
-        if (searchParams.get('resetPassword')) {
-            setModalTriggers({
-                ...modalTriggers,
-                isForgetPasswordModalOpen: true
-            })
-            console.log("Dammmn")
-        }
-
-        console.log(searchParams.get('resetPassword'))
-        console.log(resetKey)
-    }, [])
-
-
     return (
         <>
-            
-            <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated"/>
-            <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
-            <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
-            <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" resetKey={resetKey} />
+
+            {modalTriggers.isEmailValidated && <ValidateEmail email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isEmailValidated" />}
+
+            {modalTriggers.isRegisterModalOpen && <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />}
+
+            {(modalTriggers.isLoginModalOpen || modalTriggers.isLoginWithOTPModalOpen) && <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />}
+
+            {modalTriggers.isForgetPasswordModalOpen && <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" />}
             <div className={styles.mainAppTopbar}>
 
                 <div className={styles.topbarTabsContainer}>

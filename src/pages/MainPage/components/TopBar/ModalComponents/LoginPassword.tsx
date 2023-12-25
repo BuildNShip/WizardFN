@@ -60,16 +60,16 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
 
 
                         </div>
-                        {/* <div className={styles.modalFooter}>
+                        <div className={styles.modalFooter}>
                             <hr className={styles.horizontalLine} />
                             <div className={styles.subTexts}>
-                                <p onClick={() => {
+                                {/* <p onClick={() => {
                                     setModalTriggers({
                                         ...modalTriggers,
                                         isLoginModalOpen: false,
                                         isRegisterModalOpen: true
                                     })
-                                }} className={styles.subText}>Don't have an account? <span> Register</span></p>
+                                }} className={styles.subText}>Don't have an account? <span> Register</span></p> */}
 
                                 <p onClick={() => {
                                     setModalTriggers({
@@ -81,7 +81,7 @@ const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modal
                                     <span>Reset Password</span>
                                 </p>
                             </div>
-                        </div> */}
+                        </div>
                     </Modal >
                     )}
 

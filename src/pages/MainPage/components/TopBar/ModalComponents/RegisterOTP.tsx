@@ -12,8 +12,6 @@ const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalna
 }) => {
 
     const [otp, setOTP] = useState('');
-
-
     useEffect(() => {
         if (!otp || otp.length === 0) {
             if (modalTriggers[Modalname as keyof ModalTriggersType] || modalType === 'loginWithOTP') {

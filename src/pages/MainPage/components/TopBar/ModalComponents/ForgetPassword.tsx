@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { generateOTP, resetPassword } from "../../../../../apis/authentication";
 import Modal from "../../Modal/Modal";
 import styles from "./ModalContentStyles.module.css"
 import { ModalTriggersType } from "../types";
-import toast from "react-hot-toast";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
-const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, resetKey }: {
+const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
     email: string, setEmail: (email: string) => void,
-    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, resetKey?: string | null
+    modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
 }) => {
-    const [otpSent, setOtpSent] = useState(resetKey ? true : false);
-    const [id] = useState(resetKey);
+    const [otp, setOTP] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (modalTriggers[Modalname as keyof ModalTriggersType]) {
+            generateOTP(email, setModalTriggers, modalTriggers, "Forget Password");
+        }
+        else {
+            setOTP('');
+        }
+    }, [])
+
 
     return (
         <>
@@ -33,27 +41,28 @@ const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Moda
                                 }} className={styles.modalInput} type="text" />
                             </div>
 
-                            {otpSent && <>
-                                <div className={styles.modalInputContainer}>
-                                    <div className={styles.modalInputLabel}>
-                                        Enter Password<span>*</span>
-                                    </div>
-                                    <input placeholder="Enter your new Password" onChange={(e) => {
-                                        setPassword(e.target.value);
-                                    }} className={styles.modalInput} type="password" />
+                            <div className={styles.modalInputContainer}>
+                                <div className={styles.modalInputLabel}>
+                                    Enter OTP<span>*</span>
                                 </div>
-                            </>}
+                                <input placeholder="Enter OTP" onChange={(e) => {
+                                    setOTP(e.target.value);
+                                }} className={styles.modalInput} type="text" />
+                            </div>
+
+                            <div className={styles.modalInputContainer}>
+                                <div className={styles.modalInputLabel}>
+                                    Enter Password<span>*</span>
+                                </div>
+                                <input placeholder="Enter your new Password" onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }} className={styles.modalInput} type="password" />
+                            </div>
+
                             <div className={styles.modalButtonContainer}>
                                 <PrimaryButton onClick={() => {
-                                    if (!otpSent) {
-                                        generateOTP(email, setModalTriggers,modalTriggers,  "Forget Password");
-                                    }
-                                    else
-                                        if (id)
-                                            resetPassword(email, id, password, setModalTriggers, modalTriggers, setOtpSent);
-                                        else
-                                            toast.error("Password Reset Faild")
-                                }} ButtonText={otpSent ? 'Reset Password' : 'Send Reset Link'} />
+                                    resetPassword(email, otp, password, setModalTriggers, modalTriggers);
+                                }} ButtonText='Reset Password' />
                             </div>
                         </div>
                         <div className={styles.modalFooter}>
