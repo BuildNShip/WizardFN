@@ -31,7 +31,7 @@ const TopBar = () => {
             setModalType('loginWithOTP')
         if (modalTriggers.isForgetPasswordModalOpen)
             setModalType('forgetPassword')
-        else
+        if (modalTriggers.isRegisterModalOpen && !modalTriggers.isLoginWithOTPModalOpen)
             setModalType('registerWithOTP')
     }, [modalTriggers])
 

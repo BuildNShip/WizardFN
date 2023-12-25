@@ -137,10 +137,10 @@ export const register = async (
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
-      setModalTriggers({
-        ...modalTriggers,
-        isRegisterModalOpen: false,
-      });
+      // setModalTriggers({
+      //   ...modalTriggers,
+      //   isRegisterModalOpen: false,
+      // });
       console.log(error);
     });
 };
