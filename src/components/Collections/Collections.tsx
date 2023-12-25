@@ -6,6 +6,7 @@ import { IoIosMenu } from "react-icons/io";
 import { FaTriangleExclamation } from "react-icons/fa6";
 import { Tooltip } from 'react-tooltip'
 import { useJwt } from "react-jwt"
+import { getProjects } from "../../apis/collections.ts";
 
 
 const Collections = () => {
@@ -24,6 +25,10 @@ const Collections = () => {
 
 
     useEffect(() => {
+        getProjects();
+    }, [])
+
+    useEffect(() => {
         setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email)
         console.log(localStorage.getItem('profileInfo')!);
 
@@ -33,7 +38,7 @@ const Collections = () => {
         else {
             setIsGuest(false);
         }
-    }, [decodedToken, localStorage.getItem('refreshToken')])
+    }, [decodedToken, localStorage.getItem('accessToken')])
 
     const handleSubMenuToggle = (index: number) => {
         const updatedMenus = [...openMenus];
@@ -71,8 +76,8 @@ const Collections = () => {
             <div className={styles.collectionsTopbar}>
                 <div className={styles.row}>
                     <div className={styles.collectionsTopbarUsername}>
-                        <div className={styles.collectionTopbarAvatar}>{email.split('@')[0].charAt(0).toUpperCase()}</div>
-                        <div className={styles.collectionTopbarName}>{isGuest ? "Guest User" : email.split('@')[0]}</div>
+                        <div className={styles.collectionTopbarAvatar}>{email ? email?.split('@')[0].charAt(0).toUpperCase() : "G"}</div>
+                        <div className={styles.collectionTopbarName}>{isGuest ? "Guest User" : email?.split('@')[0]}</div>
                     </div>
                     {isGuest && <><FaTriangleExclamation data-tooltip-id="guest-tooltip" data-tooltip-content="Guest account data will be eraised within 2 days." size={25} className={styles.exclamationMark} />
                         <Tooltip style={{

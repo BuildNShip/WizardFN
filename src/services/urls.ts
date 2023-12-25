@@ -13,4 +13,6 @@ export const buildVerse = {
   guestRegister: '/wizardapi/guest-register/',
   mergeAccount: '/wizardapi/switch-to-login/',
   profileInfo: '/buildverse/profile-info/',
+
+  getProjects: '/wizardapi/project/list/',
 };

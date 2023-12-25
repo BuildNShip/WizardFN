@@ -11,11 +11,11 @@ import { guestRegister } from '../../apis/authentication'
 const MainPage = () => {
 
     useEffect(() => {
-        if(localStorage.getItem('accessToken') === null){
+        if (localStorage.getItem('accessToken') === null) {
             guestRegister();
         }
     }, [])
-   
+
     return (
         <div className={styles.mainContainer}>
             <Sidebar />
