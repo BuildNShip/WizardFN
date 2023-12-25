@@ -12,18 +12,22 @@ import { login } from "../../../../../apis/authentication";
 import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
+import BinaryPopup from "./BinaryPopup/BinaryPopup";
 
-const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
+const LoginPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname }: {
+    email: string, setEmail: (email: string) => void,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string
 }) => {
 
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [showBinaryPopup, setShowBinaryPopup] = useState(false);
 
     return (
         <>
             {
-                modalTriggers[Modalname as keyof ModalTriggersType] && (
+                <>
+                    modalTriggers[Modalname as keyof ModalTriggersType] && (
                     <Modal modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname={Modalname}>
                         <div className={styles.modalContent}>
                             <div className={styles.modalTitle}>
@@ -33,7 +37,7 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
-                                <input placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
+                                <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
                             </div>
                             <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>
@@ -42,7 +46,7 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                                 <input placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} className={styles.modalInput} type="password" />
                             </div>
                             <div className={styles.modalButtonContainer}>
-                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password)} />
+                                <PrimaryButton ButtonText="Login" onClick={() => login(email, password, setModalTriggers, 'loginWithPassword', setShowBinaryPopup)} />
 
                                 <SecondaryButton onClick={() => {
                                     setModalTriggers({
@@ -79,7 +83,10 @@ const LoginPassword = ({ modalTriggers, setModalTriggers, Modalname }: {
                             </div>
                         </div>
                     </Modal >
-                )
+                    )
+
+                    {showBinaryPopup && <BinaryPopup />}
+                </>
             }</>
     )
 }

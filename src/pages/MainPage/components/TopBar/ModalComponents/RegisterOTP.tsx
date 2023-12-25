@@ -6,12 +6,12 @@ import { ModalTriggersType } from "../types";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
 
-const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: {
+const RegisterOTP = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, modalType }: {
+    email: string, setEmail: (email: string) => void,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, modalType: string
 }) => {
 
     const [showOTP, setShowOTP] = useState(false);
-    const [email, setEmail] = useState('');
     const [otp, setOTP] = useState('');
 
     return (
@@ -27,7 +27,7 @@ const RegisterOTP = ({ modalTriggers, setModalTriggers, Modalname, modalType }: 
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
-                                <input placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
+                                <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
                             </div>
                             {showOTP && <div className={styles.modalInputContainer}>
                                 <div className={styles.modalInputLabel}>

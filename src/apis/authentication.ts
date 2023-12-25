@@ -71,6 +71,9 @@ export const login = async (
     modalTriggers: ModalTriggersType,
   ) => void,
   type?: string,
+  setShowBinaryPopup?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >,
 ) => {
   const config = {
     headers: {
@@ -114,6 +117,8 @@ export const login = async (
         isForgetPasswordModalOpen: false,
         isLoginWithOTPModalOpen: false,
       });
+      if (setShowBinaryPopup && type !== 'loginWithOTP')
+        setShowBinaryPopup(true);
       console.log(error);
     });
 };

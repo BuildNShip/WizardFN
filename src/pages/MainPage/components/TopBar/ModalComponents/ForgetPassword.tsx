@@ -6,10 +6,10 @@ import { ModalTriggersType } from "../types";
 import toast from "react-hot-toast";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 
-const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }: {
+const ForgetPassword = ({ email, setEmail, modalTriggers, setModalTriggers, Modalname, resetKey }: {
+    email: string, setEmail: (email: string) => void,
     modalTriggers: ModalTriggersType, setModalTriggers: (modalTriggers: ModalTriggersType) => void, Modalname: string, resetKey?: string | null
 }) => {
-    const [email, setEmail] = useState('');
     const [otpSent, setOtpSent] = useState(resetKey ? true : false);
     const [id] = useState(resetKey);
     const [password, setPassword] = useState('');
@@ -28,7 +28,7 @@ const ForgetPassword = ({ modalTriggers, setModalTriggers, Modalname, resetKey }
                                 <div className={styles.modalInputLabel}>
                                     Email Address<span>*</span>
                                 </div>
-                                <input placeholder="Enter your email address" onChange={(e) => {
+                                <input value={email} placeholder="Enter your email address" onChange={(e) => {
                                     setEmail(e.target.value);
                                 }} className={styles.modalInput} type="text" />
                             </div>

@@ -20,6 +20,8 @@ const TopBar = () => {
     const [modalType, setModalType] = useState('' as string);
     const [resetKey] = useState(searchParams.get('resetPassword'));
 
+    const [email, setEmail] = useState('');
+
     useEffect(() => {
         if (modalTriggers.isLoginWithOTPModalOpen)
             setModalType('loginWithOTP')
@@ -43,9 +45,9 @@ const TopBar = () => {
 
     return (
         <>
-            <RegisterOTP modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
-            <LoginPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
-            <ForgetPassword modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" resetKey={resetKey} />
+            <RegisterOTP email={email} setEmail={setEmail} modalTriggers={modalTriggers} setModalTriggers={setModalTriggers} Modalname="isRegisterModalOpen" modalType={modalType} />
+            <LoginPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isLoginModalOpen" />
+            <ForgetPassword modalTriggers={modalTriggers} email={email} setEmail={setEmail} setModalTriggers={setModalTriggers} Modalname="isForgetPasswordModalOpen" resetKey={resetKey} />
             <div className={styles.mainAppTopbar}>
 
                 <div className={styles.topbarTabsContainer}>
