@@ -6,6 +6,7 @@ import {
 import { buildVerse } from '../services/urls';
 import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
 import { AxiosResponse } from 'axios';
+import { getProfileInfo } from './user';
 
 const mergeRefreshTokens = (
   response: AxiosResponse<any, any>,
@@ -182,6 +183,8 @@ export const login = async (
           response.data.response.access_token,
         );
       }
+
+      getProfileInfo();
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);

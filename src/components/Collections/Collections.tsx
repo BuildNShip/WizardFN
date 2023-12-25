@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Collections.module.css"
 import { buttons } from "./CollectionsData.ts"
 import { IoIosMenu } from "react-icons/io";
 
 import { FaTriangleExclamation } from "react-icons/fa6";
+import { Tooltip } from 'react-tooltip'
+import { useJwt } from "react-jwt"
 
 
 const Collections = () => {
@@ -16,6 +18,22 @@ const Collections = () => {
     };
 
     const [openMenus, setOpenMenus] = useState<number[]>([]);
+    const [isGuest, setIsGuest] = useState<boolean>(true);
+    const { decodedToken } = useJwt(localStorage.getItem('refreshToken')!);
+    const [email, setEmail] = useState<string>("");
+
+
+    useEffect(() => {
+        setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email)
+        console.log(localStorage.getItem('profileInfo')!);
+
+        if ((decodedToken as { is_guest: boolean })?.is_guest) {
+            setIsGuest(true);
+        }
+        else {
+            setIsGuest(false);
+        }
+    }, [decodedToken, localStorage.getItem('refreshToken')])
 
     const handleSubMenuToggle = (index: number) => {
         const updatedMenus = [...openMenus];
@@ -53,10 +71,14 @@ const Collections = () => {
             <div className={styles.collectionsTopbar}>
                 <div className={styles.row}>
                     <div className={styles.collectionsTopbarUsername}>
-                        <div className={styles.collectionTopbarAvatar}>S</div>
-                        <div className={styles.collectionTopbarName}>Salman Faariz</div>
+                        <div className={styles.collectionTopbarAvatar}>{email.split('@')[0].charAt(0).toUpperCase()}</div>
+                        <div className={styles.collectionTopbarName}>{isGuest ? "Guest User" : email.split('@')[0]}</div>
                     </div>
-                    <FaTriangleExclamation size={25} className={styles.exclamationMark} />
+                    {isGuest && <><FaTriangleExclamation data-tooltip-id="guest-tooltip" data-tooltip-content="Guest account data will be eraised within 2 days." size={25} className={styles.exclamationMark} />
+                        <Tooltip style={{
+                            fontFamily: "Inter",
+                        }} id="guest-tooltip" variant="dark" /></>
+                    }
                 </div>
                 <button className={styles.addButton}>+</button>
             </div>
