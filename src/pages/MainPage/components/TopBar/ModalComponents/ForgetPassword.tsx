@@ -42,15 +42,6 @@ const ForgetPassword = ({
         >
           <div className={styles.modalContent}>
             <div className={styles.modalTitle}>Forget Password</div>
-
-            {/* <div className={styles.modalInputContainer}>
-                                <div className={styles.modalInputLabel}>
-                                    Email Address<span>*</span>
-                                </div>
-                                <input value={email} placeholder="Enter your email address" onChange={(e) => {
-                                    setEmail(e.target.value);
-                                }} className={styles.modalInput} type="text" />
-                            </div> */}
             <p className={styles.emailLabel}>{email}</p>
 
             <div className={styles.modalInputContainer}>
@@ -92,25 +83,8 @@ const ForgetPassword = ({
                     modalTriggers,
                   );
                 }}
-                ButtonText="Reset Password"
+                buttonText="Reset Password"
               />
-            </div>
-          </div>
-          <div className={styles.modalFooter}>
-            <hr className={styles.horizontalLine} />
-            <div className={styles.subTexts}>
-              <p
-                onClick={() => {
-                  setModalTriggers({
-                    ...modalTriggers,
-                    isForgetPasswordModalOpen: false,
-                    isLoginModalOpen: true,
-                  });
-                }}
-                className={styles.subText}
-              >
-                Remembered your password? <span>Login</span>
-              </p>
             </div>
           </div>
         </Modal>

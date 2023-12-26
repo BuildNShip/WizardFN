@@ -52,12 +52,6 @@ const RegisterOTP = ({
             <div className={styles.modalTitle}>
               {modalType === 'loginWithOTP' ? 'Login' : 'Register'} with OTP
             </div>
-            {/* <div className={styles.modalInputContainer}>
-                                <div className={styles.modalInputLabel}>
-                                    Email Address<span>*</span>
-                                </div>
-                                <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
-                            </div> */}
             <p className={styles.emailLabel}>{email}</p>
             <div className={styles.modalInputContainer}>
               <div className={styles.modalInputLabel}>Enter OTP</div>
@@ -83,36 +77,10 @@ const RegisterOTP = ({
                     );
                   else register(email, otp, setModalTriggers, modalTriggers);
                 }}
-                ButtonText="Verify OTP"
+                buttonText="Verify OTP"
               />
             </div>
           </div>
-          {/* <div className={styles.modalFooter}>
-                            <hr className={styles.horizontalLine} />
-                            <div className={styles.subTexts}>
-                                {modalType != 'loginWithOTP' ? <p onClick={() => {
-                                    setModalTriggers({
-                                        ...modalTriggers,
-                                        isRegisterModalOpen: false,
-                                        isLoginModalOpen: true,
-                                        isForgetPasswordModalOpen: false
-                                    })
-                                }} className={styles.subText}>Already have a Account? <span>Login</span></p> :
-                                    <p onClick={() => {
-
-                                        setModalTriggers({
-                                            ...modalTriggers,
-                                            isRegisterModalOpen: false,
-                                            isLoginModalOpen: true,
-                                            isForgetPasswordModalOpen: false
-                                        })
-
-
-                                    }} className={styles.subText}>
-                                        Login with <span>Password</span>
-                                    </p>}
-                            </div>
-                        </div> */}
         </Modal>
       )}
     </>

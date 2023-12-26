@@ -56,7 +56,7 @@ const ValidateEmail = ({
             </div>
             <div className={styles.modalButtonContainer}>
               <PrimaryButton
-                ButtonText="Login/SignUp"
+                buttonText="Login/SignUp"
                 onClick={() => {
                   validateEmail(email, setModalTriggers, modalTriggers);
                 }}

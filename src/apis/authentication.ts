@@ -29,6 +29,8 @@ export const mergeAccount = async (
         ...modalTriggers,
         askMergePopup: false,
       });
+
+      localStorage.removeItem('old_refresh_token');
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -55,14 +57,11 @@ export const preRegister = async (
   setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
-  console.log(import.meta.env.VITE_BACKEND_URL + buildVerse.preRegister);
-
   publicGateway
     .post(buildVerse.preRegister, {
       email: email,
     })
     .then((response) => {
-      console.log(response);
       toast.success(response.data.message.general[0]);
       setModalTriggers({
         ...modalTriggers,

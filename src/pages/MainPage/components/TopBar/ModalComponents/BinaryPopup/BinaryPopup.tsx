@@ -50,7 +50,7 @@ const BinaryPopup = ({
                 </div>
                 <div className={styles.modalButtonContainer}>
                   <PrimaryButton
-                    ButtonText={buttonText}
+                    buttonText={buttonText}
                     onClick={() => {
                       onClick();
                     }}
@@ -58,7 +58,7 @@ const BinaryPopup = ({
 
                   {onClickCancel && (
                     <SecondaryButton
-                      ButtonText="Don't Merge"
+                      buttonText="Don't Merge"
                       onClick={() => {
                         onClickCancel();
                       }}

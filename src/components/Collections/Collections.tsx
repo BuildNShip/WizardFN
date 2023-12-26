@@ -18,23 +18,17 @@ const Collections = () => {
 
   const [openMenus, setOpenMenus] = useState<number[]>([]);
   const [isGuest, setIsGuest] = useState<boolean>(true);
-  const { decodedToken } = useJwt(localStorage.getItem('refreshToken')!);
+  let { decodedToken } = useJwt(localStorage.getItem('refreshToken')!);
   const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
     getProjects();
-  }, []);
 
-  useEffect(() => {
-    setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email);
-    console.log(localStorage.getItem('profileInfo')!);
+    if (localStorage.getItem('profileInfo') !== null)
+      setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email);
 
-    if ((decodedToken as { is_guest: boolean })?.is_guest) {
-      setIsGuest(true);
-    } else {
-      setIsGuest(false);
-    }
-  }, [decodedToken, localStorage.getItem('accessToken')]);
+    setIsGuest((decodedToken as { is_guest: boolean })?.is_guest);
+  }, [decodedToken]);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];
@@ -77,7 +71,7 @@ const Collections = () => {
         <div className={styles.row}>
           <div className={styles.collectionsTopbarUsername}>
             <div className={styles.collectionTopbarAvatar}>
-              {email ? email?.split('@')[0].charAt(0).toUpperCase() : 'G'}
+              {isGuest ? 'G' : email?.split('@')[0].charAt(0).toUpperCase()}
             </div>
             <div className={styles.collectionTopbarName}>
               {isGuest ? 'Guest User' : email?.split('@')[0]}

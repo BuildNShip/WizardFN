@@ -17,8 +17,8 @@ const TopBar = () => {
     isForgetPasswordModalOpen: false,
     isLoginWithOTPModalOpen: false,
     isEmailValidated: false,
+    
     showBinaryPopup: false,
-
     askMergePopup: false,
   });
 

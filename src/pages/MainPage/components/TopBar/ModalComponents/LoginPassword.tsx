@@ -38,12 +38,6 @@ const LoginPassword = ({
             >
               <div className={styles.modalContent}>
                 <div className={styles.modalTitle}>Login</div>
-                {/* <div className={styles.modalInputContainer}>
-                                <div className={styles.modalInputLabel}>
-                                    Email Address<span>*</span>
-                                </div>
-                                <input value={email} placeholder="Enter your email address" onChange={(e) => setEmail(e.target.value)} className={styles.modalInput} type="text" />
-                            </div> */}
                 <p className={styles.emailLabel}>{email}</p>
                 <div className={styles.modalInputContainer}>
                   <div className={styles.modalInputLabel}>
@@ -58,7 +52,7 @@ const LoginPassword = ({
                 </div>
                 <div className={styles.modalButtonContainer}>
                   <PrimaryButton
-                    ButtonText="Login"
+                    buttonText="Login"
                     onClick={() =>
                       login(
                         email,
@@ -82,21 +76,13 @@ const LoginPassword = ({
                         askMergePopup: false,
                       });
                     }}
-                    ButtonText="Login with OTP"
+                    buttonText="Login with OTP"
                   />
                 </div>
               </div>
               <div className={styles.modalFooter}>
                 <hr className={styles.horizontalLine} />
                 <div className={styles.subTexts}>
-                  {/* <p onClick={() => {
-                                    setModalTriggers({
-                                        ...modalTriggers,
-                                        isLoginModalOpen: false,
-                                        isRegisterModalOpen: true
-                                    })
-                                }} className={styles.subText}>Don't have an account? <span> Register</span></p> */}
-
                   <p
                     onClick={() => {
                       setModalTriggers({
@@ -113,8 +99,6 @@ const LoginPassword = ({
               </div>
             </Modal>
           )}
-
-          {/* {showBinaryPopup && <BinaryPopup />} */}
         </>
       }
     </>

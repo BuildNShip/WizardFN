@@ -1,16 +1,16 @@
 import styles from './Buttons.module.css';
 
 const SecondaryButton = ({
-  ButtonText,
+  buttonText,
   onClick,
 }: {
-  ButtonText: string;
+  buttonText: string;
   onClick: () => void;
 }) => {
   return (
     <>
       <button onClick={onClick} className={styles.secondaryButton}>
-        {ButtonText}
+        {buttonText}
       </button>
     </>
   );
