@@ -1,7 +1,10 @@
 import { privateGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 
-export const getProfileInfo = async (setEmail: { (email: string): void; (arg0: any): void; }) => {
+export const getProfileInfo = async (setEmail: {
+  (email: string): void;
+  (arg0: any): void;
+}) => {
   privateGateway
     .get(buildVerse.profileInfo)
     .then((response) => {

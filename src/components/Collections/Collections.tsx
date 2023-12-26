@@ -5,7 +5,6 @@ import { IoIosMenu } from 'react-icons/io';
 
 import { FaTriangleExclamation } from 'react-icons/fa6';
 import { Tooltip } from 'react-tooltip';
-import { getProjects } from '../../apis/collections.ts';
 
 import { UserContext } from '../../pages/MainPage/context';
 
@@ -21,9 +20,7 @@ const Collections = () => {
 
   const [openMenus, setOpenMenus] = useState<number[]>([]);
 
-  useEffect(() => {
-    getProjects();
-  }, []);
+
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];

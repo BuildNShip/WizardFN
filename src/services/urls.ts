@@ -15,4 +15,6 @@ export const buildVerse = {
   profileInfo: '/buildverse/profile-info/',
 
   getProjects: '/wizardapi/project/list/',
+  createProject: '/wizardapi/project/create/',
+
 };

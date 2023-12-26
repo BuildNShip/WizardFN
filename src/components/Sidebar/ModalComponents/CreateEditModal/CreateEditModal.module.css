@@ -1,0 +1,105 @@
+/* Modal Styles */
+
+.modalContent {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: start;
+  }
+  
+  .modalTitle {
+    position: absolute;
+    font-size: 13px;
+    top: 19px;
+    left: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  
+  .modalInput {
+    width: 16rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--light-skin);
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .modalInput:focus {
+    outline: none;
+    border: 1px solid var(--tertiary-color);
+  }
+  
+  .modalInputLabel {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .modalInputLabel span {
+    color: var(--tertiary-color);
+    font-size: 1.25rem;
+    margin-left: 0.1rem;
+  }
+  
+  .modalButtonContainer {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .modalFooter {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .subTexts {
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    gap: 0.5rem;
+    width: calc(100% - 2rem);
+  }
+  
+  .subText {
+    font-family: 'Intern', sans-serif;
+    font-size: 0.85rem;
+  }
+  
+  .subText span {
+    color: var(--tertiary-color);
+  }
+  
+  .horizontalLine {
+    width: 100%;
+    height: 0.1px;
+    background-color: var(--light-skin);
+    margin: 0.775rem 0;
+  
+    border: none;
+  }
+  
+  .helperText {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    max-width: 18rem;
+  }
+  
+  .helperText span {
+    color: var(--tertiary-color);
+  }
+  
+  .emailLabel {
+    font-size: 0.8rem;
+    color: var(--tertiary-color);
+    margin-right: 0.5rem;
+  }
+  

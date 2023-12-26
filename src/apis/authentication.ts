@@ -51,7 +51,10 @@ export const guestRegister = async () => {
     .post(buildVerse.guestRegister)
     .then((response) => {
       localStorage.setItem('accessToken', response.data.response.access_token);
-      localStorage.setItem('refreshToken', response.data.response.refresh_token);
+      localStorage.setItem(
+        'refreshToken',
+        response.data.response.refresh_token,
+      );
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);

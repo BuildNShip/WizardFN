@@ -10,7 +10,7 @@ import { UserContext } from './context';
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   useEffect(() => {
     if (localStorage.getItem('accessToken') === null) {
       guestRegister();

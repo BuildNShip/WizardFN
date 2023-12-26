@@ -1,3 +1,4 @@
+import { ProjectModals } from '../../../../components/Sidebar/types';
 import { ModalTriggersType } from '../TopBar/types';
 import styles from './Modal.module.css'; // Create a separate CSS file for styling
 import { IoClose } from 'react-icons/io5';
@@ -7,24 +8,13 @@ const Modal = ({
   Modalname,
   children,
 }: {
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
+  modalTriggers: any
+  setModalTriggers: any
   Modalname: string;
   children: React.ReactNode;
 }) => {
   return (
     <div>
-      <button
-        onClick={() => {
-          setModalTriggers({
-            ...modalTriggers,
-            [Modalname]: true,
-          });
-        }}
-      >
-        Open Modal
-      </button>
-
       {modalTriggers[Modalname as keyof ModalTriggersType] && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
