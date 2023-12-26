@@ -9,6 +9,8 @@ import { ModalTriggersType } from './types';
 import ValidateEmail from './ModalComponents/ValidateEmail';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
 import { mergeAccount } from '../../../../apis/authentication';
+import { useJwt } from 'react-jwt';
+import toast from 'react-hot-toast';
 
 const TopBar = () => {
   const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({
@@ -17,10 +19,14 @@ const TopBar = () => {
     isForgetPasswordModalOpen: false,
     isLoginWithOTPModalOpen: false,
     isEmailValidated: false,
-    
+
     showBinaryPopup: false,
     askMergePopup: false,
   });
+
+  const { decodedToken } = useJwt(
+    localStorage.getItem('refreshToken') as string,
+  );
 
   const [modalType, setModalType] = useState('' as string);
 
@@ -107,13 +113,21 @@ const TopBar = () => {
           <button
             className={styles.logoutButton}
             onClick={() => {
-              setModalTriggers({
-                ...modalTriggers,
-                isEmailValidated: true,
-              });
+              if ((decodedToken as { is_guest: boolean })?.is_guest) {
+                setModalTriggers({
+                  ...modalTriggers,
+                  isLoginModalOpen: true,
+                });
+              } else {
+                localStorage.clear();
+                toast.success('Logged out successfully');
+                window.location.reload();
+              }
             }}
           >
-            Login
+            {(decodedToken as { is_guest: boolean })?.is_guest
+              ? 'Login'
+              : 'Logout'}
           </button>
         </div>
       </div>

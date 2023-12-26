@@ -17,18 +17,19 @@ const Collections = () => {
   };
 
   const [openMenus, setOpenMenus] = useState<number[]>([]);
-  const [isGuest, setIsGuest] = useState<boolean>(true);
-  let { decodedToken } = useJwt(localStorage.getItem('refreshToken')!);
   const [email, setEmail] = useState<string>('');
+  
+  const { decodedToken } = useJwt(
+    localStorage.getItem('refreshToken') as string,
+  );
 
   useEffect(() => {
     getProjects();
-
     if (localStorage.getItem('profileInfo') !== null)
       setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email);
-
-    setIsGuest((decodedToken as { is_guest: boolean })?.is_guest);
   }, [decodedToken]);
+
+ 
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];
@@ -71,13 +72,13 @@ const Collections = () => {
         <div className={styles.row}>
           <div className={styles.collectionsTopbarUsername}>
             <div className={styles.collectionTopbarAvatar}>
-              {isGuest ? 'G' : email?.split('@')[0].charAt(0).toUpperCase()}
+              {(decodedToken as { is_guest: boolean })?.is_guest ? 'G' : email?.split('@')[0].charAt(0).toUpperCase()}
             </div>
             <div className={styles.collectionTopbarName}>
-              {isGuest ? 'Guest User' : email?.split('@')[0]}
+              {(decodedToken as { is_guest: boolean })?.is_guest ? 'Guest User' : email?.split('@')[0]}
             </div>
           </div>
-          {isGuest && (
+          {(decodedToken as { is_guest: boolean })?.is_guest && (
             <>
               <FaTriangleExclamation
                 data-tooltip-id="guest-tooltip"

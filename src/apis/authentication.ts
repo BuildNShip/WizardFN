@@ -7,6 +7,11 @@ import { getProfileInfo } from './user';
 
 const mergeRefreshTokens = (response: AxiosResponse<any, any>) => {
   if (response.data.response && response.data.response.access_token) {
+    if (localStorage.getItem('refreshToken') !== null)
+      localStorage.setItem(
+        'old_refresh_token',
+        localStorage.getItem('refreshToken') as string,
+      );
     localStorage.setItem('accessToken', response.data.response.access_token);
     localStorage.setItem('refreshToken', response.data.response.refresh_token);
   }
@@ -141,20 +146,7 @@ export const login = async (
         askMergePopup: true,
       });
 
-      if (localStorage.getItem('refreshToken') !== null) {
-        localStorage.setItem(
-          'old_refresh_token',
-          localStorage.getItem('refreshToken') as string,
-        );
-        localStorage.setItem(
-          'refreshToken',
-          response.data.response.refresh_token,
-        );
-        localStorage.setItem(
-          'accessToken',
-          response.data.response.access_token,
-        );
-      }
+      mergeRefreshTokens(response);
 
       getProfileInfo();
     })
@@ -222,20 +214,7 @@ export const resetPassword = async (
         askMergePopup: true,
       });
 
-      if (localStorage.getItem('refreshToken') !== null) {
-        localStorage.setItem(
-          'old_refresh_token',
-          localStorage.getItem('refreshToken') as string,
-        );
-        localStorage.setItem(
-          'refreshToken',
-          response.data.response.refresh_token,
-        );
-        localStorage.setItem(
-          'accessToken',
-          response.data.response.access_token,
-        );
-      }
+      mergeRefreshTokens(response);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
