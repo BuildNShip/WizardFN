@@ -87,7 +87,7 @@
   border: none;
 }
 
-.helperText{
+.helperText {
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   max-width: 18rem;
@@ -97,7 +97,7 @@
   color: var(--tertiary-color);
 }
 
-.emailLabel{
+.emailLabel {
   font-size: 0.8rem;
   color: var(--tertiary-color);
   margin-right: 0.5rem;

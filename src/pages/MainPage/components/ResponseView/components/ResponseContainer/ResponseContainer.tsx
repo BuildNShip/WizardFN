@@ -1,7 +1,6 @@
-
-import { useState } from 'react'
-import styles from './ResponseContainer.module.css'
-import { Editor } from "json5-editor"
+import { useState } from 'react';
+import styles from './ResponseContainer.module.css';
+import { Editor } from 'json5-editor';
 
 const ResponseContainer = () => {
   const [jsonData, setJsonData] = useState(`
@@ -44,14 +43,22 @@ const ResponseContainer = () => {
           }
         ]
       }
-      `)
+      `);
   return (
     <div className={styles.response}>
       <div className={styles.responseTopBar}>
         <div className={styles.responseTopBarButtons}>
           <div>
-            <img src="/assets/close.png" alt="" className={styles.responseTopBarButton} />
-            <img src="/assets/maxmize.png" alt="" className={styles.responseTopBarButton} />
+            <img
+              src="/assets/close.png"
+              alt=""
+              className={styles.responseTopBarButton}
+            />
+            <img
+              src="/assets/maxmize.png"
+              alt=""
+              className={styles.responseTopBarButton}
+            />
           </div>
           <div>
             <div className={styles.responseActive}>
@@ -72,13 +79,18 @@ const ResponseContainer = () => {
         </div>
       </div>
       <div className={styles.editorContainer}>
-        <Editor showLineNumber style={{
-          backgroundColor: "#1e1e1e",
-          zIndex: 0,
-        }} value={jsonData} onChange={setJsonData} />
+        <Editor
+          showLineNumber
+          style={{
+            backgroundColor: '#1e1e1e',
+            zIndex: 0,
+          }}
+          value={jsonData}
+          onChange={setJsonData}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ResponseContainer
+export default ResponseContainer;

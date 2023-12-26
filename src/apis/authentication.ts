@@ -1,36 +1,20 @@
 import toast from 'react-hot-toast';
-import {
-  privateGateway,
-  publicGateway,
-} from '../services/apiGateways';
+import { privateGateway, publicGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
 import { AxiosResponse } from 'axios';
 import { getProfileInfo } from './user';
 
-const mergeRefreshTokens = (
-  response: AxiosResponse<any, any>,
-) => {
-  if (
-    response.data.response &&
-    response.data.response.access_token
-  ) {
-    localStorage.setItem(
-      'accessToken',
-      response.data.response.access_token,
-    );
-    localStorage.setItem(
-      'refreshToken',
-      response.data.response.refresh_token,
-    );
+const mergeRefreshTokens = (response: AxiosResponse<any, any>) => {
+  if (response.data.response && response.data.response.access_token) {
+    localStorage.setItem('accessToken', response.data.response.access_token);
+    localStorage.setItem('refreshToken', response.data.response.refresh_token);
   }
 };
 
 export const mergeAccount = async (
   transfer: boolean,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
   privateGateway
@@ -39,14 +23,12 @@ export const mergeAccount = async (
       transfer: transfer,
     })
     .then(() => {
-      if (transfer)
-        toast.success("Account's merged successfully");
-      else toast.success("Account's not merged");
+      if (transfer) toast.success('Accounts merged successfully');
+      else toast.success('Accounts not merged');
       setModalTriggers({
         ...modalTriggers,
         askMergePopup: false,
       });
-      localStorage.removeItem('old_refresh_token');
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -70,15 +52,10 @@ export const guestRegister = async () => {
 
 export const preRegister = async (
   email: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
-  console.log(
-    import.meta.env.VITE_BACKEND_URL +
-      buildVerse.preRegister,
-  );
+  console.log(import.meta.env.VITE_BACKEND_URL + buildVerse.preRegister);
 
   publicGateway
     .post(buildVerse.preRegister, {
@@ -108,9 +85,7 @@ export const preRegister = async (
 export const register = async (
   email: string,
   otp: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
   publicGateway
@@ -137,9 +112,7 @@ export const register = async (
 export const login = async (
   email: string,
   password: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
   type?: string,
 ) => {
@@ -199,9 +172,7 @@ export const login = async (
 
 export const generateOTP = async (
   email: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
   type?: string,
 ) => {
@@ -234,9 +205,7 @@ export const resetPassword = async (
   email: string,
   otp: string,
   password: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
   publicGateway
@@ -281,9 +250,7 @@ export const resetPassword = async (
 
 export const validateEmail = async (
   email: string,
-  setModalTriggers: (
-    modalTriggers: ModalTriggersType,
-  ) => void,
+  setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
 ) => {
   publicGateway

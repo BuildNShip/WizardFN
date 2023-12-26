@@ -2,13 +2,13 @@
   background-color: var(--primary-color);
   width: fit-content;
   height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 
   border-right: 0.01px solid #413e36;
 }
 
 .projectsSideBar {
-  width:  4rem;
+  width: 4rem;
   padding: 1rem;
   height: 89vh;
 }

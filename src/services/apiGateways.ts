@@ -5,8 +5,7 @@ export const publicGateway = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL as string,
   headers: {
     'Content-Type': 'application/json',
-    timezone:
-      Intl.DateTimeFormat().resolvedOptions().timeZone,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     product: 'Wizard',
   },
 });
@@ -27,8 +26,7 @@ export const privateGateway = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL as string,
   headers: {
     'Content-Type': 'application/json',
-    timezone:
-      Intl.DateTimeFormat().resolvedOptions().timeZone,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     product: 'Wizard',
   },
 });
@@ -38,8 +36,7 @@ privateGateway.interceptors.request.use(
   function (config) {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      config.headers['Authorization'] =
-        `Bearer ${accessToken}`;
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
     return config;
@@ -80,22 +77,16 @@ privateGateway.interceptors.response.use(
       //console.log("inside",error.response,error.response?.data?.statusCode)
       //console.log("refresh",fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken"))
       try {
-        const response = await publicGateway.post(
-          buildVerse.getAccessToken,
-          {
-            refreshToken:
-              localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
-          },
-        );
-        localStorage.setItem(
-          'accessToken',
-          response.data.response.accessToken,
-        );
+        const response = await publicGateway.post(buildVerse.getAccessToken, {
+          refreshToken: localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
+        });
+        localStorage.setItem('accessToken', response.data.response.accessToken);
         //console.log('new access token',response.data.response.accessToken)
         // Retry the original request
         const { config } = error;
-        config.headers['Authorization'] =
-          `Bearer ${localStorage.getItem('accessToken')}`;
+        config.headers['Authorization'] = `Bearer ${localStorage.getItem(
+          'accessToken',
+        )}`;
         return await new Promise((resolve, reject) => {
           privateGateway
             .request(config)
@@ -108,9 +99,7 @@ privateGateway.interceptors.response.use(
             });
         });
       } catch (error_2) {
-        alert(
-          'Your session has expired. Please login again.',
-        );
+        alert('Your session has expired. Please login again.');
 
         // Wait for 3 seconds
         setTimeout(() => {

@@ -23,7 +23,7 @@
 .collectionsTopbarUsername {
   background-color: var(--tertiary-color);
   font-size: 0.9rem;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   padding: 0.15rem 1.15rem;
   padding-left: 0.5rem;
 
@@ -58,7 +58,7 @@
   border: none;
   border-radius: 0.25rem;
   padding: 0.25rem 0.75rem;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
 }
@@ -103,7 +103,7 @@
   list-style: none;
   color: white;
 
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
 }
