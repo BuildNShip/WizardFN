@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -39,24 +39,24 @@
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
       (function (l) {
-        if (l.search[1] === "/") {
+        if (l.search[1] === '/') {
           var decoded = l.search
             .slice(1)
-            .split("&")
+            .split('&')
             .map(function (s) {
-              return s.replace(/~and~/g, "&");
+              return s.replace(/~and~/g, '&');
             })
-            .join("?");
+            .join('?');
           window.history.replaceState(
             null,
             null,
-            l.pathname.slice(0, -1) + decoded + l.hash
+            l.pathname.slice(0, -1) + decoded + l.hash,
           );
         }
       })(window.location);
     </script>
-    <script type="module" crossorigin src="/assets/index-ucdTpojH.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Y5EbI33n.css">
+    <script type="module" crossorigin src="/assets/index-9_uwZ11t.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-p20ueARS.css">
   </head>
   <body>
     <div id="root"></div>
