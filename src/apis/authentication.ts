@@ -50,7 +50,8 @@ export const guestRegister = async () => {
   publicGateway
     .post(buildVerse.guestRegister)
     .then((response) => {
-      mergeRefreshTokens(response);
+      localStorage.setItem('accessToken', response.data.response.access_token);
+      localStorage.setItem('refreshToken', response.data.response.refresh_token);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -91,6 +92,8 @@ export const register = async (
   otp: string,
   setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
+  setEmail: (email: string) => void,
+  setIsLoggedIn: (isLoggedIn: boolean) => void,
 ) => {
   publicGateway
     .post(buildVerse.register, {
@@ -107,6 +110,9 @@ export const register = async (
         isRegisterModalOpen: false,
         askMergePopup: true,
       });
+
+      getProfileInfo(setEmail);
+      setIsLoggedIn(true);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -118,6 +124,8 @@ export const login = async (
   password: string,
   setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
+  setIsLoggedIn: (isLoggedIn: boolean) => void,
+  setEmail: (email: string) => void,
   type?: string,
 ) => {
   let data;
@@ -145,10 +153,10 @@ export const login = async (
         isRegisterModalOpen: false,
         askMergePopup: true,
       });
-
+      setIsLoggedIn(true);
       mergeRefreshTokens(response);
 
-      getProfileInfo();
+      getProfileInfo(setEmail);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);
@@ -198,6 +206,8 @@ export const resetPassword = async (
   password: string,
   setModalTriggers: (modalTriggers: ModalTriggersType) => void,
   modalTriggers: ModalTriggersType,
+  setIsLoggedIn: (isLoggedIn: boolean) => void,
+  setEmail: (email: string) => void,
 ) => {
   publicGateway
     .post(buildVerse.resetPassword, {
@@ -213,8 +223,10 @@ export const resetPassword = async (
         isForgetPasswordModalOpen: false,
         askMergePopup: true,
       });
-
+      setIsLoggedIn(true);
       mergeRefreshTokens(response);
+
+      getProfileInfo(setEmail);
     })
     .catch((error) => {
       toast.error(error.response.data.message.general[0]);

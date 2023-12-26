@@ -1,23 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { generateOTP, resetPassword } from '../../../../../apis/authentication';
 import Modal from '../../Modal/Modal';
 import styles from './ModalContentStyles.module.css';
 import { ModalTriggersType } from '../types';
 import PrimaryButton from '../../Buttons/PrimaryButton';
+import { ModalContext } from '../context';
+import { UserContext } from '../../../context';
 
 const ForgetPassword = ({
-  email,
-  modalTriggers,
-  setModalTriggers,
   Modalname,
   modalType,
 }: {
-  email: string;
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
   Modalname: string;
   modalType: string;
 }) => {
+  const { modalTriggers, setModalTriggers, email } = useContext(ModalContext);
+  const { setIsLoggedIn, setEmail } = useContext(UserContext);
+
   const [otp, setOTP] = useState('');
   const [password, setPassword] = useState('');
 
@@ -81,6 +80,8 @@ const ForgetPassword = ({
                     password,
                     setModalTriggers,
                     modalTriggers,
+                    setIsLoggedIn,
+                    setEmail,
                   );
                 }}
                 buttonText="Reset Password"

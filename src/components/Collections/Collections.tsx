@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styles from './Collections.module.css';
 import { buttons } from './CollectionsData.ts';
 import { IoIosMenu } from 'react-icons/io';
 
 import { FaTriangleExclamation } from 'react-icons/fa6';
 import { Tooltip } from 'react-tooltip';
-import { useJwt } from 'react-jwt';
 import { getProjects } from '../../apis/collections.ts';
+
+import { UserContext } from '../../pages/MainPage/context';
 
 const Collections = () => {
   type Button = {
@@ -16,20 +17,13 @@ const Collections = () => {
     children?: Button[];
   };
 
+  const { isLoggedIn, email } = useContext(UserContext);
+
   const [openMenus, setOpenMenus] = useState<number[]>([]);
-  const [email, setEmail] = useState<string>('');
-  
-  const { decodedToken } = useJwt(
-    localStorage.getItem('refreshToken') as string,
-  );
 
   useEffect(() => {
     getProjects();
-    if (localStorage.getItem('profileInfo') !== null)
-      setEmail(JSON.parse(localStorage.getItem('profileInfo')!)?.email);
-  }, [decodedToken]);
-
- 
+  }, []);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];
@@ -72,13 +66,13 @@ const Collections = () => {
         <div className={styles.row}>
           <div className={styles.collectionsTopbarUsername}>
             <div className={styles.collectionTopbarAvatar}>
-              {(decodedToken as { is_guest: boolean })?.is_guest ? 'G' : email?.split('@')[0].charAt(0).toUpperCase()}
+              {!isLoggedIn ? 'G' : email.split('@')[0].charAt(0).toUpperCase()}
             </div>
             <div className={styles.collectionTopbarName}>
-              {(decodedToken as { is_guest: boolean })?.is_guest ? 'Guest User' : email?.split('@')[0]}
+              {!isLoggedIn ? 'Guest User' : email.split('@')[0]}
             </div>
           </div>
-          {(decodedToken as { is_guest: boolean })?.is_guest && (
+          {!isLoggedIn && (
             <>
               <FaTriangleExclamation
                 data-tooltip-id="guest-tooltip"

@@ -5,19 +5,13 @@ import Modal from '../../Modal/Modal';
 import { preRegister, validateEmail } from '../../../../../apis/authentication';
 import BinaryPopup from './BinaryPopup/BinaryPopup';
 
-const ValidateEmail = ({
-  email,
-  setEmail,
-  modalTriggers,
-  setModalTriggers,
-  Modalname,
-}: {
-  email: string;
-  setEmail: (email: string) => void;
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
-  Modalname: string;
-}) => {
+import { useContext } from 'react';
+import { ModalContext } from '../context';
+
+const ValidateEmail = ({ Modalname }: { Modalname: string }) => {
+  const { modalTriggers, setModalTriggers, email, setEmail } =
+    useContext(ModalContext);
+
   return (
     <>
       {modalTriggers.showBinaryPopup && (
@@ -29,8 +23,6 @@ const ValidateEmail = ({
             "It looks like you haven't registered with us, Register Now with a single click."
           }
           buttonText={'Register Now'}
-          modalTriggers={modalTriggers}
-          setModalTriggers={setModalTriggers}
           Modalname={'showBinaryPopup'}
         />
       )}
@@ -49,7 +41,7 @@ const ValidateEmail = ({
               <input
                 value={email}
                 placeholder="Enter your email address"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail && setEmail(e.target.value)}
                 className={styles.modalInput}
                 type="text"
               />

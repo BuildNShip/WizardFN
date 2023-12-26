@@ -1,5 +1,5 @@
 //React Imports
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 //Component Imports
 import Modal from '../../Modal/Modal';
@@ -13,19 +13,14 @@ import { ModalTriggersType } from '../types';
 import PrimaryButton from '../../Buttons/PrimaryButton';
 import SecondaryButton from '../../Buttons/SecondaryButton';
 
-const LoginPassword = ({
-  email,
-  modalTriggers,
-  setModalTriggers,
-  Modalname,
-}: {
-  email: string;
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
-  Modalname: string;
-}) => {
-  const [password, setPassword] = useState('');
+import { ModalContext } from '../context';
+import { UserContext } from '../../../context';
 
+const LoginPassword = ({ Modalname }: { Modalname: string }) => {
+  const [password, setPassword] = useState('');
+  const { modalTriggers, setModalTriggers, email } = useContext(ModalContext);
+  const { setEmail } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
   return (
     <>
       {
@@ -59,6 +54,8 @@ const LoginPassword = ({
                         password,
                         setModalTriggers,
                         modalTriggers,
+                        setIsLoggedIn,
+                        setEmail,
                         'loginWithPassword',
                       )
                     }

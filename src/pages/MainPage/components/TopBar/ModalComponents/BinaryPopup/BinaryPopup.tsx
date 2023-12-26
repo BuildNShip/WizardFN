@@ -4,23 +4,24 @@ import PrimaryButton from '../../../Buttons/PrimaryButton';
 import { ModalTriggersType } from '../../types';
 import SecondaryButton from '../../../Buttons/SecondaryButton';
 
+import { useContext } from 'react';
+import { ModalContext } from '../../context';
+
 const BinaryPopup = ({
   onClick,
   content,
   buttonText,
-  modalTriggers,
-  setModalTriggers,
   Modalname,
   onClickCancel,
 }: {
   onClick: () => void;
   content: string;
   buttonText: string;
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
   Modalname: string;
   onClickCancel?: () => void;
 }) => {
+  const { modalTriggers, setModalTriggers } = useContext(ModalContext);
+
   return (
     <>
       {modalTriggers[Modalname as keyof ModalTriggersType] && (

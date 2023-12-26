@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Modal from '../../Modal/Modal';
 import styles from './ModalContentStyles.module.css';
 import {
@@ -7,22 +7,23 @@ import {
   preRegister,
   register,
 } from '../../../../../apis/authentication';
+
 import { ModalTriggersType } from '../types';
 import PrimaryButton from '../../Buttons/PrimaryButton';
 
+import { ModalContext } from '../context';
+import { UserContext } from '../../../context';
+
 const RegisterOTP = ({
-  email,
-  modalTriggers,
-  setModalTriggers,
   Modalname,
   modalType,
 }: {
-  email: string;
-  modalTriggers: ModalTriggersType;
-  setModalTriggers: (modalTriggers: ModalTriggersType) => void;
   Modalname: string;
   modalType: string;
 }) => {
+  const { modalTriggers, setModalTriggers, email } = useContext(ModalContext);
+  const { setEmail } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
   const [otp, setOTP] = useState('');
   useEffect(() => {
     if (!otp || otp.length === 0) {
@@ -73,9 +74,19 @@ const RegisterOTP = ({
                       otp,
                       setModalTriggers,
                       modalTriggers,
+                      setIsLoggedIn,
+                      setEmail,
                       'loginWithOTP',
                     );
-                  else register(email, otp, setModalTriggers, modalTriggers);
+                  else
+                    register(
+                      email,
+                      otp,
+                      setModalTriggers,
+                      modalTriggers,
+                      setEmail,
+                      setIsLoggedIn,
+                    );
                 }}
                 buttonText="Verify OTP"
               />
