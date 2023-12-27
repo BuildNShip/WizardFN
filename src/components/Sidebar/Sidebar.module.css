@@ -83,3 +83,16 @@
   font-size: 0.9rem;
   background-color: var(--secondary-color);
 }
+
+.projectContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeDot {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--blue)
+}

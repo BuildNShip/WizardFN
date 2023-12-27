@@ -128,23 +128,34 @@ const Sidebar = () => {
                 </div>
 
                 {projects.map((project) => (
-                  <div
-                    onContextMenu={(e) => {
-                      e.preventDefault();
-                      setRightClickMenu(true);
-                      setPoints({ top: e.clientY, left: e.clientX });
+                  <div className={styles.projectContainer}>
+                    <div
+                      onContextMenu={(e) => {
+                        e.preventDefault();
+                        setRightClickMenu(true);
+                        setPoints({ top: e.clientY, left: e.clientX });
 
-                      setProject({
-                        title: project.title,
-                        id: project.id,
-                      });
-                    }}
-                    className={styles.project}
-                    onClick={() => {
-                      setCurrentProject(project);
-                    }}
-                  >
-                    {project.title.substring(0, 2).toUpperCase()}
+                        setProject({
+                          title: project.title,
+                          id: project.id,
+                        });
+                      }}
+                      className={styles.project}
+                      onClick={() => {
+                        setCurrentProject(project);
+
+                        projects.map((project) => {
+                          project.selected = false;
+                        });
+
+                        project.selected = true;
+                      }}
+                    >
+                      {project.title.substring(0, 2).toUpperCase()}
+                    </div>
+                    {project.selected && (
+                      <span className={styles.activeDot}></span>
+                    )}
                   </div>
                 ))}
 
