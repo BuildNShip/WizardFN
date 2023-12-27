@@ -9,3 +9,9 @@ type Collection = {
   project_id: string;
   endpoints: any[]; // You can replace 'any' with a more specific type if needed
 };
+
+type CollectionModals = {
+  isCreateCollectionModalOpen: boolean;
+  isEditCollectionModalOpen: boolean;
+  isDeleteCollectionModalOpen: boolean;
+};

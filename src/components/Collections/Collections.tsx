@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
 import styles from './Collections.module.css';
-import { buttons } from './CollectionsData.ts';
 import { IoIosMenu } from 'react-icons/io';
 
 import { FaTriangleExclamation } from 'react-icons/fa6';
@@ -10,6 +9,8 @@ import { UserContext } from '../../pages/MainPage/context';
 
 import RightClickMenu from '../RightClickMenu/RightClickMenu.tsx';
 import { getCollections } from '../../apis/collections.ts';
+import { CollectionsContext } from './context.ts';
+import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal.tsx';
 const Collections = () => {
   type Button = {
     url: string;
@@ -24,7 +25,15 @@ const Collections = () => {
   const [rightClickMenu, setRightClickMenu] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
 
+  const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
+    isCreateCollectionModalOpen: false,
+    isEditCollectionModalOpen: false,
+    isDeleteCollectionModalOpen: false,
+  });
+
   useEffect(() => {
+    console.log(collections);
+
     const handleClick = () => {
       setRightClickMenu(false);
     };
@@ -56,13 +65,23 @@ const Collections = () => {
   const menuItems: MenuItem[] = [
     {
       label: 'Create Collections',
-      onClick: () => {},
+      onClick: () => {
+        setCollectionsModal({
+          ...collectionsModal,
+          isCreateCollectionModalOpen: true,
+        });
+      },
     },
     {
       label: 'Create Project',
       onClick: () => {},
     },
   ];
+
+  const [collection, setCollection] = useState({
+    title: '',
+    id: '',
+  });
 
   const renderSubMenu = (submenu: Button[], level = 2) => {
     return (
@@ -87,101 +106,115 @@ const Collections = () => {
   };
 
   return (
-    <>
-      <div className={styles.collectionsContainer}>
-        <div className={styles.collectionsTopbar}>
-          <div className={styles.row}>
-            <div className={styles.collectionsTopbarUsername}>
-              <div className={styles.collectionTopbarAvatar}>
-                {!isLoggedIn
-                  ? 'G'
-                  : email.split('@')[0].charAt(0).toUpperCase()}
+    <CollectionsContext.Provider
+      value={{
+        collectionsModal,
+        setCollectionsModal,
+        collection,
+        setCollection,
+
+        collections,
+        setCollections,
+      }}
+    >
+      <>
+        <CreateEditModal />
+        <div className={styles.collectionsContainer}>
+          <div className={styles.collectionsTopbar}>
+            <div className={styles.row}>
+              <div className={styles.collectionsTopbarUsername}>
+                <div className={styles.collectionTopbarAvatar}>
+                  {!isLoggedIn
+                    ? 'G'
+                    : email.split('@')[0].charAt(0).toUpperCase()}
+                </div>
+                <div className={styles.collectionTopbarName}>
+                  {!isLoggedIn ? 'Guest User' : email.split('@')[0]}
+                </div>
               </div>
-              <div className={styles.collectionTopbarName}>
-                {!isLoggedIn ? 'Guest User' : email.split('@')[0]}
-              </div>
+              {!isLoggedIn && (
+                <>
+                  <FaTriangleExclamation
+                    data-tooltip-id="guest-tooltip"
+                    data-tooltip-content="Guest account data will be eraised within 2 days."
+                    size={25}
+                    className={styles.exclamationMark}
+                  />
+                  <Tooltip
+                    style={{
+                      fontFamily: 'Inter',
+                    }}
+                    id="guest-tooltip"
+                    variant="dark"
+                  />
+                </>
+              )}
             </div>
-            {!isLoggedIn && (
-              <>
-                <FaTriangleExclamation
-                  data-tooltip-id="guest-tooltip"
-                  data-tooltip-content="Guest account data will be eraised within 2 days."
-                  size={25}
-                  className={styles.exclamationMark}
-                />
-                <Tooltip
-                  style={{
-                    fontFamily: 'Inter',
-                  }}
-                  id="guest-tooltip"
-                  variant="dark"
-                />
-              </>
-            )}
+
+            <button
+              onContextMenu={(e) => {
+                e.preventDefault();
+                setRightClickMenu(true);
+                setPoints({
+                  top: e.clientY,
+                  left: e.clientX,
+                });
+              }}
+              className={styles.addButton}
+            >
+              +
+            </button>
           </div>
 
-          <button
-            onContextMenu={(e) => {
-              e.preventDefault();
-              setRightClickMenu(true);
-              setPoints({
-                top: e.clientY,
-                left: e.clientX,
-              });
-            }}
-            className={styles.addButton}
+          <div className={styles.collectionsMenuContainer}>
+            <div className={styles.searchBar}>
+              <input
+                className={styles.searchMenu}
+                type="text"
+                placeholder="Search files, teams or people"
+              />
+            </div>
+
+            <div className={styles.collectionsMenu}>
+              <nav>
+                <ul className={styles.menu}>
+                  {collections &&
+                    collections.map((collection, index) => (
+                      <li
+                        className={styles.listItem}
+                        key={index}
+                        style={{ margin: '1rem', marginLeft: 0 }}
+                      >
+                        <p onClick={() => handleSubMenuToggle(index)}>
+                          <div className={styles.row}>
+                            <div className={`red ${styles.listIcon}`} />
+                            {collection.title}
+                          </div>
+                          {collection.endpoints.length > 0 && (
+                            <IoIosMenu size={20} />
+                          )}
+                        </p>
+
+                        {collection.endpoints.length > 0 &&
+                          openMenus.includes(index) &&
+                          renderSubMenu(collection.endpoints)}
+                      </li>
+                    ))}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        {rightClickMenu && (
+          <div
+            className={styles.rightClickMenuContainer}
+            style={{ top: points.top, left: points.left }}
           >
-            +
-          </button>
-        </div>
-
-        <div className={styles.collectionsMenuContainer}>
-          <div className={styles.searchBar}>
-            <input
-              className={styles.searchMenu}
-              type="text"
-              placeholder="Search files, teams or people"
-            />
+            <RightClickMenu menuItems={menuItems} />
           </div>
-
-          <div className={styles.collectionsMenu}>
-            <nav>
-              <ul className={styles.menu}>
-                {collections.map((collection, index) => (
-                  <li
-                    className={styles.listItem}
-                    key={index}
-                    style={{ margin: '1rem', marginLeft: 0 }}
-                  >
-                    <p onClick={() => handleSubMenuToggle(index)}>
-                      <div className={styles.row}>
-                        <div className={`red ${styles.listIcon}`} />
-                        {collection.title}
-                      </div>
-                      {collection.endpoints.length > 0 && (
-                        <IoIosMenu size={20} />
-                      )}
-                    </p>
-
-                    {collection.endpoints.length > 0 &&
-                      openMenus.includes(index) &&
-                      renderSubMenu(collection.endpoints)}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-      {rightClickMenu && (
-        <div
-          className={styles.rightClickMenuContainer}
-          style={{ top: points.top, left: points.left }}
-        >
-          <RightClickMenu menuItems={menuItems} />
-        </div>
-      )}
-    </>
+        )}
+      </>
+    </CollectionsContext.Provider>
   );
 };
 

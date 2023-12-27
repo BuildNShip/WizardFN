@@ -21,4 +21,7 @@ export const buildVerse = {
 
   getCollections: (projectId: string) =>
     `/wizardapi/project/${projectId}/collection/list/`,
+
+  createCollection: (projectId: string) =>
+    `/wizardapi/project/${projectId}/collection/create/`,
 };

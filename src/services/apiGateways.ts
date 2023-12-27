@@ -72,13 +72,13 @@ privateGateway.interceptors.response.use(
   async function (error) {
     // TODO: if error occurs and status isn't 1000 nothing will happen
     //console.log(error.response,error.response?.data?.statusCode === 1000)
-    if (error.response?.data?.statusCode === 1000) {
+    if (error.response?.data?.detail.statusCode === 1000) {
       // publicGatewayAuth
       //console.log("inside",error.response,error.response?.data?.statusCode)
       //console.log("refresh",fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken"))
       try {
         const response = await publicGateway.post(buildVerse.getAccessToken, {
-          refreshToken: localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
+          refresh_token: localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
         });
         localStorage.setItem('accessToken', response.data.response.accessToken);
         //console.log('new access token',response.data.response.accessToken)

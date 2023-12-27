@@ -36,11 +36,11 @@ const Sidebar = () => {
   });
 
   const [rightClickMenu, setRightClickMenu] = useState(false);
-  const [project, setProject] = useState({
+ const [project, setProject] = useState({
     title: '',
     id: '',
   });
-
+ 
   useEffect(() => {
     const handleClick = () => {
       setRightClickMenu(false);
