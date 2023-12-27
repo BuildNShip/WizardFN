@@ -8,9 +8,10 @@ import { Tooltip } from 'react-tooltip';
 import { UserContext } from '../../pages/MainPage/context';
 
 import RightClickMenu from '../RightClickMenu/RightClickMenu.tsx';
-import { getCollections } from '../../apis/collections.ts';
+import { deleteCollection, getCollections } from '../../apis/collections.ts';
 import { CollectionsContext } from './context.ts';
 import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal.tsx';
+import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup.tsx';
 const Collections = () => {
   type Button = {
     url: string;
@@ -82,11 +83,21 @@ const Collections = () => {
 
   const CMenuItems: MenuItem[] = [
     {
-      label: 'Edit Collections',
+      label: 'Edit Collection',
       onClick: () => {
         setCollectionsModal({
           ...collectionsModal,
           isEditCollectionModalOpen: true,
+        });
+      },
+    },
+    {
+      label: 'Delete Collection',
+      onClick: () => {
+        setCollectionsModal({
+          ...collectionsModal,
+          isCreateCollectionModalOpen: false,
+          isDeleteCollectionModalOpen: true,
         });
       },
     },
@@ -131,6 +142,26 @@ const Collections = () => {
       }}
     >
       <>
+        <BinaryPopup
+          onClick={() => {
+            deleteCollection(
+              currentProject.id,
+              collection.id,
+              setCollections,
+              collectionsModal,
+              setCollectionsModal,
+            );
+          }}
+          content={`Are you sure you want to delete ${collection.title}?`}
+          buttonText="Delete Project"
+          Modalname="isDeleteCollectionModalOpen"
+          onClickCancel={() => {
+            setCollectionsModal({
+              ...collectionsModal,
+              isDeleteCollectionModalOpen: false,
+            });
+          }}
+        />
         <CreateEditModal />
         <div className={styles.collectionsContainer}>
           <div className={styles.collectionsTopbar}>

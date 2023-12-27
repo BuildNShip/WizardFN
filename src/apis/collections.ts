@@ -65,3 +65,25 @@ export const editCollection = async (
       console.log(error);
     });
 };
+
+export const deleteCollection = async (
+  projectId: string,
+  collectionId: string,
+  setCollections: any,
+  collectionsModal: CollectionModals,
+  setCollectionsModal: React.Dispatch<React.SetStateAction<CollectionModals>>,
+) => {
+  privateGateway
+    .delete(buildVerse.deleteCollection(projectId, collectionId))
+    .then((response) => {
+      setCollectionsModal({
+        ...collectionsModal,
+        isDeleteCollectionModalOpen: false,
+      });
+      getCollections(projectId, setCollections);
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

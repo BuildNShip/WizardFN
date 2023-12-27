@@ -23,14 +23,14 @@ const CreateEditModal = () => {
 
   const [modalType, setModalType] = useState('');
 
+  console.log(modalType);
+
   useEffect(() => {
     if (collectionsModal.isCreateCollectionModalOpen) {
       setModalType('isCreateCollectionModalOpen');
     } else if (collectionsModal.isEditCollectionModalOpen) {
       setModalType('isEditCollectionModalOpen');
-    } else if (collectionsModal.isDeleteCollectionModalOpen) {
-      setModalType('isDeleteCollectionModalOpen');
-    }
+    } 
   }, [collectionsModal]);
 
   return (
@@ -41,7 +41,10 @@ const CreateEditModal = () => {
         Modalname={modalType}
       >
         <div className={styles.modalContent}>
-          <div className={styles.modalTitle}>Create Collections</div>
+          <div className={styles.modalTitle}>
+            {collectionsModal.isCreateCollectionModalOpen ? 'Create' : 'Edit'}{' '}
+            Collections
+          </div>
           <div className={styles.modalInputContainer}>
             <div className={styles.modalInputLabel}>
               Collection Title<span>*</span>

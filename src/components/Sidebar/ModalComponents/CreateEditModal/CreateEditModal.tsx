@@ -17,8 +17,6 @@ const CreateEditModal = () => {
       setModalType('isCreateProjectModalOpen');
     } else if (projectModals.isEditProjectModalOpen) {
       setModalType('isEditProjectModalOpen');
-    } else if (projectModals.isDeleteProjectModalOpen) {
-      setModalType('isDeleteProjectModalOpen');
     }
   }, [projectModals]);
 
@@ -30,7 +28,7 @@ const CreateEditModal = () => {
         Modalname={modalType}
       >
         <div className={styles.modalContent}>
-          <div className={styles.modalTitle}>Create Projet</div>
+          <div className={styles.modalTitle}>Create Project</div>
           <div className={styles.modalInputContainer}>
             <div className={styles.modalInputLabel}>
               Project Title<span>*</span>
