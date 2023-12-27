@@ -40,6 +40,32 @@ const Sidebar = () => {
     };
   }, []);
 
+
+
+  const menuItems: MenuItem[] = [
+    {
+      label: 'Rename Project',
+      onClick: () => {
+        setProjectModals({
+          ...projectModals,
+          isEditProjectModalOpen: true,
+        });
+      },
+    },
+    {
+      label: 'Duplicate Project',
+    },
+    {
+      label: 'Delete Project',
+      onClick: () => {
+        setProjectModals({
+          ...projectModals,
+          isDeleteProjectModalOpen: true,
+        });
+      },
+    },
+  ];
+
   return (
     <SidebarContext.Provider
       value={{
@@ -113,7 +139,7 @@ const Sidebar = () => {
                     className={styles.rightClickMenuContainer}
                     style={{ top: points.top, left: points.left }}
                   >
-                    <RightClickMenu />
+                    <RightClickMenu menuItems={menuItems} />
                   </div>
                 )}
               </div>
