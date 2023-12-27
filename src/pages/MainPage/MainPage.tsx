@@ -7,6 +7,7 @@ import URLContainer from './components/URLContainer/URLContainer';
 import { guestRegister } from '../../apis/authentication'; // Import useJWT hook
 import { UserContext } from './context';
 import TopBar from '../../components/TopBar/TopBar';
+import { ProjectType } from '../../components/Sidebar/types';
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +24,15 @@ const MainPage = () => {
   }, [isLoggedIn]);
 
   const [email, setEmail] = useState('');
+  const [currentProject, setCurrentProject] = useState<ProjectType>({
+    id: '',
+    updated_by: '',
+    title: '',
+    token: '',
+    updated_at: '',
+    code: '',
+    selected: true,
+  });
 
   return (
     <>
@@ -32,6 +42,8 @@ const MainPage = () => {
           email,
           setIsLoggedIn,
           setEmail,
+          currentProject,
+          setCurrentProject,
         }}
       >
         <div className={styles.mainContainer}>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from './Sidebar.module.css';
 import { deleteProject, getProjects } from '../../apis/projects';
@@ -7,14 +7,27 @@ import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal';
 import RightClickMenu from '../RightClickMenu/RightClickMenu';
 import { SidebarContext } from './context';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
+import { UserContext } from '../../pages/MainPage/context';
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
 
+  const { setCurrentProject } = useContext(UserContext);
+
   useEffect(() => {
     getProjects(setProjects);
   }, []);
+
+  useEffect(() => {
+    if (projects.length > 0) {
+      projects.filter((project) => {
+        if (project.selected) {
+          setCurrentProject(project);
+        }
+      });
+    }
+  }, [projects]);
 
   const [projectModals, setProjectModals] = useState<ProjectModals>({
     isCreateProjectModalOpen: false,
@@ -127,6 +140,9 @@ const Sidebar = () => {
                       });
                     }}
                     className={styles.project}
+                    onClick={() => {
+                      setCurrentProject(project);
+                    }}
                   >
                     {project.title.substring(0, 2).toUpperCase()}
                   </div>

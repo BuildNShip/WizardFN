@@ -9,6 +9,7 @@ import { Tooltip } from 'react-tooltip';
 import { UserContext } from '../../pages/MainPage/context';
 
 import RightClickMenu from '../RightClickMenu/RightClickMenu.tsx';
+import { getCollections } from '../../apis/collections.ts';
 const Collections = () => {
   type Button = {
     url: string;
@@ -17,11 +18,11 @@ const Collections = () => {
     children?: Button[];
   };
 
-  const { isLoggedIn, email } = useContext(UserContext);
+  const { isLoggedIn, email, currentProject } = useContext(UserContext);
   const [openMenus, setOpenMenus] = useState<number[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
-
   const [rightClickMenu, setRightClickMenu] = useState(false);
+  const [collections, setCollections] = useState([]);
 
   useEffect(() => {
     const handleClick = () => {
@@ -34,6 +35,10 @@ const Collections = () => {
       window.removeEventListener('click', handleClick);
     };
   }, []);
+
+  useEffect(() => {
+    if (currentProject.id) getCollections(currentProject.id, setCollections);
+  }, [currentProject]);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];

@@ -18,4 +18,7 @@ export const buildVerse = {
   createProject: '/wizardapi/project/create/',
 
   editDeleteProject: '/wizardapi/project/',
+
+  getCollections: (projectId: string) =>
+    `/wizardapi/project/${projectId}/collection/list/`,
 };
