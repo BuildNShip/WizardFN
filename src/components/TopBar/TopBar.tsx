@@ -12,8 +12,8 @@ import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
 import toast from 'react-hot-toast';
 
 import { ModalContext } from './context';
-import { UserContext } from '../../../pages/MainPage/context';
-import { mergeAccount } from '../../../apis/authentication';
+import { UserContext } from '../../pages/MainPage/context';
+import { mergeAccount } from '../../apis/authentication';
 
 
 const TopBar = () => {

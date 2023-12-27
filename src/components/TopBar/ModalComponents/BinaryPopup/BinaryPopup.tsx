@@ -5,8 +5,8 @@ import { ModalTriggersType } from '../../types';
 
 import { useContext } from 'react';
 import { ModalContext } from '../../context';
-import PrimaryButton from '../../../../../pages/MainPage/components/Buttons/PrimaryButton';
-import SecondaryButton from '../../../../../pages/MainPage/components/Buttons/SecondaryButton';
+import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
+import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
 
 const BinaryPopup = ({
   onClick,

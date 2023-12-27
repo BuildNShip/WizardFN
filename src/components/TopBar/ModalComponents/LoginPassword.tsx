@@ -5,11 +5,11 @@ import styles from './ModalContentStyles.module.css';
 import { ModalTriggersType } from '../types';
 
 import { ModalContext } from '../context';
-import { UserContext } from '../../../../pages/MainPage/context';
-import Modal from '../../../../pages/MainPage/components/Modal/Modal';
-import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
-import { login } from '../../../../apis/authentication';
-import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
+import { UserContext } from '../../../pages/MainPage/context';
+import Modal from '../../../pages/MainPage/components/Modal/Modal';
+import PrimaryButton from '../../../pages/MainPage/components/Buttons/PrimaryButton';
+import { login } from '../../../apis/authentication';
+import SecondaryButton from '../../../pages/MainPage/components/Buttons/SecondaryButton';
 
 
 const LoginPassword = ({ Modalname }: { Modalname: string }) => {

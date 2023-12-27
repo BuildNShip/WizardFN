@@ -4,7 +4,7 @@ import { buildVerse } from '../services/urls';
 
 import { AxiosResponse } from 'axios';
 import { getProfileInfo } from './user';
-import { ModalTriggersType } from '../components/Collections/TopBar/types';
+import { ModalTriggersType } from '../components/TopBar/types';
 
 const mergeRefreshTokens = (response: AxiosResponse<any, any>) => {
   if (response.data.response && response.data.response.access_token) {

@@ -6,7 +6,7 @@ import ResponseView from './components/ResponseView/ResponseView';
 import URLContainer from './components/URLContainer/URLContainer';
 import { guestRegister } from '../../apis/authentication'; // Import useJWT hook
 import { UserContext } from './context';
-import TopBar from '../../components/Collections/TopBar/TopBar';
+import TopBar from '../../components/TopBar/TopBar';
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

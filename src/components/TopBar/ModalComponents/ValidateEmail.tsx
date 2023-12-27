@@ -4,9 +4,9 @@ import BinaryPopup from './BinaryPopup/BinaryPopup';
 
 import { useContext } from 'react';
 import { ModalContext } from '../context';
-import { preRegister, validateEmail } from '../../../../apis/authentication';
-import Modal from '../../../../pages/MainPage/components/Modal/Modal';
-import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
+import { preRegister, validateEmail } from '../../../apis/authentication';
+import Modal from '../../../pages/MainPage/components/Modal/Modal';
+import PrimaryButton from '../../../pages/MainPage/components/Buttons/PrimaryButton';
 
 const ValidateEmail = ({ Modalname }: { Modalname: string }) => {
   const { modalTriggers, setModalTriggers, email, setEmail } =
