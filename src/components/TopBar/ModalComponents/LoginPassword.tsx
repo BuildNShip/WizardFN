@@ -11,7 +11,6 @@ import PrimaryButton from '../../../pages/MainPage/components/Buttons/PrimaryBut
 import { login } from '../../../apis/authentication';
 import SecondaryButton from '../../../pages/MainPage/components/Buttons/SecondaryButton';
 
-
 const LoginPassword = ({ Modalname }: { Modalname: string }) => {
   const [password, setPassword] = useState('');
   const { modalTriggers, setModalTriggers, email } = useContext(ModalContext);

@@ -15,7 +15,6 @@ import { ModalContext } from './context';
 import { UserContext } from '../../pages/MainPage/context';
 import { mergeAccount } from '../../apis/authentication';
 
-
 const TopBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const [modalTriggers, setModalTriggers] = useState<ModalTriggersType>({

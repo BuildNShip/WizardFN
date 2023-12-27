@@ -18,6 +18,4 @@ export const buildVerse = {
   createProject: '/wizardapi/project/create/',
 
   editDeleteProject: '/wizardapi/project/',
-
-
 };

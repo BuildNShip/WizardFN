@@ -10,12 +10,10 @@ import {
 
 import { ModalTriggersType } from '../types';
 
-
 import { ModalContext } from '../context';
 import { UserContext } from '../../../pages/MainPage/context';
 import Modal from '../../../pages/MainPage/components/Modal/Modal';
 import PrimaryButton from '../../../pages/MainPage/components/Buttons/PrimaryButton';
-
 
 const RegisterOTP = ({
   Modalname,

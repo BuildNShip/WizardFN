@@ -40,8 +40,6 @@ const Sidebar = () => {
     };
   }, []);
 
-
-
   const menuItems: MenuItem[] = [
     {
       label: 'Rename Project',
