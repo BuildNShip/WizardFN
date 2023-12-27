@@ -10,4 +10,6 @@ export type ProjectType = {
 
 export type ProjectModals = {
     isCreateProjectModalOpen: boolean;
+    isDeleteProjectModalOpen: boolean;
+    isEditProjectModalOpen: boolean;
 }

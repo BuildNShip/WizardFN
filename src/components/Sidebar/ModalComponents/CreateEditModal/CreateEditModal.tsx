@@ -1,28 +1,33 @@
-import React from 'react';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from './CreateEditModal.module.css';
 import Modal from '../../../../pages/MainPage/components/Modal/Modal';
 import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
-import { ProjectModals, ProjectType } from '../../types';
-import { createProject } from '../../../../apis/projects';
+import { createProject, editProject } from '../../../../apis/projects';
+import { SidebarContext } from '../../context';
 
-const CreateEditModal = ({
-  projectModals,
-  setProjectModals,
-  setProjects,
-}: {
-  projectModals: ProjectModals;
-  setProjectModals: React.Dispatch<React.SetStateAction<ProjectModals>>;
-  setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>;
-}) => {
-  const [projectTitle, setProjectTitle] = useState('');
+const CreateEditModal = () => {
+  const { projectModals, setProjectModals, setProjects, project, setProject } =
+    useContext(SidebarContext);
+
+  const [modalType, setModalType] = useState('');
+
+  useEffect(() => {
+    if (projectModals.isCreateProjectModalOpen) {
+      setModalType('isCreateProjectModalOpen');
+    } else if (projectModals.isEditProjectModalOpen) {
+      setModalType('isEditProjectModalOpen');
+    } else if (projectModals.isDeleteProjectModalOpen) {
+      setModalType('isDeleteProjectModalOpen');
+    }
+  }, [projectModals]);
+
   return (
     <>
       <Modal
         modalTriggers={projectModals}
         setModalTriggers={setProjectModals}
-        Modalname="isCreateProjectModalOpen"
+        Modalname={modalType}
       >
         <div className={styles.modalContent}>
           <div className={styles.modalTitle}>Create Projet</div>
@@ -32,18 +37,41 @@ const CreateEditModal = ({
             </div>
             <input
               placeholder="Enter your project title"
-              onChange={(e) => setProjectTitle(e.target.value)}
+              onChange={(e) => {
+                setProject({
+                  ...project,
+                  title: e.target.value,
+                });
+              }}
               className={styles.modalInput}
               type="text"
-              value={projectTitle}
+              value={project.title}
             />
           </div>
           <div className={styles.modalButtonContainer}>
             <PrimaryButton
               onClick={() => {
-                createProject(projectTitle, setProjectModals, setProjects);
+                if (projectModals.isCreateProjectModalOpen)
+                  createProject(
+                    project.title,
+                    projectModals,
+                    setProjectModals,
+                    setProjects,
+                  );
+                else if (projectModals.isEditProjectModalOpen)
+                  editProject(
+                    project.title,
+                    project.id,
+                    projectModals,
+                    setProjectModals,
+                    setProjects,
+                  );
               }}
-              buttonText="Create Project"
+              buttonText={
+                projectModals.isCreateProjectModalOpen
+                  ? 'Create Project'
+                  : 'Edit Project'
+              }
             />
           </div>
         </div>

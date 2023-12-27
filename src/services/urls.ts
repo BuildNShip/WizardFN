@@ -17,4 +17,6 @@ export const buildVerse = {
   getProjects: '/wizardapi/project/list/',
   createProject: '/wizardapi/project/create/',
 
+  editProject: '/wizardapi/project/',
+
 };

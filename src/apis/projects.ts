@@ -19,6 +19,7 @@ export const getProjects = async (
 
 export const createProject = async (
   title: string,
+  projectModals: ProjectModals,
   setProjectModals: React.Dispatch<React.SetStateAction<ProjectModals>>,
   setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>,
 ) => {
@@ -30,7 +31,34 @@ export const createProject = async (
       console.log(response.data.response);
       toast.success('Project created successfully');
       setProjectModals({
+        ...projectModals,
         isCreateProjectModalOpen: false,
+      });
+      getProjects(setProjects);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const editProject = async (
+  title: string,
+  id: string,
+  projectModals: ProjectModals,
+  setProjectModals: React.Dispatch<React.SetStateAction<ProjectModals>>,
+  setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>,
+) => {
+  return privateGateway
+    .put(buildVerse.editProject + id + '/edit/', {
+      title,
+      id,
+    })
+    .then((response) => {
+      console.log(response.data.response);
+      toast.success('Project edited successfully');
+      setProjectModals({
+        ...projectModals,
+        isEditProjectModalOpen: false,
       });
       getProjects(setProjects);
     })
