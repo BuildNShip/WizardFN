@@ -22,7 +22,7 @@ const Collections = () => {
   const [openMenus, setOpenMenus] = useState<number[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
   const [rightClickMenu, setRightClickMenu] = useState(false);
-  const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
 
   useEffect(() => {
     const handleClick = () => {
@@ -147,7 +147,7 @@ const Collections = () => {
           <div className={styles.collectionsMenu}>
             <nav>
               <ul className={styles.menu}>
-                {buttons.map((button, index) => (
+                {collections.map((collection, index) => (
                   <li
                     className={styles.listItem}
                     key={index}
@@ -155,15 +155,17 @@ const Collections = () => {
                   >
                     <p onClick={() => handleSubMenuToggle(index)}>
                       <div className={styles.row}>
-                        <div className={`${button.icon} ${styles.listIcon}`} />
-                        {button.title}
+                        <div className={`red ${styles.listIcon}`} />
+                        {collection.title}
                       </div>
-                      {button.children && <IoIosMenu size={20} />}
+                      {collection.endpoints.length > 0 && (
+                        <IoIosMenu size={20} />
+                      )}
                     </p>
 
-                    {button.children &&
+                    {collection.endpoints.length > 0 &&
                       openMenus.includes(index) &&
-                      renderSubMenu(button.children)}
+                      renderSubMenu(collection.endpoints)}
                   </li>
                 ))}
               </ul>

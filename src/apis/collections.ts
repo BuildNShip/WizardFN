@@ -9,7 +9,7 @@ export const getCollections = async (
     privateGateway
       .get(buildVerse.getCollections(projectId))
       .then((response) => {
-        setCollections(response.data.response);
+        setCollections(response.data.response.collections);
       })
       .catch((error) => {
         console.log(error);
