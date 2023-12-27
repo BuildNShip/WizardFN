@@ -1,0 +1,17 @@
+.messageStyles {
+  border-radius: 0.25rem;
+  background-color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.messageStyles ul {
+  margin: 1rem 0;
+}
+
+.messageStyles li:hover {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+}
+
+.rightClickListItem {
+  padding: 0.5rem 1.5rem;
+}
