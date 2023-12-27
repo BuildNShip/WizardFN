@@ -16,6 +16,12 @@ const App = () => {
         containerStyle={{
           fontFamily: 'Inter, sans-serif',
         }}
+        toastOptions={{
+          style: {
+            backgroundColor: '#f9eec5',
+            color: '#262626',
+          },
+        }}
         position="bottom-center"
       />
     </>

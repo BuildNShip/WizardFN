@@ -1,11 +1,11 @@
 import { IoClose } from 'react-icons/io5';
 import styles from './BinaryPopup.module.css';
-import { ModalTriggersType } from '../../types';
 
 import { useContext } from 'react';
-import { ModalContext } from '../../context';
+import { SidebarContext } from '../../context';
 import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
 import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
+import { ProjectModals } from '../../types';
 
 const BinaryPopup = ({
   onClick,
@@ -20,11 +20,11 @@ const BinaryPopup = ({
   Modalname: string;
   onClickCancel?: () => void;
 }) => {
-  const { modalTriggers, setModalTriggers } = useContext(ModalContext);
+  const { projectModals, setProjectModals } = useContext(SidebarContext);
 
   return (
     <>
-      {modalTriggers[Modalname as keyof ModalTriggersType] && (
+      {projectModals[Modalname as keyof ProjectModals] && (
         <div>
           <div className={styles.modalOverlay}>
             <div className={styles.modal}>
@@ -32,8 +32,8 @@ const BinaryPopup = ({
                 <button
                   className={styles.closeButton}
                   onClick={() => {
-                    setModalTriggers({
-                      ...modalTriggers,
+                    setProjectModals({
+                      ...projectModals,
                       [Modalname]: false,
                     });
                   }}
@@ -59,7 +59,7 @@ const BinaryPopup = ({
 
                   {onClickCancel && (
                     <SecondaryButton
-                      buttonText="Don't Merge"
+                      buttonText="Don't Delete"
                       onClick={() => {
                         onClickCancel();
                       }}

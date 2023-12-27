@@ -3,7 +3,7 @@ import styles from './RightClickMenu.module.css';
 import { SidebarContext } from '../Sidebar/context';
 
 const RightClickMenu = () => {
-  const { projectModals, setProjectModals, projects, project, setProject } =
+  const { projectModals, setProjectModals } =
     useContext(SidebarContext);
   useContext(SidebarContext);
   return (
@@ -22,7 +22,14 @@ const RightClickMenu = () => {
         <li>
           <p className={styles.rightClickListItem}>Duplicate Project</p>
         </li>
-        <li>
+        <li
+          onClick={() => {
+            setProjectModals({
+              ...projectModals,
+              isDeleteProjectModalOpen: true,
+            });
+          }}
+        >
           <p className={styles.rightClickListItem}>Delete Project</p>
         </li>
       </ul>

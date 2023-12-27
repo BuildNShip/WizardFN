@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import styles from './Sidebar.module.css';
-import { getProjects } from '../../apis/projects';
+import { deleteProject, getProjects } from '../../apis/projects';
 import { ProjectModals, ProjectType } from './types';
 import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal';
 import RightClickMenu from '../RightClickMenu/RightClickMenu';
 import { SidebarContext } from './context';
+import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -52,6 +53,25 @@ const Sidebar = () => {
     >
       <>
         <CreateEditModal />
+        <BinaryPopup
+          onClick={() => {
+            deleteProject(
+              project.id,
+              projectModals,
+              setProjectModals,
+              setProjects,
+            );
+          }}
+          content={`Are you sure you want to delete ${project.title}?`}
+          buttonText="Delete Project"
+          Modalname="isDeleteProjectModalOpen"
+          onClickCancel={() => {
+            setProjectModals({
+              ...projectModals,
+              isDeleteProjectModalOpen: false,
+            });
+          }}
+        />
         <div className={styles.projectsSideBarContainer}>
           <div className={styles.projectsSideBar}>
             <p className={styles.projectsSideBarHeading}>Projects</p>

@@ -49,7 +49,7 @@ export const editProject = async (
   setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>,
 ) => {
   return privateGateway
-    .put(buildVerse.editProject + id + '/edit/', {
+    .put(buildVerse.editDeleteProject + id + '/edit/', {
       title,
       id,
     })
@@ -59,6 +59,28 @@ export const editProject = async (
       setProjectModals({
         ...projectModals,
         isEditProjectModalOpen: false,
+      });
+      getProjects(setProjects);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const deleteProject = async (
+  id: string,
+  projectModals: ProjectModals,
+  setProjectModals: React.Dispatch<React.SetStateAction<ProjectModals>>,
+  setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>,
+) => {
+  return privateGateway
+    .delete(buildVerse.editDeleteProject + id + '/delete/')
+    .then((response) => {
+      console.log(response.data.response);
+      toast.success('Project deleted successfully');
+      setProjectModals({
+        ...projectModals,
+        isDeleteProjectModalOpen: false,
       });
       getProjects(setProjects);
     })
