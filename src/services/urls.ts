@@ -24,4 +24,7 @@ export const buildVerse = {
 
   createCollection: (projectId: string) =>
     `/wizardapi/project/${projectId}/collection/create/`,
+
+  editDeleteCollection: (projectId: string, collectionId: string) =>
+    `/wizardapi/project/${projectId}/collection/${collectionId}/edit/`,
 };

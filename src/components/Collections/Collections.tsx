@@ -25,6 +25,9 @@ const Collections = () => {
   const [rightClickMenu, setRightClickMenu] = useState(false);
   const [collections, setCollections] = useState<Collection[]>([]);
 
+  const [cRightClickMenu, setCRightClickMenu] = useState(false);
+  const [cPoints, setCPoints] = useState({ top: 0, left: 0 });
+
   const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
     isCreateCollectionModalOpen: false,
     isEditCollectionModalOpen: false,
@@ -32,10 +35,9 @@ const Collections = () => {
   });
 
   useEffect(() => {
-    console.log(collections);
-
     const handleClick = () => {
       setRightClickMenu(false);
+      setCRightClickMenu(false);
     };
 
     window.addEventListener('click', handleClick);
@@ -46,7 +48,7 @@ const Collections = () => {
   }, []);
 
   useEffect(() => {
-    if (currentProject.id) getCollections(currentProject.id, setCollections);
+    getCollections(currentProject.id, setCollections);
   }, [currentProject]);
 
   const handleSubMenuToggle = (index: number) => {
@@ -75,6 +77,18 @@ const Collections = () => {
     {
       label: 'Create Project',
       onClick: () => {},
+    },
+  ];
+
+  const CMenuItems: MenuItem[] = [
+    {
+      label: 'Edit Collections',
+      onClick: () => {
+        setCollectionsModal({
+          ...collectionsModal,
+          isEditCollectionModalOpen: true,
+        });
+      },
     },
   ];
 
@@ -112,7 +126,6 @@ const Collections = () => {
         setCollectionsModal,
         collection,
         setCollection,
-
         collections,
         setCollections,
       }}
@@ -178,28 +191,40 @@ const Collections = () => {
             <div className={styles.collectionsMenu}>
               <nav>
                 <ul className={styles.menu}>
-                  {collections &&
-                    collections.map((collection, index) => (
-                      <li
-                        className={styles.listItem}
-                        key={index}
-                        style={{ margin: '1rem', marginLeft: 0 }}
-                      >
-                        <p onClick={() => handleSubMenuToggle(index)}>
-                          <div className={styles.row}>
-                            <div className={`red ${styles.listIcon}`} />
-                            {collection.title}
-                          </div>
-                          {collection.endpoints.length > 0 && (
-                            <IoIosMenu size={20} />
-                          )}
-                        </p>
+                  {collections.map((collection, index) => (
+                    <li
+                      className={styles.listItem}
+                      key={index}
+                      style={{ margin: '1rem', marginLeft: 0 }}
+                      onContextMenu={(e) => {
+                        e.preventDefault();
+                        setCRightClickMenu(true);
+                        setCPoints({
+                          top: e.clientY,
+                          left: e.clientX,
+                        });
 
-                        {collection.endpoints.length > 0 &&
-                          openMenus.includes(index) &&
-                          renderSubMenu(collection.endpoints)}
-                      </li>
-                    ))}
+                        setCollection({
+                          title: collection.title,
+                          id: collection.id,
+                        });
+                      }}
+                    >
+                      <p onClick={() => handleSubMenuToggle(index)}>
+                        <div className={styles.row}>
+                          <div className={`red ${styles.listIcon}`} />
+                          {collection.title}
+                        </div>
+                        {collection.endpoints.length > 0 && (
+                          <IoIosMenu size={20} />
+                        )}
+                      </p>
+
+                      {collection.endpoints.length > 0 &&
+                        openMenus.includes(index) &&
+                        renderSubMenu(collection.endpoints)}
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
@@ -211,6 +236,15 @@ const Collections = () => {
             style={{ top: points.top, left: points.left }}
           >
             <RightClickMenu menuItems={menuItems} />
+          </div>
+        )}
+
+        {cRightClickMenu && (
+          <div
+            className={styles.rightClickMenuContainer}
+            style={{ top: cPoints.top, left: cPoints.left }}
+          >
+            <RightClickMenu menuItems={CMenuItems} />
           </div>
         )}
       </>

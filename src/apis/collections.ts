@@ -10,6 +10,7 @@ export const getCollections = async (
       .get(buildVerse.getCollections(projectId))
       .then((response) => {
         setCollections(response.data.response.collections);
+        // console.log(response.data.response.collections);
       })
       .catch((error) => {
         console.log(error);
@@ -28,11 +29,36 @@ export const createCollections = async (
       title: title,
     })
     .then((response) => {
-      getCollections(projectId, setCollections);
       setCollectionsModal({
         ...collectionsModal,
         isCreateCollectionModalOpen: false,
       });
+      getCollections(projectId, setCollections);
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const editCollection = async (
+  projectId: string,
+  collectionId: string,
+  title: string,
+  setCollections: any,
+  collectionsModal: CollectionModals,
+  setCollectionsModal: React.Dispatch<React.SetStateAction<CollectionModals>>,
+) => {
+  privateGateway
+    .put(buildVerse.editDeleteCollection(projectId, collectionId), {
+      title: title,
+    })
+    .then((response) => {
+      setCollectionsModal({
+        ...collectionsModal,
+        isEditCollectionModalOpen: false,
+      });
+      getCollections(projectId, setCollections);
       console.log(response);
     })
     .catch((error) => {

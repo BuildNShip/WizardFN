@@ -2,23 +2,43 @@ import PrimaryButton from '../../../../pages/MainPage/components/Buttons/Primary
 import Modal from '../../../../pages/MainPage/components/Modal/Modal';
 import styles from './CreateEditModal.module.css';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CollectionsContext } from '../../context';
 import { UserContext } from '../../../../pages/MainPage/context';
-import { createCollections } from '../../../../apis/collections';
+import {
+  createCollections,
+  editCollection,
+} from '../../../../apis/collections';
 
 const CreateEditModal = () => {
-  const { collectionsModal, setCollectionsModal, collection, setCollection } =
-    useContext(CollectionsContext);
+  const {
+    collectionsModal,
+    setCollectionsModal,
+    collection,
+    setCollection,
+    setCollections,
+  } = useContext(CollectionsContext);
 
   const { currentProject } = useContext(UserContext);
+
+  const [modalType, setModalType] = useState('');
+
+  useEffect(() => {
+    if (collectionsModal.isCreateCollectionModalOpen) {
+      setModalType('isCreateCollectionModalOpen');
+    } else if (collectionsModal.isEditCollectionModalOpen) {
+      setModalType('isEditCollectionModalOpen');
+    } else if (collectionsModal.isDeleteCollectionModalOpen) {
+      setModalType('isDeleteCollectionModalOpen');
+    }
+  }, [collectionsModal]);
 
   return (
     <>
       <Modal
         modalTriggers={collectionsModal}
         setModalTriggers={setCollectionsModal}
-        Modalname="isCreateCollectionModalOpen"
+        Modalname={modalType}
       >
         <div className={styles.modalContent}>
           <div className={styles.modalTitle}>Create Collections</div>
@@ -27,7 +47,7 @@ const CreateEditModal = () => {
               Collection Title<span>*</span>
             </div>
             <input
-              placeholder="Enter your project title"
+              placeholder="Enter your collection title"
               className={styles.modalInput}
               type="text"
               value={collection.title}
@@ -41,13 +61,26 @@ const CreateEditModal = () => {
           </div>
           <div className={styles.modalButtonContainer}>
             <PrimaryButton
-              buttonText="Create Collection"
+              buttonText={
+                collectionsModal.isCreateCollectionModalOpen
+                  ? 'Create Project'
+                  : 'Edit Project'
+              }
               onClick={() => {
                 if (collectionsModal.isCreateCollectionModalOpen) {
                   createCollections(
                     currentProject.id,
                     collection.title,
-                    setCollection,
+                    setCollections,
+                    collectionsModal,
+                    setCollectionsModal,
+                  );
+                } else if (collectionsModal.isEditCollectionModalOpen) {
+                  editCollection(
+                    currentProject.id,
+                    collection.id,
+                    collection.title,
+                    setCollections,
                     collectionsModal,
                     setCollectionsModal,
                   );
