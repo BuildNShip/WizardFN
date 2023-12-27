@@ -1,5 +1,6 @@
-import { ProjectModals } from '../../../../components/Sidebar/types';
-import { ModalTriggersType } from '../TopBar/types';
+
+
+import { ModalTriggersType } from '../../../../components/Collections/TopBar/types';
 import styles from './Modal.module.css'; // Create a separate CSS file for styling
 import { IoClose } from 'react-icons/io5';
 const Modal = ({

@@ -8,11 +8,13 @@ import { ModalTriggersType } from './types';
 
 import ValidateEmail from './ModalComponents/ValidateEmail';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
-import { mergeAccount } from '../../../../apis/authentication';
+
 import toast from 'react-hot-toast';
 
 import { ModalContext } from './context';
-import { UserContext } from '../../context';
+import { UserContext } from '../../../pages/MainPage/context';
+import { mergeAccount } from '../../../apis/authentication';
+
 
 const TopBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);

@@ -1,9 +1,10 @@
 import toast from 'react-hot-toast';
 import { privateGateway, publicGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
-import { ModalTriggersType } from '../pages/MainPage/components/TopBar/types';
+
 import { AxiosResponse } from 'axios';
 import { getProfileInfo } from './user';
+import { ModalTriggersType } from '../components/Collections/TopBar/types';
 
 const mergeRefreshTokens = (response: AxiosResponse<any, any>) => {
   if (response.data.response && response.data.response.access_token) {

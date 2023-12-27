@@ -1,11 +1,12 @@
 import { IoClose } from 'react-icons/io5';
 import styles from './BinaryPopup.module.css';
-import PrimaryButton from '../../../Buttons/PrimaryButton';
 import { ModalTriggersType } from '../../types';
-import SecondaryButton from '../../../Buttons/SecondaryButton';
+
 
 import { useContext } from 'react';
 import { ModalContext } from '../../context';
+import PrimaryButton from '../../../../../pages/MainPage/components/Buttons/PrimaryButton';
+import SecondaryButton from '../../../../../pages/MainPage/components/Buttons/SecondaryButton';
 
 const BinaryPopup = ({
   onClick,

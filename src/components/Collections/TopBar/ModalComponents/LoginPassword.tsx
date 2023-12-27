@@ -1,20 +1,16 @@
-//React Imports
 import { useState, useContext } from 'react';
 
-//Component Imports
-import Modal from '../../Modal/Modal';
-
-//Styles Import
 import styles from './ModalContentStyles.module.css';
 
-//API Calling Functions
-import { login } from '../../../../../apis/authentication';
 import { ModalTriggersType } from '../types';
-import PrimaryButton from '../../Buttons/PrimaryButton';
-import SecondaryButton from '../../Buttons/SecondaryButton';
 
 import { ModalContext } from '../context';
-import { UserContext } from '../../../context';
+import { UserContext } from '../../../../pages/MainPage/context';
+import Modal from '../../../../pages/MainPage/components/Modal/Modal';
+import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
+import { login } from '../../../../apis/authentication';
+import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
+
 
 const LoginPassword = ({ Modalname }: { Modalname: string }) => {
   const [password, setPassword] = useState('');

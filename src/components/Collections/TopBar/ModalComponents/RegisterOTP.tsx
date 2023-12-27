@@ -1,18 +1,21 @@
 import { useEffect, useState, useContext } from 'react';
-import Modal from '../../Modal/Modal';
+
 import styles from './ModalContentStyles.module.css';
 import {
   generateOTP,
   login,
   preRegister,
   register,
-} from '../../../../../apis/authentication';
+} from '../../../../apis/authentication';
 
 import { ModalTriggersType } from '../types';
-import PrimaryButton from '../../Buttons/PrimaryButton';
+
 
 import { ModalContext } from '../context';
-import { UserContext } from '../../../context';
+import { UserContext } from '../../../../pages/MainPage/context';
+import Modal from '../../../../pages/MainPage/components/Modal/Modal';
+import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
+
 
 const RegisterOTP = ({
   Modalname,

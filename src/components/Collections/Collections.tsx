@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import styles from './Collections.module.css';
 import { buttons } from './CollectionsData.ts';
 import { IoIosMenu } from 'react-icons/io';
@@ -19,8 +19,6 @@ const Collections = () => {
   const { isLoggedIn, email } = useContext(UserContext);
 
   const [openMenus, setOpenMenus] = useState<number[]>([]);
-
-
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];

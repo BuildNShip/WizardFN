@@ -1,11 +1,15 @@
 import { useEffect, useState, useContext } from 'react';
-import { generateOTP, resetPassword } from '../../../../../apis/authentication';
-import Modal from '../../Modal/Modal';
+
+
 import styles from './ModalContentStyles.module.css';
 import { ModalTriggersType } from '../types';
-import PrimaryButton from '../../Buttons/PrimaryButton';
+
 import { ModalContext } from '../context';
-import { UserContext } from '../../../context';
+import { UserContext } from '../../../../pages/MainPage/context';
+import { generateOTP, resetPassword } from '../../../../apis/authentication';
+import Modal from '../../../../pages/MainPage/components/Modal/Modal';
+import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
+
 
 const ForgetPassword = ({
   Modalname,

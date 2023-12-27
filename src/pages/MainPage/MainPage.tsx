@@ -3,10 +3,10 @@ import Collections from '../../components/Collections/Collections';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './MainPage.module.css';
 import ResponseView from './components/ResponseView/ResponseView';
-import TopBar from './components/TopBar/TopBar';
 import URLContainer from './components/URLContainer/URLContainer';
 import { guestRegister } from '../../apis/authentication'; // Import useJWT hook
 import { UserContext } from './context';
+import TopBar from '../../components/Collections/TopBar/TopBar';
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
