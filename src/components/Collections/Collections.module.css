@@ -132,3 +132,15 @@ li {
   justify-content: space-between;
   align-items: center;
 }
+
+.rightClickMenuContainer {
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  color: var(--text-white);
+  font-family: 'Inter', sans-serif;
+
+  font-size: 0.9rem;
+  background-color: var(--secondary-color);
+}
