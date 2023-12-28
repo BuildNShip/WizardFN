@@ -20,7 +20,13 @@ const Collections = () => {
     children?: Button[];
   };
 
-  const { isLoggedIn, email, currentProject } = useContext(UserContext);
+  const {
+    isLoggedIn,
+    email,
+    currentProject,
+    setCurrentCollection,
+    currentCollection,
+  } = useContext(UserContext);
   const [openMenus, setOpenMenus] = useState<number[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
   const [rightClickMenu, setRightClickMenu] = useState(false);
@@ -51,6 +57,12 @@ const Collections = () => {
   useEffect(() => {
     getCollections(currentProject.id, setCollections);
   }, [currentProject]);
+
+  useEffect(() => {
+    if (collections.length > 0) {
+      setCurrentCollection(collections[0]);
+    }
+  }, [collections]);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];
@@ -248,6 +260,9 @@ const Collections = () => {
                         </div>
                         {collection.endpoints.length > 0 && (
                           <IoIosMenu size={20} />
+                        )}
+                        {collection.id === currentCollection.id && (
+                          <div className={styles.activeDot}></div>
                         )}
                       </p>
 

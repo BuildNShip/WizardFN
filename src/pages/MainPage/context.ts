@@ -8,6 +8,8 @@ interface userContextType {
   setEmail: (email: string) => void;
   currentProject: ProjectType;
   setCurrentProject: (currentProject: ProjectType) => void;
+  currentCollection: Collection;
+  setCurrentCollection: (currentCollection: Collection) => void;
 }
 
 export const UserContext = createContext(<userContextType>{});

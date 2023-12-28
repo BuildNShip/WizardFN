@@ -30,4 +30,7 @@ export const buildVerse = {
 
   deleteCollection: (projectId: string, collectionId: string) =>
     `/wizardapi/project/${projectId}/collection/${collectionId}/delete/`,
+
+  getEndpoints: (projectId: string, collectionId: string) =>
+    `/wizardapi/project/${projectId}/collection/${collectionId}/get/`,
 };

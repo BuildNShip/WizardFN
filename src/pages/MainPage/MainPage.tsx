@@ -34,6 +34,18 @@ const MainPage = () => {
     selected: true,
   });
 
+  const [currentCollection, setCurrentCollection] = useState<Collection>({
+    id: '',
+    updated_by: '',
+    title: '',
+    order: 0,
+    created_at: '',
+    created_by: '',
+    updated_at: '',
+    project_id: '',
+    endpoints: [] as any[], // You can replace 'any' with a more specific type if needed
+  });
+
   return (
     <>
       <UserContext.Provider
@@ -44,6 +56,8 @@ const MainPage = () => {
           setEmail,
           currentProject,
           setCurrentProject,
+          currentCollection,
+          setCurrentCollection,
         }}
       >
         <div className={styles.mainContainer}>

@@ -152,3 +152,10 @@ li {
   font-size: 0.9rem;
   background-color: var(--secondary-color);
 }
+
+.activeDot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--blue);
+}
