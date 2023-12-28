@@ -16,7 +16,7 @@
 
 .responseTopBar {
   padding: 1rem;
-  height: 5rem;
+  max-height: 10rem;
   background-color: var(--secondary-color);
 
   display: flex;
@@ -32,6 +32,7 @@
 }
 
 .responseTopBarBButtons {
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,9 +89,22 @@
   border-radius: 50%;
 }
 
+.responseInactiveDot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--tertiary-color);
+
+  border-radius: 50%;
+}
+
 .row {
   display: flex;
   align-items: center;
+}
+
+.row1 {
+  display: flex;
+  align-items: end;
 }
 
 @keyframes pulse {
@@ -121,4 +135,27 @@
 
 .responseTextArea:focus {
   outline: none;
+}
+
+.apiResponseDescription {
+  margin-top: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--tertiary-color);
+
+  height: 5rem;
+  width: 100%;
+}
+
+.saveButton {
+  background-color: var(--primary-color);
+  padding: 0.5rem 0.6rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  border-radius: 0.25rem;
+  color: white;
+  border: none;
+  font-family: 'Inter', sans-serif;
 }

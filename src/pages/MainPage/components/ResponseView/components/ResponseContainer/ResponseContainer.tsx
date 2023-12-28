@@ -1,49 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ResponseContainer.module.css';
 import { Editor } from 'json5-editor';
 
 const ResponseContainer = () => {
-  const [jsonData, setJsonData] = useState(`
-    {
-        "characters": [
-          {
-            "name": "Alice",
-            "age": 25,
-            "gender": "female",
-            "occupation": "software engineer",
-            "hobbies": ["reading", "coding", "hiking"]
-          },
-          {
-            "name": "Bob",
-            "age": 30,
-            "gender": "male",
-            "occupation": "graphic designer",
-            "hobbies": ["drawing", "gaming", "traveling"]
-          },
-          {
-            "name": "Charlie",
-            "age": 22,
-            "gender": "non-binary",
-            "occupation": "student",
-            "hobbies": ["writing", "playing music", "photography"]
-          },
-          {
-            "name": "Diana",
-            "age": 35,
-            "gender": "female",
-            "occupation": "doctor",
-            "hobbies": ["running", "cooking", "volunteering"]
-          },
-          {
-            "name": "Ethan",
-            "age": 28,
-            "gender": "male",
-            "occupation": "entrepreneur",
-            "hobbies": ["business strategy", "fitness", "surfing"]
-          }
-        ]
-      }
-      `);
+  const [responseData, setResponseData] = useState<ResponseData>({
+    responseCode: '',
+    body: `{
+
+    }`,
+    isActive: false,
+    description: '',
+    order: 0,
+  });
+
+  const [jsonData, setJsonData] = useState(`{}`);
+
+  const [showDescription, setShowDescription] = useState(false);
+
+  useEffect(() => {
+    setResponseData({
+      ...responseData,
+      body: jsonData,
+    });
+  }, [jsonData]);
+
   return (
     <div className={styles.response}>
       <div className={styles.responseTopBar}>
@@ -61,22 +41,76 @@ const ResponseContainer = () => {
             />
           </div>
           <div>
-            <div className={styles.responseActive}>
-              <div className={styles.responseActiveDot}></div>
+            <div
+              onClick={() => {
+                setResponseData({
+                  ...responseData,
+                  isActive: !responseData.isActive,
+                });
+              }}
+              className={styles.responseActive}
+            >
+              <div
+                className={
+                  responseData.isActive
+                    ? styles.responseActiveDot
+                    : styles.responseInactiveDot
+                }
+              ></div>
             </div>
           </div>
         </div>
         <div className={styles.responseTopBarBButtons}>
           <div className={styles.row}>
-            <select className={styles.selectButton} name="" id="">
-              <option value="">Type 1</option>
-              <option value="">Type 2</option>
-              <option value="">Type 3</option>
+            <select
+              onChange={(e) => {
+                setResponseData({
+                  ...responseData,
+                  responseCode: e.target.value,
+                });
+              }}
+              className={styles.selectButton}
+              name=""
+              id=""
+            >
+              <option value="">200</option>
+              <option value="">400</option>
             </select>
-            <div className={styles.responseTopBarButton}>View Desc</div>
+            {!showDescription && (
+              <div
+                onClick={() => {
+                  setShowDescription(true);
+                }}
+                className={styles.responseTopBarButton}
+              >
+                View Desc
+              </div>
+            )}
           </div>
           <button className={styles.responseDeleteButton}>Delete</button>
         </div>
+        {showDescription && (
+          <div className={styles.row1}>
+            <input
+              onChange={(e) => {
+                setResponseData({
+                  ...responseData,
+                  description: e.target.value,
+                });
+              }}
+              type="text"
+              className={styles.apiResponseDescription}
+            />
+            <button
+              onClick={() => {
+                setShowDescription(false);
+              }}
+              className={styles.saveButton}
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
       <div className={styles.editorContainer}>
         <Editor

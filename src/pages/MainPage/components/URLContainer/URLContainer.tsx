@@ -29,9 +29,6 @@ const URLContainer = () => {
           value={requestType}
           onChange={(e) => setRequestType(e.target.value)}
         >
-          <option className={styles.menuItem} value="">
-            Method
-          </option>
           <option className={styles.menuItem} value="GET">
             GET
           </option>
