@@ -12,6 +12,7 @@ import { deleteCollection, getCollections } from '../../apis/collections.ts';
 import { CollectionsContext } from './context.ts';
 import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal.tsx';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup.tsx';
+import { getEndpoints } from '../../apis/endpoints.ts';
 const Collections = () => {
   type Button = {
     url: string;
@@ -34,6 +35,8 @@ const Collections = () => {
 
   const [cRightClickMenu, setCRightClickMenu] = useState(false);
   const [cPoints, setCPoints] = useState({ top: 0, left: 0 });
+
+  const [endpoints, setEndpoints] = useState<any>([]);
 
   const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
     isCreateCollectionModalOpen: false,
@@ -63,6 +66,12 @@ const Collections = () => {
       setCurrentCollection(collections[0]);
     }
   }, [collections]);
+
+  useEffect(() => {
+    if (currentCollection.id) {
+      getEndpoints(currentProject.id, currentCollection.id, setEndpoints);
+    }
+  }, [currentCollection]);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];
@@ -251,6 +260,9 @@ const Collections = () => {
                           title: collection.title,
                           id: collection.id,
                         });
+                      }}
+                      onClick={() => {
+                        setCurrentCollection(collection);
                       }}
                     >
                       <p onClick={() => handleSubMenuToggle(index)}>
