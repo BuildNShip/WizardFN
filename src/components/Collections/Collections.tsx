@@ -36,7 +36,7 @@ const Collections = () => {
   const [cRightClickMenu, setCRightClickMenu] = useState(false);
   const [cPoints, setCPoints] = useState({ top: 0, left: 0 });
 
-  const [endpoints, setEndpoints] = useState<any>([]);
+  const [setEndpoints] = useState<any>([]);
 
   const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
     isCreateCollectionModalOpen: false,

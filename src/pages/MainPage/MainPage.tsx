@@ -5,7 +5,7 @@ import styles from './MainPage.module.css';
 import ResponseView from './components/ResponseView/ResponseView';
 import URLContainer from './components/URLContainer/URLContainer';
 import { guestRegister } from '../../apis/authentication'; // Import useJWT hook
-import { UserContext } from './context';
+import { UserContext, APIContext } from './context';
 import TopBar from '../../components/TopBar/TopBar';
 import { ProjectType } from '../../components/Sidebar/types';
 
@@ -46,6 +46,36 @@ const MainPage = () => {
     endpoints: [] as any[], // You can replace 'any' with a more specific type if needed
   });
 
+  const [endpoints, setEndpoints] = useState<APIData>({
+    endPointData: {
+      id: '',
+      title: '',
+      collectionId: '',
+      method: '',
+      url: '',
+      description: '',
+      isActive: true,
+      cors: [],
+      token: '',
+    },
+    apiResponses: [
+      {
+        responseCode: 200,
+        body: '',
+        isActive: true,
+        description: '',
+        order: 0,
+      },
+      {
+        responseCode: 500,
+        body: '',
+        isActive: true,
+        description: '',
+        order: 0,
+      },
+    ],
+  });
+
   return (
     <>
       <UserContext.Provider
@@ -64,11 +94,18 @@ const MainPage = () => {
           <Sidebar />
           <Collections />
 
-          <div className={styles.mainAppContainer}>
-            <TopBar />
-            <URLContainer />
-            <ResponseView />
-          </div>
+          <APIContext.Provider
+            value={{
+              endpoints,
+              setEndpoints,
+            }}
+          >
+            <div className={styles.mainAppContainer}>
+              <TopBar />
+              <URLContainer />
+              <ResponseView />
+            </div>
+          </APIContext.Provider>
         </div>
       </UserContext.Provider>
     </>

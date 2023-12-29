@@ -10,8 +10,8 @@ const APIDescription = ({
 }: {
   modalTriggers: URLContainerProps;
   setModalTriggers: React.Dispatch<React.SetStateAction<URLContainerProps>>;
-  requestDescription: string;
-  setRequestDescription: React.Dispatch<React.SetStateAction<string>>;
+  requestDescription: APIData;
+  setRequestDescription: (apiData: APIData) => void;
 }) => {
   return (
     <>
@@ -30,8 +30,16 @@ const APIDescription = ({
               placeholder="Enter the API Description"
               className={styles.modalInput}
               type="text"
-              onChange={(e) => setRequestDescription(e.target.value)}
-              value={requestDescription}
+              onChange={(e) => {
+                setRequestDescription({
+                  ...requestDescription,
+                  endPointData: {
+                    ...requestDescription.endPointData,
+                    method: e.target.value,
+                  },
+                });
+              }}
+              value={requestDescription.endPointData.description}
             />
           </div>
           <div className={styles.modalButtonContainer}>

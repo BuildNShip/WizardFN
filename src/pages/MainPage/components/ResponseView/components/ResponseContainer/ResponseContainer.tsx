@@ -1,28 +1,37 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styles from './ResponseContainer.module.css';
 import { Editor } from 'json5-editor';
 
-const ResponseContainer = () => {
-  const [responseData, setResponseData] = useState<ResponseData>({
-    responseCode: '',
-    body: `{
-
-    }`,
-    isActive: false,
-    description: '',
-    order: 0,
-  });
-
+const ResponseContainer = ({
+  responseData,
+  setResponseData,
+  responseCount,
+}: {
+  responseData: ApiResponse[];
+  setResponseData: Dispatch<SetStateAction<ApiResponse[]>>;
+  responseCount: number;
+}) => {
   const [jsonData, setJsonData] = useState(`{}`);
 
   const [showDescription, setShowDescription] = useState(false);
 
-  useEffect(() => {
-    setResponseData({
-      ...responseData,
-      body: jsonData,
+  const updateState = (fieldName: any, newValue: any) => {
+    const updatedData = responseData.map((item) => {
+      if (item.order === responseCount) {
+        return { ...item, [fieldName]: newValue };
+      }
+      return item;
     });
+    setResponseData(updatedData);
+  };
+
+  useEffect(() => {
+    updateState('body', jsonData);
   }, [jsonData]);
+
+  useEffect(() => {
+    console.log(responseData);
+  }, [responseData]);
 
   return (
     <div className={styles.response}>
@@ -43,16 +52,16 @@ const ResponseContainer = () => {
           <div>
             <div
               onClick={() => {
-                setResponseData({
-                  ...responseData,
-                  isActive: !responseData.isActive,
-                });
+                updateState(
+                  'isActive',
+                  !responseData[responseCount - 1]?.isActive,
+                );
               }}
               className={styles.responseActive}
             >
               <div
                 className={
-                  responseData.isActive
+                  responseData[responseCount - 1]?.isActive
                     ? styles.responseActiveDot
                     : styles.responseInactiveDot
                 }
@@ -64,17 +73,14 @@ const ResponseContainer = () => {
           <div className={styles.row}>
             <select
               onChange={(e) => {
-                setResponseData({
-                  ...responseData,
-                  responseCode: e.target.value,
-                });
+                updateState('responseCode', Number(e.target.value));
               }}
               className={styles.selectButton}
               name=""
               id=""
             >
-              <option value="">200</option>
-              <option value="">400</option>
+              <option value="200">200</option>
+              <option value="400">400</option>
             </select>
             {!showDescription && (
               <div
@@ -93,12 +99,10 @@ const ResponseContainer = () => {
           <div className={styles.row1}>
             <input
               onChange={(e) => {
-                setResponseData({
-                  ...responseData,
-                  description: e.target.value,
-                });
+                updateState('description', e.target.value);
               }}
               type="text"
+              value={responseData[responseCount - 1]?.description}
               className={styles.apiResponseDescription}
             />
             <button

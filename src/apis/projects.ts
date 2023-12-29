@@ -10,7 +10,6 @@ export const getProjects = async (
     .get(buildVerse.getProjects)
     .then((response) => {
       setProjects(response.data.response.projects);
-      console.log(response.data.response.projects);
     })
     .catch((error) => {
       console.log(error);

@@ -2,7 +2,7 @@
   border: var(--light-skin) 1px solid;
   width: fit-content;
   min-width: 25rem;
-  min-height: 20rem;
+  
   overflow: hidden; /*add this*/
   border-radius: 0.25rem;
 
