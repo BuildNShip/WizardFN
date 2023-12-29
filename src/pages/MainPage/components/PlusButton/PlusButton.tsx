@@ -19,6 +19,8 @@ const PlusButton = ({
     }
   }, [isInvalidJSON]);
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <div
@@ -35,7 +37,7 @@ const PlusButton = ({
 
           try {
             JSON.parse(currentResponse?.body as string);
-           
+
             setIsInvalidJSON(false);
           } catch {
             toast.error('Enter a valid JSON in the response body');

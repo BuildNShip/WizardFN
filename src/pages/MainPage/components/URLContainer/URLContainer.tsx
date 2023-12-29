@@ -16,6 +16,29 @@ const URLContainer = () => {
   const { currentProject } = useContext(UserContext);
   const { endpoints, setEndpoints } = useContext(APIContext);
 
+  const [toBackend, setToBackend] = useState<APIData>({
+    endPointData: {
+      id: '',
+      title: 'Untitled Endpoint',
+      collectionId: '',
+      method: '',
+      url: '',
+      description: '',
+      isActive: true,
+      cors: [],
+      token: '',
+    },
+    apiResponses: [
+      {
+        responseCode: 200,
+        body: '',
+        isActive: true,
+        description: '',
+        order: 0,
+      },
+    ],
+  });
+
   useEffect(() => {
     setEndpoints({
       ...endpoints,
@@ -25,6 +48,10 @@ const URLContainer = () => {
       },
     });
   }, [currentProject]);
+
+  useEffect(() => {
+    console.log(toBackend);
+  }, [toBackend]);
 
   const handleSendRequest = () => {
     const lastApiResponse =
@@ -36,11 +63,29 @@ const URLContainer = () => {
         toast.error('Kindly enter a valid JSON  in the response body');
         return;
       }
-      
+      updateBody();
       toast.success('Request sent successfully');
     } catch (error) {
       toast.error('Invalid JSON in the response body');
     }
+  };
+
+  const updateBody = () => {
+    const updatedApiResponses = endpoints.apiResponses.map(
+      (apiResponse: ApiResponse) => {
+        try {
+          return {
+            ...apiResponse,
+            body: JSON.parse(apiResponse.body as string),
+          };
+        } catch (error) {
+          return apiResponse;
+        }
+      },
+    );
+    setToBackend({ ...endpoints, apiResponses: updatedApiResponses });
+
+    setEndpoints({ ...endpoints, apiResponses: updatedApiResponses });
   };
 
   return (
@@ -98,7 +143,6 @@ const URLContainer = () => {
         <button
           onClick={() => {
             handleSendRequest();
-            console.log(endpoints);
           }}
           className={styles.urlSendButton}
         >
