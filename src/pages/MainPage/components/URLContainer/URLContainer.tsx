@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import styles from './URLContainer.module.css';
 import { PiFloppyDiskBack } from 'react-icons/pi';
 
