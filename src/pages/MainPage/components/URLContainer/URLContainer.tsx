@@ -5,6 +5,7 @@ import { PiFloppyDiskBack } from 'react-icons/pi';
 import { APIContext, UserContext } from '../../context';
 import APIDescription from './ModalContainer/APIDescription/APIDescription';
 import toast from 'react-hot-toast';
+import { saveEndpoint } from '../../../../apis/endpoints';
 
 const URLContainer = () => {
   // const [requestType, setRequestType] = useState('');
@@ -63,6 +64,7 @@ const URLContainer = () => {
         toast.error('Kindly enter a valid JSON  in the response body');
         return;
       }
+      console.log("ivadae ethi njn")
       updateBody();
       toast.success('Request sent successfully');
     } catch (error) {
@@ -84,6 +86,7 @@ const URLContainer = () => {
       },
     );
     setToBackend({ ...endpoints, apiResponses: updatedApiResponses });
+    console.log("toBackend", toBackend);
 
     setEndpoints({ ...endpoints, apiResponses: updatedApiResponses });
   };
@@ -143,6 +146,8 @@ const URLContainer = () => {
         <button
           onClick={() => {
             handleSendRequest();
+
+            saveEndpoint(toBackend);
           }}
           className={styles.urlSendButton}
         >

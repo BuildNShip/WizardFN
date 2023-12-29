@@ -36,7 +36,6 @@ const Collections = () => {
   const [cRightClickMenu, setCRightClickMenu] = useState(false);
   const [cPoints, setCPoints] = useState({ top: 0, left: 0 });
 
-  const [setEndpoints] = useState<any>([]);
 
   const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
     isCreateCollectionModalOpen: false,
@@ -66,12 +65,6 @@ const Collections = () => {
       setCurrentCollection(collections[0]);
     }
   }, [collections]);
-
-  useEffect(() => {
-    if (currentCollection.id) {
-      getEndpoints(currentProject.id, currentCollection.id, setEndpoints);
-    }
-  }, [currentCollection]);
 
   const handleSubMenuToggle = (index: number) => {
     const updatedMenus = [...openMenus];

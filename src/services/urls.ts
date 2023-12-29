@@ -33,4 +33,6 @@ export const buildVerse = {
 
   getEndpoints: (projectId: string, collectionId: string) =>
     `/wizardapi/project/${projectId}/collection/${collectionId}/get/`,
+
+  saveEndpoint: `/wizardapi/endpoint/save/`,
 };
