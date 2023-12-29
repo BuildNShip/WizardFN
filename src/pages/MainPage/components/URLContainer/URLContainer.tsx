@@ -41,16 +41,6 @@ const URLContainer = () => {
   });
 
   useEffect(() => {
-    setEndpoints({
-      ...endpoints,
-      endPointData: {
-        ...endpoints.endPointData,
-        url: `https://wizard.api/${currentProject.code}`,
-      },
-    });
-  }, [currentProject]);
-
-  useEffect(() => {
     console.log(toBackend);
   }, [toBackend]);
 
@@ -64,31 +54,26 @@ const URLContainer = () => {
         toast.error('Kindly enter a valid JSON  in the response body');
         return;
       }
-      console.log("ivadae ethi njn")
-      updateBody();
+
+      const updatedApiResponses = endpoints.apiResponses.map(
+        (apiResponse: ApiResponse) => {
+          try {
+            return {
+              ...apiResponse,
+              body: JSON.parse(apiResponse.body as string),
+            };
+          } catch (error) {
+            return apiResponse;
+          }
+        },
+      );
+
+      saveEndpoint({ ...endpoints, apiResponses: updatedApiResponses });
+
       toast.success('Request sent successfully');
     } catch (error) {
       toast.error('Invalid JSON in the response body');
     }
-  };
-
-  const updateBody = () => {
-    const updatedApiResponses = endpoints.apiResponses.map(
-      (apiResponse: ApiResponse) => {
-        try {
-          return {
-            ...apiResponse,
-            body: JSON.parse(apiResponse.body as string),
-          };
-        } catch (error) {
-          return apiResponse;
-        }
-      },
-    );
-    setToBackend({ ...endpoints, apiResponses: updatedApiResponses });
-    console.log("toBackend", toBackend);
-
-    setEndpoints({ ...endpoints, apiResponses: updatedApiResponses });
   };
 
   return (
@@ -129,25 +114,24 @@ const URLContainer = () => {
             PATCH
           </option>
         </select>
-        <input
-          className={styles.urlInput}
-          placeholder="https://www.example.com"
-          value={endpoints.endPointData.url}
-          onChange={(e) => {
-            setEndpoints({
-              ...endpoints,
-              endPointData: {
-                ...endpoints.endPointData,
-                url: e.target.value,
-              },
-            });
-          }}
-        />
+        <div className={styles.urlLabel}>
+          {`https://wizard.api/${currentProject.code}`}
+          <input
+            value={endpoints.endPointData.url}
+            onChange={(e) => {
+              setEndpoints({
+                ...endpoints,
+                endPointData: {
+                  ...endpoints.endPointData,
+                  url: e.target.value,
+                },
+              });
+            }}
+          />
+        </div>
         <button
           onClick={() => {
             handleSendRequest();
-
-            saveEndpoint(toBackend);
           }}
           className={styles.urlSendButton}
         >

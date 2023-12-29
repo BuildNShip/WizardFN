@@ -52,7 +52,7 @@ const MainPage = () => {
       title: ' Untitled Endpoint',
       collectionId: currentCollection.id,
       method: '',
-      url: '',
+      url: '/',
       description: '',
       isActive: true,
       cors: [],

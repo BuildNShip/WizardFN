@@ -26,7 +26,7 @@ export const saveEndpoint = async (endpoint: APIData) => {
 
   const data = {
     end_point_data: {
-      id: endpoint.endPointData.id,
+      ...(endpoint.endPointData.id && { id: endpoint.endPointData.id }),
       title: endpoint.endPointData.title,
       collection_id: endpoint.endPointData.collectionId,
       method: endpoint.endPointData.method,
