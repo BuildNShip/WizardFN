@@ -1,3 +1,3 @@
 type URLContainerProps = {
-    isAPIDescriptionModalOpen: boolean;
+  isAPIDescriptionModalOpen: boolean;
 };

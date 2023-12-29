@@ -4,6 +4,7 @@ import { PiFloppyDiskBack } from 'react-icons/pi';
 
 import { APIContext, UserContext } from '../../context';
 import APIDescription from './ModalContainer/APIDescription/APIDescription';
+import toast from 'react-hot-toast';
 
 const URLContainer = () => {
   // const [requestType, setRequestType] = useState('');
@@ -24,6 +25,24 @@ const URLContainer = () => {
       },
     });
   }, [currentProject]);
+
+  const handleSendRequest = () => {
+    const lastApiResponse =
+      endpoints.apiResponses[endpoints.apiResponses.length - 1];
+    try {
+      const json = JSON.parse(lastApiResponse.body as string);
+
+      if (json === '{}') {
+        toast.error('Kindly enter a valid JSON  in the response body');
+        return;
+      }
+      
+      toast.success('Request sent successfully');
+    } catch (error) {
+      toast.error('Invalid JSON in the response body');
+    }
+  };
+
   return (
     <>
       <APIDescription
@@ -76,7 +95,15 @@ const URLContainer = () => {
             });
           }}
         />
-        <button className={styles.urlSendButton}>Send</button>
+        <button
+          onClick={() => {
+            handleSendRequest();
+            console.log(endpoints);
+          }}
+          className={styles.urlSendButton}
+        >
+          Send
+        </button>
         <button
           onClick={() => {
             setModalTriggers({

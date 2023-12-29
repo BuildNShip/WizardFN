@@ -49,8 +49,8 @@ const MainPage = () => {
   const [endpoints, setEndpoints] = useState<APIData>({
     endPointData: {
       id: '',
-      title: '',
-      collectionId: '',
+      title: ' Untitled Endpoint',
+      collectionId: currentCollection.id,
       method: '',
       url: '',
       description: '',
@@ -75,6 +75,16 @@ const MainPage = () => {
       },
     ],
   });
+
+  useEffect(() => {
+    setEndpoints({
+      ...endpoints,
+      endPointData: {
+        ...endpoints.endPointData,
+        collectionId: currentCollection.id,
+      },
+    });
+  }, [currentCollection]);
 
   return (
     <>

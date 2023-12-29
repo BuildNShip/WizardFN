@@ -21,7 +21,7 @@ const APIDescription = ({
         Modalname="isAPIDescriptionModalOpen"
       >
         <div className={styles.modalContent}>
-          <div className={styles.modalTitle}>Create Project</div>
+          <div className={styles.modalTitle}>Set API Description</div>
           <div className={styles.modalInputContainer}>
             <div className={styles.modalInputLabel}>
               API Description<span>*</span>
@@ -35,7 +35,7 @@ const APIDescription = ({
                   ...requestDescription,
                   endPointData: {
                     ...requestDescription.endPointData,
-                    method: e.target.value,
+                    description: e.target.value,
                   },
                 });
               }}
@@ -43,7 +43,15 @@ const APIDescription = ({
             />
           </div>
           <div className={styles.modalButtonContainer}>
-            <PrimaryButton buttonText="Save" onClick={() => {}} />
+            <PrimaryButton
+              buttonText="Save"
+              onClick={() => {
+                setModalTriggers({
+                  ...modalTriggers,
+                  isAPIDescriptionModalOpen: false,
+                });
+              }}
+            />
           </div>
         </div>
       </Modal>

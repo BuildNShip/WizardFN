@@ -1,8 +1,8 @@
 .response {
   border: var(--light-skin) 1px solid;
   width: fit-content;
-  min-width: 25rem;
-  
+  width: 25rem;
+
   overflow: hidden; /*add this*/
   border-radius: 0.25rem;
 

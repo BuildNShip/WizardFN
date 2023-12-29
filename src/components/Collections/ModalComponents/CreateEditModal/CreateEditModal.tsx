@@ -23,14 +23,12 @@ const CreateEditModal = () => {
 
   const [modalType, setModalType] = useState('');
 
-
-
   useEffect(() => {
     if (collectionsModal.isCreateCollectionModalOpen) {
       setModalType('isCreateCollectionModalOpen');
     } else if (collectionsModal.isEditCollectionModalOpen) {
       setModalType('isEditCollectionModalOpen');
-    } 
+    }
   }, [collectionsModal]);
 
   return (

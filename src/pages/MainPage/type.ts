@@ -1,18 +1,18 @@
 type EndpointData = {
-  id: string;
+  id?: string;
   title: string;
   collectionId: string;
   method: string;
   url: string;
   description: string;
   isActive: boolean;
-  cors: string[];
-  token: string;
+  cors?: string[];
+  token?: string;
 };
 
 type ApiResponse = {
   responseCode: number;
-  body: string;
+  body: {} | string;
   isActive: boolean;
   description: string;
   order: number;

@@ -1,6 +1,13 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useContext,
+} from 'react';
 import styles from './ResponseContainer.module.css';
 import { Editor } from 'json5-editor';
+import { APIContext } from '../../../../context';
 
 const ResponseContainer = ({
   responseData,
@@ -12,6 +19,7 @@ const ResponseContainer = ({
   responseCount: number;
 }) => {
   const [jsonData, setJsonData] = useState(`{}`);
+  const { endpoints, setEndpoints } = useContext(APIContext);
 
   const [showDescription, setShowDescription] = useState(false);
 
@@ -26,12 +34,15 @@ const ResponseContainer = ({
   };
 
   useEffect(() => {
-    updateState('body', jsonData);
-  }, [jsonData]);
+    setEndpoints({
+      ...endpoints,
+      apiResponses: responseData,
+    });
+  }, [responseData]);
 
   useEffect(() => {
-    console.log(responseData);
-  }, [responseData]);
+    updateState('body', jsonData);
+  }, [jsonData]);
 
   return (
     <div className={styles.response}>
