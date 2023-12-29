@@ -8,8 +8,6 @@ import toast from 'react-hot-toast';
 import { saveEndpoint } from '../../../../apis/endpoints';
 
 const URLContainer = () => {
-  // const [requestType, setRequestType] = useState('');
-  // const [requestDescription, setRequestDescription] = useState('');
   const [modalTriggers, setModalTriggers] = useState<URLContainerProps>({
     isAPIDescriptionModalOpen: false,
   });
@@ -87,7 +85,7 @@ const URLContainer = () => {
             PATCH
           </option>
         </select>
-        <div className={styles.urlLabel}>
+        <div className={styles.urlInput}>
           {`https://wizard.api/${currentProject.code}`}
           <input
             value={endpoints.endPointData.url}

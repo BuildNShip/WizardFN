@@ -51,7 +51,7 @@ const MainPage = () => {
       id: '',
       title: ' Untitled Endpoint',
       collectionId: currentCollection.id,
-      method: '',
+      method: 'GET',
       url: '/',
       description: '',
       isActive: true,
