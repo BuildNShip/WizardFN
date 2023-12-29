@@ -17,33 +17,6 @@ const URLContainer = () => {
   const { currentProject } = useContext(UserContext);
   const { endpoints, setEndpoints } = useContext(APIContext);
 
-  const [toBackend, setToBackend] = useState<APIData>({
-    endPointData: {
-      id: '',
-      title: 'Untitled Endpoint',
-      collectionId: '',
-      method: '',
-      url: '',
-      description: '',
-      isActive: true,
-      cors: [],
-      token: '',
-    },
-    apiResponses: [
-      {
-        responseCode: 200,
-        body: '',
-        isActive: true,
-        description: '',
-        order: 0,
-      },
-    ],
-  });
-
-  useEffect(() => {
-    console.log(toBackend);
-  }, [toBackend]);
-
   const handleSendRequest = () => {
     const lastApiResponse =
       endpoints.apiResponses[endpoints.apiResponses.length - 1];

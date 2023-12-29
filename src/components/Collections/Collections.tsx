@@ -12,7 +12,6 @@ import { deleteCollection, getCollections } from '../../apis/collections.ts';
 import { CollectionsContext } from './context.ts';
 import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal.tsx';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup.tsx';
-import { getEndpoints } from '../../apis/endpoints.ts';
 const Collections = () => {
   type Button = {
     url: string;
@@ -35,7 +34,6 @@ const Collections = () => {
 
   const [cRightClickMenu, setCRightClickMenu] = useState(false);
   const [cPoints, setCPoints] = useState({ top: 0, left: 0 });
-
 
   const [collectionsModal, setCollectionsModal] = useState<CollectionModals>({
     isCreateCollectionModalOpen: false,
