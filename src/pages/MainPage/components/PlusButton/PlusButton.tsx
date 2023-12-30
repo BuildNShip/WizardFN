@@ -30,7 +30,6 @@ const PlusButton = ({
           );
 
           if (currentResponse?.body.toString() === '{}') {
-            console.log(currentResponse?.body.toString());
             toast.error(
               'Kindly enter a valid JSON in the response body(empty)',
             );
@@ -43,8 +42,6 @@ const PlusButton = ({
 
             setIsInvalidJSON(false);
           } catch {
-            console.log(currentResponse);
-            console.log(endpoints);
             toast.error('Enter a valid JSON in the response body(catch)');
             setIsInvalidJSON(true);
           }

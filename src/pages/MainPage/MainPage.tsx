@@ -86,6 +86,11 @@ const MainPage = () => {
     });
   }, [currentCollection]);
 
+
+  useEffect(() => {
+    console.log(endpoints);
+  }, [endpoints]);
+
   return (
     <>
       <UserContext.Provider

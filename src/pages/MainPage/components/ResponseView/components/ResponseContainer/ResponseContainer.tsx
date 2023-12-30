@@ -18,13 +18,18 @@ const ResponseContainer = ({
   setResponseData: Dispatch<SetStateAction<ApiResponse[]>>;
   responseCount: number;
 }) => {
-  const [jsonData, setJsonData] = useState(`{}`);
+  const [jsonData, setJsonData] = useState('{}');
   const { endpoints, setEndpoints } = useContext(APIContext);
 
   const [showDescription, setShowDescription] = useState(false);
 
   const updateState = (fieldName: any, newValue: any) => {
+    console.log('Hoohoo');
+    console.log(fieldName, newValue);
+    console.log(responseCount);
+    console.log(responseData);
     const updatedData = responseData.map((item) => {
+      console.log(item.order, responseCount);
       if (item.order === responseCount) {
         return { ...item, [fieldName]: newValue };
       }

@@ -16,16 +16,27 @@ const ResponseView = () => {
       apiResponses: responseData,
     });
 
-    responseData.push({
-      responseCode: 0,
-      body: `{
+    // responseData.push({
+    //   responseCode: 0,
+    //   body: '{}',
+    //   isActive: false,
+    //   description: '',
+    //   order: responseCount,
+    // });
 
-      }`,
-      isActive: false,
-      description: '',
-      order: responseCount,
-    });
+    setResponseData([
+      ...responseData,
+      {
+        responseCode: 0,
+        body: '{}',
+        isActive: false,
+        description: '',
+        order: responseCount,
+      },
+    ]);
   }, [responseCount]);
+
+  console.log('ResponsesData', responseData);
 
   return (
     <div className={styles.responsesViewContainer}>
