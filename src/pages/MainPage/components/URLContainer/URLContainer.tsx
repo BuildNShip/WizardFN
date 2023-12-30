@@ -89,6 +89,7 @@ const URLContainer = () => {
           {`https://wizard.api/${currentProject.code}`}
           <input
             value={endpoints.endPointData.url}
+            className={styles.urlInputField}
             onChange={(e) => {
               setEndpoints({
                 ...endpoints,
