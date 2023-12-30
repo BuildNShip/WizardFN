@@ -47,7 +47,7 @@ privateGateway.interceptors.request.use(
   },
 );
 
-// Request Interceptor: Ensure that the URL ends with a trailing slash
+// Request Interceptor: Ensure that the URL ends with a trailing slash~
 // If the URL doesn't terminate with a slash, this interceptor appends one.
 privateGateway.interceptors.request.use(
   function (config) {
@@ -80,7 +80,7 @@ privateGateway.interceptors.response.use(
         const response = await publicGateway.post(buildVerse.getAccessToken, {
           refresh_token: localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
         });
-        localStorage.setItem('accessToken', response.data.response.accessToken);
+        localStorage.setItem('accessToken', response.data.response.access_token);
         //console.log('new access token',response.data.response.accessToken)
         // Retry the original request
         const { config } = error;
