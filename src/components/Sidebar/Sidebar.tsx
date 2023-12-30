@@ -13,11 +13,11 @@ const Sidebar = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
 
-  const { setCurrentProject } = useContext(UserContext);
+  const { setCurrentProject, isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     getProjects(setProjects);
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (projects.length > 0) {

@@ -149,7 +149,7 @@ export const login = async (
   publicGateway
     .post(buildVerse.login, data)
     .then((response) => {
-      toast.success(response.data.message.general[0]);
+      toast.success(response.data.message.general[0] || 'Logged in successfully');
       setModalTriggers({
         ...modalTriggers,
         isLoginModalOpen: false,

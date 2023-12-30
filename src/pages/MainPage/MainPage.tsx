@@ -15,6 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     if (localStorage.getItem('accessToken') === null) {
       guestRegister();
+      setIsLoggedIn(false);
     }
 
     if (localStorage.getItem('profileInfo') !== null) {
