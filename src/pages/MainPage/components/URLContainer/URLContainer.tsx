@@ -13,7 +13,7 @@ const URLContainer = () => {
   });
 
   const { currentProject } = useContext(UserContext);
-  const { endpoints, setEndpoints } = useContext(APIContext);
+  const { currentEndpoints: endpoints, setCurrentEndpoints: setEndpoints } = useContext(APIContext);
 
   const handleSendRequest = () => {
     const lastApiResponse =

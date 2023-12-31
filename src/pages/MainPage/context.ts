@@ -15,8 +15,8 @@ interface userContextType {
 export const UserContext = createContext(<userContextType>{});
 
 interface APIContextType {
-  endpoints: APIData;
-  setEndpoints: (apiData: APIData) => void;
+  currentEndpoints: APIData;
+  setCurrentEndpoints: (apiData: APIData) => void;
 }
 
 export const APIContext = createContext(<APIContextType>{});

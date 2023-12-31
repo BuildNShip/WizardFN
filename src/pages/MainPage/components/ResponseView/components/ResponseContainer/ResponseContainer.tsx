@@ -19,7 +19,7 @@ const ResponseContainer = ({
   responseCount: number;
 }) => {
   const [jsonData, setJsonData] = useState('{}');
-  const { endpoints, setEndpoints } = useContext(APIContext);
+  const { currentEndpoints: endpoints, setCurrentEndpoints: setEndpoints } = useContext(APIContext);
 
   const [showDescription, setShowDescription] = useState(false);
 
@@ -86,7 +86,7 @@ const ResponseContainer = ({
           </div>
         </div>
         <div className={styles.responseTopBarBButtons}>
-          <div className={styles.row}>
+          <div className="row">
             <select
               onChange={(e) => {
                 updateState('responseCode', Number(e.target.value));

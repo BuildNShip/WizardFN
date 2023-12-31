@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 import { ModalContext } from './context';
 import { UserContext } from '../../pages/MainPage/context';
-import { guestRegister, mergeAccount } from '../../apis/authentication';
+import { mergeAccount } from '../../apis/authentication';
 
 const TopBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);

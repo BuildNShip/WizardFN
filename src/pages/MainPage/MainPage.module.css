@@ -44,10 +44,6 @@
   border-left: none;
 }
 
-.row {
-  display: flex;
-  align-items: center;
-}
 
 .urlSendButton {
   font-size: 0.9rem;

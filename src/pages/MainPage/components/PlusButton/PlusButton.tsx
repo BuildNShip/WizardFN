@@ -10,7 +10,7 @@ const PlusButton = ({
   setResponseCount: (count: number) => void;
   responseCount: number;
 }) => {
-  const { endpoints } = useContext(APIContext);
+  const { currentEndpoints: endpoints } = useContext(APIContext);
   const [isInvalidJSON, setIsInvalidJSON] = useState(true);
 
   useEffect(() => {

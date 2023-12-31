@@ -64,8 +64,8 @@ const CreateEditModal = () => {
             <PrimaryButton
               buttonText={
                 collectionsModal.isCreateCollectionModalOpen
-                  ? 'Create Project'
-                  : 'Edit Project'
+                  ? 'Create Collection'
+                  : 'Edit Collection'
               }
               onClick={() => {
                 if (collectionsModal.isCreateCollectionModalOpen) {

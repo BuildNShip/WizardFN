@@ -177,7 +177,7 @@ const Collections = () => {
         <CreateEditModal />
         <div className={styles.collectionsContainer}>
           <div className={styles.collectionsTopbar}>
-            <div className={styles.row}>
+            <div className="row">
               <div className={styles.collectionsTopbarUsername}>
                 <div className={styles.collectionTopbarAvatar}>
                   {!isLoggedIn
@@ -257,7 +257,7 @@ const Collections = () => {
                       }}
                     >
                       <p onClick={() => handleSubMenuToggle(index)}>
-                        <div className={styles.row}>
+                        <div className="row">
                           <div className={`red ${styles.listIcon}`} />
                           {collection.title}
                         </div>

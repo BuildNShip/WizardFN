@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { buildVerse } from './urls';
+import toast from 'react-hot-toast';
 
 export const publicGateway = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL as string,
+  //The beackend requires the timezone and product headers to be set for every request hence the following code.
   headers: {
     'Content-Type': 'application/json',
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -17,7 +19,6 @@ publicGateway.interceptors.request.use(
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   },
 );
@@ -42,7 +43,6 @@ privateGateway.interceptors.request.use(
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   },
 );
@@ -59,7 +59,6 @@ privateGateway.interceptors.request.use(
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   },
 );
@@ -70,18 +69,15 @@ privateGateway.interceptors.response.use(
     return response;
   },
   async function (error) {
-    // TODO: if error occurs and status isn't 1000 nothing will happen
-    //console.log(error.response,error.response?.data?.statusCode === 1000)
     if (error.response?.data?.detail.statusCode === 1000) {
-      // publicGatewayAuth
-      //console.log("inside",error.response,error.response?.data?.statusCode)
-      //console.log("refresh",fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken"))
       try {
         const response = await publicGateway.post(buildVerse.getAccessToken, {
-          refresh_token: localStorage.getItem('refreshToken'), //fetchLocalStorage<AllTokens["refreshToken"]>("refreshToken")
+          refresh_token: localStorage.getItem('refreshToken'),
         });
-        localStorage.setItem('accessToken', response.data.response.access_token);
-        //console.log('new access token',response.data.response.accessToken)
+        localStorage.setItem(
+          'accessToken',
+          response.data.response.access_token,
+        );
         // Retry the original request
         const { config } = error;
         config.headers['Authorization'] = `Bearer ${localStorage.getItem(
@@ -94,32 +90,22 @@ privateGateway.interceptors.response.use(
               resolve(response_1);
             })
             .catch((error_1) => {
-              //console.log("error_1",error_1)
               reject(error_1);
             });
         });
       } catch (error_2) {
-        alert('Your session has expired. Please login again.');
-
-        // Wait for 3 seconds
+        toast.error('Your session has expired. Please login again.');
         setTimeout(() => {
-          //localStorage.clear();
-          //window.location.href = "/login";
+          localStorage.clear();
         }, 3000);
         return await Promise.reject(error_2);
       }
-    }
-    //! This was causeing unwanted redirects during api testing please fix.
-    //! Spend 2 hours to figure out this was causing the issue.
-    // if (error.response?.status === 500) {
-    //     // publicGatewayAuth
-    //     //console.log("inside", error.response, error.response?.data?.statusCode)
-    //     //Toast.error("A server error has occurred. Please try again later.");
-    //     window.location.href = "/500";
-    // }
+    } else {
+      // Any status codes that fall outside the range of 2xx cause this function to trigger
+      // Do something with response error
 
-    // Any status codes that fall outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error);
+      toast.error(error.response?.data?.detail.message);
+      return await Promise.reject(error);
+    }
   },
 );

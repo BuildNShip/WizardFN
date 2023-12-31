@@ -11,20 +11,9 @@ import { ProjectType } from '../../components/Sidebar/types';
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem('accessToken') === null) {
-      guestRegister();
-      setIsLoggedIn(false);
-    }
-
-    if (localStorage.getItem('profileInfo') !== null) {
-      setIsLoggedIn(true);
-      setEmail(JSON.parse(localStorage.getItem('profileInfo') as string).email);
-    }
-  }, [isLoggedIn]);
-
   const [email, setEmail] = useState('');
+  
+  //State for storing the currenly selected project and collection
   const [currentProject, setCurrentProject] = useState<ProjectType>({
     id: '',
     updated_by: '',
@@ -34,7 +23,6 @@ const MainPage = () => {
     code: '',
     selected: true,
   });
-
   const [currentCollection, setCurrentCollection] = useState<Collection>({
     id: '',
     updated_by: '',
@@ -46,8 +34,8 @@ const MainPage = () => {
     project_id: '',
     endpoints: [] as any[], // You can replace 'any' with a more specific type if needed
   });
-
-  const [endpoints, setEndpoints] = useState<APIData>({
+  //State for storing the currently selected endpoint
+  const [currentEndpoints, setCurrentEndpoints] = useState<APIData>({
     endPointData: {
       id: '',
       title: ' Untitled Endpoint',
@@ -78,19 +66,26 @@ const MainPage = () => {
   });
 
   useEffect(() => {
-    setEndpoints({
-      ...endpoints,
+    setCurrentEndpoints({
+      ...currentEndpoints,
       endPointData: {
-        ...endpoints.endPointData,
+        ...currentEndpoints.endPointData,
         collectionId: currentCollection.id,
       },
     });
   }, [currentCollection]);
 
-
   useEffect(() => {
-    console.log(endpoints);
-  }, [endpoints]);
+    if (localStorage.getItem('accessToken') === null) {
+      guestRegister();
+      setIsLoggedIn(false);
+    }
+
+    if (localStorage.getItem('profileInfo') !== null) {
+      setIsLoggedIn(true);
+      setEmail(JSON.parse(localStorage.getItem('profileInfo') as string).email);
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -112,8 +107,8 @@ const MainPage = () => {
 
           <APIContext.Provider
             value={{
-              endpoints,
-              setEndpoints,
+              currentEndpoints: currentEndpoints,
+              setCurrentEndpoints: setCurrentEndpoints,
             }}
           >
             <div className={styles.mainAppContainer}>

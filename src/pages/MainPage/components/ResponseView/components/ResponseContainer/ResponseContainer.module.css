@@ -97,11 +97,6 @@
   border-radius: 50%;
 }
 
-.row {
-  display: flex;
-  align-items: center;
-}
-
 .row1 {
   display: flex;
   align-items: end;

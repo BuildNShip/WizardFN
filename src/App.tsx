@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { Toaster, ToastPosition } from 'react-hot-toast';
 import MainPage from './pages/MainPage/MainPage';
 
 const App = () => {
@@ -9,21 +9,24 @@ const App = () => {
       element: <MainPage />,
     },
   ]);
+
+  const toasterProps = {
+    containerStyle: {
+      fontFamily: 'Inter, sans-serif',
+    },
+    toastOptions: {
+      style: {
+        backgroundColor: '#f9eec5',
+        color: '#262626',
+      },
+    },
+    position: 'bottom-center' as ToastPosition,
+  };
+
   return (
     <>
       <RouterProvider router={router} />
-      <Toaster
-        containerStyle={{
-          fontFamily: 'Inter, sans-serif',
-        }}
-        toastOptions={{
-          style: {
-            backgroundColor: '#f9eec5',
-            color: '#262626',
-          },
-        }}
-        position="bottom-center"
-      />
+      <Toaster {...toasterProps} />
     </>
   );
 };

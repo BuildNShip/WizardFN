@@ -1,0 +1,48 @@
+.json5-editor-wrapper {
+  border: 1px solid var(--primary-color) !important;
+}
+
+.json5-editor-wrapper .line-numbers-rows {
+  border-right: 1px solid var(--primary-color) !important;
+}
+.json5-editor-wrapper .line-numbers-rows > .errorLine {
+  background: var(--red) !important;
+}
+.json5-editor-wrapper .line-numbers-rows > .errorLine > .errorMessage {
+  display: none;
+}
+
+.json5-editor-wrapper
+  .line-numbers-rows
+  > .errorLine:hover
+  > .errorMessage
+  > span {
+  display: none !important;
+}
+
+.j .json5-editor-wrapper .token.punctuation {
+  color: var(--light-skin) !important;
+}
+.json5-editor-wrapper .token.indent::after {
+  content: url("data:image/svg+xml; utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='21' height='21'><line stroke='rgba(249, 238, 197, 0.2)' x1='0' y1='0' x2='0' y2='21'></line></svg>") !important;
+}
+.json5-editor-wrapper .token.string {
+  color: #4ec9b0 !important;
+}
+.json5-editor-wrapper .token.comment {
+  color: #6a737d !important;
+}
+.json5-editor-wrapper .token.number,
+.json5-editor-wrapper .token.boolean,
+.json5-editor-wrapper .token.keyword {
+  color: #ce9178 !important;
+}
+.json5-editor-wrapper .token.property {
+  color: #dcdcaa !important;
+}
+.json5-editor-wrapper .token.property.exist-property {
+  text-decoration: line-through !important;
+}
+.json5-editor-wrapper pre {
+  color: #faf8f4 !important;
+}

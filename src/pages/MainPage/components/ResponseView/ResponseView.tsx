@@ -6,7 +6,7 @@ import { APIContext } from '../../context';
 
 const ResponseView = () => {
   const [responseCount, setResponseCount] = useState(1);
-  const { endpoints, setEndpoints } = useContext(APIContext);
+  const { currentEndpoints: endpoints, setCurrentEndpoints: setEndpoints } = useContext(APIContext);
 
   const [responseData, setResponseData] = useState<ApiResponse[]>([]);
 
