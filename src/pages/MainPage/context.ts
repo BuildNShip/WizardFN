@@ -3,8 +3,8 @@ import { ProjectType } from '../../components/Sidebar/types';
 
 interface userContextType {
   isLoggedIn: boolean;
-  email: string;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
+  email: string;
   setEmail: (email: string) => void;
   currentProject: ProjectType;
   setCurrentProject: (currentProject: ProjectType) => void;
@@ -12,11 +12,11 @@ interface userContextType {
   setCurrentCollection: (currentCollection: Collection) => void;
 }
 
-export const UserContext = createContext(<userContextType>{});
-
 interface APIContextType {
   currentEndpoints: APIData;
   setCurrentEndpoints: (apiData: APIData) => void;
 }
+
+export const UserContext = createContext(<userContextType>{});
 
 export const APIContext = createContext(<APIContextType>{});

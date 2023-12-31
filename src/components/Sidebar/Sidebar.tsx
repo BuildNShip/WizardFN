@@ -1,33 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
-
 import styles from './Sidebar.module.css';
+
 import { deleteProject, getProjects } from '../../apis/projects';
 import { ProjectModals, ProjectType } from './types';
+
+import { SidebarContext } from './context';
+import { UserContext } from '../../pages/MainPage/context';
+
 import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal';
 import RightClickMenu from '../RightClickMenu/RightClickMenu';
-import { SidebarContext } from './context';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
-import { UserContext } from '../../pages/MainPage/context';
+
 
 const Sidebar = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });
-
-  const { setCurrentProject, isLoggedIn } = useContext(UserContext);
-
-  useEffect(() => {
-    getProjects(setProjects);
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (projects.length > 0) {
-      projects.filter((project) => {
-        if (project.selected) {
-          setCurrentProject(project);
-        }
-      });
-    }
-  }, [projects]);
 
   const [projectModals, setProjectModals] = useState<ProjectModals>({
     isCreateProjectModalOpen: false,
@@ -40,6 +27,8 @@ const Sidebar = () => {
     title: '',
     id: '',
   });
+
+  const { setCurrentProject, isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     const handleClick = () => {
@@ -76,6 +65,20 @@ const Sidebar = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    getProjects(setProjects);
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (projects.length > 0) {
+      projects.filter((project) => {
+        if (project.selected) {
+          setCurrentProject(project);
+        }
+      });
+    }
+  }, [projects]);
 
   return (
     <SidebarContext.Provider

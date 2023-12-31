@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
+import { guestRegister } from '../../apis/authentication'; 
+
+import { UserContext, APIContext } from './context';
+import { ProjectType } from '../../components/Sidebar/types';
+
 import Collections from '../../components/Collections/Collections';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './MainPage.module.css';
 import ResponseView from './components/ResponseView/ResponseView';
 import URLContainer from './components/URLContainer/URLContainer';
-import { guestRegister } from '../../apis/authentication'; // Import useJWT hook
-import { UserContext, APIContext } from './context';
 import TopBar from '../../components/TopBar/TopBar';
-import { ProjectType } from '../../components/Sidebar/types';
+
+
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
-  
+
   //State for storing the currenly selected project and collection
   const [currentProject, setCurrentProject] = useState<ProjectType>({
     id: '',
@@ -92,11 +96,14 @@ const MainPage = () => {
       <UserContext.Provider
         value={{
           isLoggedIn,
-          email,
           setIsLoggedIn,
+
+          email,
           setEmail,
+
           currentProject,
           setCurrentProject,
+
           currentCollection,
           setCurrentCollection,
         }}
@@ -107,8 +114,8 @@ const MainPage = () => {
 
           <APIContext.Provider
             value={{
-              currentEndpoints: currentEndpoints,
-              setCurrentEndpoints: setCurrentEndpoints,
+              currentEndpoints,
+              setCurrentEndpoints,
             }}
           >
             <div className={styles.mainAppContainer}>
