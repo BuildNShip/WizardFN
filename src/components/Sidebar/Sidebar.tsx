@@ -11,7 +11,6 @@ import CreateEditModal from './ModalComponents/CreateEditModal/CreateEditModal';
 import RightClickMenu from '../RightClickMenu/RightClickMenu';
 import BinaryPopup from './ModalComponents/BinaryPopup/BinaryPopup';
 
-
 const Sidebar = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [points, setPoints] = useState({ top: 0, left: 0 });

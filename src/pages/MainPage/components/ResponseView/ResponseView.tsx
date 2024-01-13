@@ -6,7 +6,8 @@ import { APIContext } from '../../context';
 
 const ResponseView = () => {
   const [responseCount, setResponseCount] = useState(1);
-  const { currentEndpoints: endpoints, setCurrentEndpoints: setEndpoints } = useContext(APIContext);
+  const { currentEndpoints: endpoints, setCurrentEndpoints: setEndpoints } =
+    useContext(APIContext);
 
   const [responseData, setResponseData] = useState<ApiResponse[]>([]);
 
@@ -35,8 +36,6 @@ const ResponseView = () => {
       },
     ]);
   }, [responseCount]);
-
-  console.log('ResponsesData', responseData);
 
   return (
     <div className={styles.responsesViewContainer}>

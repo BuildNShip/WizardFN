@@ -3,7 +3,6 @@ import { privateGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 import toast from 'react-hot-toast';
 
-
 export const getProjects = async (
   setProjects: React.Dispatch<React.SetStateAction<ProjectType[]>>,
 ): Promise<void> => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { guestRegister } from '../../apis/authentication'; 
+import { guestRegister } from '../../apis/authentication';
 
 import { UserContext, APIContext } from './context';
 import { ProjectType } from '../../components/Sidebar/types';
@@ -10,8 +10,6 @@ import styles from './MainPage.module.css';
 import ResponseView from './components/ResponseView/ResponseView';
 import URLContainer from './components/URLContainer/URLContainer';
 import TopBar from '../../components/TopBar/TopBar';
-
-
 
 const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -108,7 +106,12 @@ const MainPage = () => {
           setCurrentCollection,
         }}
       >
-        <div className={styles.mainContainer}>
+        <div
+          onKeyDown={() => {
+            console.log("I'm here");
+          }}
+          className={styles.mainContainer}
+        >
           <Sidebar />
           <Collections />
 

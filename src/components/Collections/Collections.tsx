@@ -216,6 +216,12 @@ const Collections = () => {
                   left: e.clientX,
                 });
               }}
+              onClick={() => {
+                setCollectionsModal({
+                  ...collectionsModal,
+                  isCreateCollectionModalOpen: true,
+                });
+              }}
               className={styles.addButton}
             >
               +

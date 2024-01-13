@@ -88,7 +88,17 @@ const TopBar = () => {
               </div>
               <div className={styles.topbarTab}>Another Tab</div>
             </div>
-            <div className={styles.topbarAddTab}>+</div>
+            <div
+              onClick={() => {
+                setModalTriggers({
+                  ...modalTriggers,
+                  askMergePopup: true,
+                });
+              }}
+              className={styles.topbarAddTab}
+            >
+              +
+            </div>
             <div className={styles.shareButton}>Share</div>
           </div>
 
