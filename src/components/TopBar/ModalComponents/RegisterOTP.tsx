@@ -42,6 +42,28 @@ const RegisterOTP = ({
     }
   }, [modalType]);
 
+  const onRegister = () => {
+    if (modalType === 'loginWithOTP')
+      login(
+        email,
+        otp,
+        setModalTriggers,
+        modalTriggers,
+        setIsLoggedIn,
+        setEmail,
+        'loginWithOTP',
+      );
+    else
+      register(
+        email,
+        otp,
+        setModalTriggers,
+        modalTriggers,
+        setEmail,
+        setIsLoggedIn,
+      );
+  };
+
   return (
     <>
       {modalTriggers[Modalname as keyof ModalTriggersType] && (
@@ -50,7 +72,14 @@ const RegisterOTP = ({
           setModalTriggers={setModalTriggers}
           Modalname={Modalname}
         >
-          <div className={styles.modalContent}>
+          <div
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                onRegister();
+              }
+            }}
+            className={styles.modalContent}
+          >
             <div className={styles.modalTitle}>
               {modalType === 'loginWithOTP' ? 'Login' : 'Register'} with OTP
             </div>
@@ -67,30 +96,7 @@ const RegisterOTP = ({
               />
             </div>
             <div className={styles.modalButtonContainer}>
-              <PrimaryButton
-                onClick={() => {
-                  if (modalType === 'loginWithOTP')
-                    login(
-                      email,
-                      otp,
-                      setModalTriggers,
-                      modalTriggers,
-                      setIsLoggedIn,
-                      setEmail,
-                      'loginWithOTP',
-                    );
-                  else
-                    register(
-                      email,
-                      otp,
-                      setModalTriggers,
-                      modalTriggers,
-                      setEmail,
-                      setIsLoggedIn,
-                    );
-                }}
-                buttonText="Verify OTP"
-              />
+              <PrimaryButton onClick={onRegister} buttonText="Verify OTP" />
             </div>
           </div>
         </Modal>

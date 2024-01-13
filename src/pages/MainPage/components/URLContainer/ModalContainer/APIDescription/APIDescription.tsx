@@ -27,6 +27,7 @@ const APIDescription = ({
               API Description<span>*</span>
             </div>
             <input
+            autoFocus={true}
               placeholder="Enter the API Description"
               className={styles.modalInput}
               type="text"

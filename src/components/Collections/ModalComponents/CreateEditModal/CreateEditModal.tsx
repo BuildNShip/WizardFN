@@ -31,6 +31,28 @@ const CreateEditModal = () => {
     }
   }, [collectionsModal]);
 
+  const collectionSubmitHandler = () => {
+    if (collectionsModal.isCreateCollectionModalOpen) {
+      console.log('Test');
+      createCollections(
+        currentProject.id,
+        collection.title,
+        setCollections,
+        collectionsModal,
+        setCollectionsModal,
+      );
+    } else if (collectionsModal.isEditCollectionModalOpen) {
+      editCollection(
+        currentProject.id,
+        collection.id,
+        collection.title,
+        setCollections,
+        collectionsModal,
+        setCollectionsModal,
+      );
+    }
+  };
+
   return (
     <>
       <Modal
@@ -38,7 +60,14 @@ const CreateEditModal = () => {
         setModalTriggers={setCollectionsModal}
         Modalname={modalType}
       >
-        <div className={styles.modalContent}>
+        <div
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              collectionSubmitHandler();
+            }
+          }}
+          className={styles.modalContent}
+        >
           <div className={styles.modalTitle}>
             {collectionsModal.isCreateCollectionModalOpen ? 'Create' : 'Edit'}{' '}
             Collections
@@ -48,6 +77,7 @@ const CreateEditModal = () => {
               Collection Title<span>*</span>
             </div>
             <input
+              autoFocus={true}
               placeholder="Enter your collection title"
               className={styles.modalInput}
               type="text"
@@ -68,24 +98,7 @@ const CreateEditModal = () => {
                   : 'Edit Collection'
               }
               onClick={() => {
-                if (collectionsModal.isCreateCollectionModalOpen) {
-                  createCollections(
-                    currentProject.id,
-                    collection.title,
-                    setCollections,
-                    collectionsModal,
-                    setCollectionsModal,
-                  );
-                } else if (collectionsModal.isEditCollectionModalOpen) {
-                  editCollection(
-                    currentProject.id,
-                    collection.id,
-                    collection.title,
-                    setCollections,
-                    collectionsModal,
-                    setCollectionsModal,
-                  );
-                }
+                collectionSubmitHandler();
               }}
             />
           </div>

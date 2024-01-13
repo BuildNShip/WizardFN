@@ -110,6 +110,7 @@ const ResponseContainer = ({
         {showDescription && (
           <div className={styles.row1}>
             <input
+            autoFocus={true}
               onChange={(e) => {
                 updateState('description', e.target.value);
               }}

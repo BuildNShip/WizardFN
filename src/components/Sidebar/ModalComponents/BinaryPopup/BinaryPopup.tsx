@@ -1,7 +1,7 @@
 import { IoClose } from 'react-icons/io5';
 import styles from './BinaryPopup.module.css';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { SidebarContext } from '../../context';
 import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
 import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
@@ -22,12 +22,27 @@ const BinaryPopup = ({
 }) => {
   const { projectModals, setProjectModals } = useContext(SidebarContext);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    modalRef.current?.focus();
+  }, [projectModals]);
+
   return (
     <>
       {projectModals[Modalname as keyof ProjectModals] && (
         <div>
           <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
+            <div
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  onClick();
+                }
+              }}
+              tabIndex={0}
+              ref={modalRef}
+              className={styles.modal}
+            >
               <div className={styles.modalTopbar}>
                 <button
                   className={styles.closeButton}
@@ -44,7 +59,14 @@ const BinaryPopup = ({
                 <hr className={styles.horizonalLine} />
               </div>
 
-              <div className={styles.modalContent}>
+              <div
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    onClick();
+                  }
+                }}
+                className={styles.modalContent}
+              >
                 <div className={styles.modalTitle}>Oh Snap!</div>
                 <div className={styles.modalInputContainer}>
                   <div className={styles.modalInputLabel}>{content}</div>

@@ -220,6 +220,7 @@ const Collections = () => {
                 setCollectionsModal({
                   ...collectionsModal,
                   isCreateCollectionModalOpen: true,
+                  isEditCollectionModalOpen: false,
                 });
               }}
               className={styles.addButton}

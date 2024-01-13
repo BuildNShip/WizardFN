@@ -20,6 +20,24 @@ const CreateEditModal = () => {
     }
   }, [projectModals]);
 
+  const createProjectHandler = () => {
+    if (projectModals.isCreateProjectModalOpen)
+      createProject(
+        project.title,
+        projectModals,
+        setProjectModals,
+        setProjects,
+      );
+    else if (projectModals.isEditProjectModalOpen)
+      editProject(
+        project.title,
+        project.id,
+        projectModals,
+        setProjectModals,
+        setProjects,
+      );
+  };
+
   return (
     <>
       <Modal
@@ -27,13 +45,22 @@ const CreateEditModal = () => {
         setModalTriggers={setProjectModals}
         Modalname={modalType}
       >
-        <div className={styles.modalContent}>
+        <div
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              createProjectHandler();
+            }
+          }}
+          tabIndex={0}
+          className={styles.modalContent}
+        >
           <div className={styles.modalTitle}>Create Project</div>
           <div className={styles.modalInputContainer}>
             <div className={styles.modalInputLabel}>
               Project Title<span>*</span>
             </div>
             <input
+            autoFocus={true}
               placeholder="Enter your project title"
               onChange={(e) => {
                 setProject({
@@ -48,23 +75,7 @@ const CreateEditModal = () => {
           </div>
           <div className={styles.modalButtonContainer}>
             <PrimaryButton
-              onClick={() => {
-                if (projectModals.isCreateProjectModalOpen)
-                  createProject(
-                    project.title,
-                    projectModals,
-                    setProjectModals,
-                    setProjects,
-                  );
-                else if (projectModals.isEditProjectModalOpen)
-                  editProject(
-                    project.title,
-                    project.id,
-                    projectModals,
-                    setProjectModals,
-                    setProjects,
-                  );
-              }}
+              onClick={createProjectHandler}
               buttonText={
                 projectModals.isCreateProjectModalOpen
                   ? 'Create Project'

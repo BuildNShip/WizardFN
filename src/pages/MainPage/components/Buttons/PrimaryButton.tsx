@@ -9,7 +9,7 @@ const PrimaryButton = ({
 }) => {
   return (
     <>
-      <button onClick={onClick} className={styles.primaryButton}>
+      <button  onClick={onClick} className={styles.primaryButton}>
         {buttonText}
       </button>
     </>

@@ -2,7 +2,7 @@ import { IoClose } from 'react-icons/io5';
 import styles from './BinaryPopup.module.css';
 import { ModalTriggersType } from '../../types';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { ModalContext } from '../../context';
 import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
 import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
@@ -22,12 +22,27 @@ const BinaryPopup = ({
 }) => {
   const { modalTriggers, setModalTriggers } = useContext(ModalContext);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    modalRef.current?.focus();
+  }, [modalTriggers]);
+
   return (
     <>
       {modalTriggers[Modalname as keyof ModalTriggersType] && (
         <div>
           <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
+            <div
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  onClick();
+                }
+              }}
+              tabIndex={0}
+              ref={modalRef}
+              className={styles.modal}
+            >
               <div className={styles.modalTopbar}>
                 <button
                   className={styles.closeButton}

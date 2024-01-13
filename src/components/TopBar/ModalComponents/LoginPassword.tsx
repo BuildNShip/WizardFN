@@ -16,6 +16,19 @@ const LoginPassword = ({ Modalname }: { Modalname: string }) => {
   const { modalTriggers, setModalTriggers, email } = useContext(ModalContext);
   const { setEmail } = useContext(UserContext);
   const { setIsLoggedIn } = useContext(UserContext);
+
+  const loginHandler = () => {
+    console.log("Uff")
+    login(
+      email,
+      password,
+      setModalTriggers,
+      modalTriggers,
+      setIsLoggedIn,
+      setEmail,
+      'loginWithPassword',
+    );
+  };
   return (
     <>
       {
@@ -26,7 +39,15 @@ const LoginPassword = ({ Modalname }: { Modalname: string }) => {
               setModalTriggers={setModalTriggers}
               Modalname={Modalname}
             >
-              <div className={styles.modalContent}>
+              <div
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    loginHandler();
+                  }
+                }}
+                tabIndex={0}
+                className={styles.modalContent}
+              >
                 <div className={styles.modalTitle}>Login</div>
                 <p className={styles.emailLabel}>{email}</p>
                 <div className={styles.modalInputContainer}>
@@ -34,6 +55,7 @@ const LoginPassword = ({ Modalname }: { Modalname: string }) => {
                     Password<span>*</span>
                   </div>
                   <input
+                    autoFocus={true}
                     placeholder="Enter your password"
                     onChange={(e) => setPassword(e.target.value)}
                     className={styles.modalInput}
@@ -43,17 +65,9 @@ const LoginPassword = ({ Modalname }: { Modalname: string }) => {
                 <div className={styles.modalButtonContainer}>
                   <PrimaryButton
                     buttonText="Login"
-                    onClick={() =>
-                      login(
-                        email,
-                        password,
-                        setModalTriggers,
-                        modalTriggers,
-                        setIsLoggedIn,
-                        setEmail,
-                        'loginWithPassword',
-                      )
-                    }
+                    onClick={() => {
+                      loginHandler();
+                    }}
                   />
 
                   <SecondaryButton

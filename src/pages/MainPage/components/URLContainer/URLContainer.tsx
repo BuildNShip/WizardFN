@@ -89,6 +89,7 @@ const URLContainer = () => {
         <div className={styles.urlInput}>
           {`https://wizard.api/${currentProject.code}`}
           <input
+          autoFocus={true}
             value={endpoints.endPointData.url}
             className={styles.urlInputField}
             onChange={(e) => {

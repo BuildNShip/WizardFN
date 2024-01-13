@@ -33,6 +33,18 @@ const ForgetPassword = ({
     }
   }, [modalType]);
 
+  const resetPasswordHandler = () => {
+    resetPassword(
+      email,
+      otp,
+      password,
+      setModalTriggers,
+      modalTriggers,
+      setIsLoggedIn,
+      setEmail,
+    );
+  };
+
   return (
     <>
       {modalTriggers[Modalname as keyof ModalTriggersType] && (
@@ -41,7 +53,15 @@ const ForgetPassword = ({
           setModalTriggers={setModalTriggers}
           Modalname={Modalname}
         >
-          <div className={styles.modalContent}>
+          <div
+            // onKeyDown={(event) => {
+            //   if (event.key === 'Enter') {
+            //     resetPasswordHandler();
+            //   }
+            // }}
+            // tabIndex={0}
+            className={styles.modalContent}
+          >
             <div className={styles.modalTitle}>Forget Password</div>
             <p className={styles.emailLabel}>{email}</p>
 
@@ -50,6 +70,7 @@ const ForgetPassword = ({
                 Enter OTP<span>*</span>
               </div>
               <input
+                autoFocus={true}
                 placeholder="Enter OTP"
                 onChange={(e) => {
                   setOTP(e.target.value);
@@ -76,15 +97,7 @@ const ForgetPassword = ({
             <div className={styles.modalButtonContainer}>
               <PrimaryButton
                 onClick={() => {
-                  resetPassword(
-                    email,
-                    otp,
-                    password,
-                    setModalTriggers,
-                    modalTriggers,
-                    setIsLoggedIn,
-                    setEmail,
-                  );
+                  resetPasswordHandler();
                 }}
                 buttonText="Reset Password"
               />

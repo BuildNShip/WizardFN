@@ -104,7 +104,7 @@ privateGateway.interceptors.response.use(
       // Any status codes that fall outside the range of 2xx cause this function to trigger
       // Do something with response error
 
-      toast.error(error.response?.data?.detail.message);
+      // toast.error(error.response?.data?.detail.message || 'Something went wrong');
       return await Promise.reject(error);
     }
   },

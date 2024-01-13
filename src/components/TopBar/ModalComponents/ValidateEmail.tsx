@@ -32,13 +32,21 @@ const ValidateEmail = ({ Modalname }: { Modalname: string }) => {
           setModalTriggers={setModalTriggers}
           Modalname={Modalname}
         >
-          <div className={styles.modalContent}>
+          <div
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                validateEmail(email, setModalTriggers, modalTriggers);
+              }
+            }}
+            className={styles.modalContent}
+          >
             <div className={styles.modalTitle}>Login</div>
             <div className={styles.modalInputContainer}>
               <div className={styles.modalInputLabel}>
                 Email Address<span>*</span>
               </div>
               <input
+              autoFocus={true}
                 value={email}
                 placeholder="Enter your email address"
                 onChange={(e) => setEmail && setEmail(e.target.value)}

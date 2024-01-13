@@ -1,7 +1,7 @@
 import { IoClose } from 'react-icons/io5';
 import styles from './BinaryPopup.module.css';
 
-import { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 
 import PrimaryButton from '../../../../pages/MainPage/components/Buttons/PrimaryButton';
 import SecondaryButton from '../../../../pages/MainPage/components/Buttons/SecondaryButton';
@@ -23,12 +23,27 @@ const BinaryPopup = ({
   const { collectionsModal, setCollectionsModal } =
     useContext(CollectionsContext);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    modalRef.current?.focus();
+  }, [collectionsModal]);
+
   return (
     <>
       {collectionsModal[Modalname as keyof CollectionModals] && (
         <div>
           <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
+            <div
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  onClick();
+                }
+              }}
+              tabIndex={0}
+              ref={modalRef}
+              className={styles.modal}
+            >
               <div className={styles.modalTopbar}>
                 <button
                   className={styles.closeButton}
@@ -51,19 +66,12 @@ const BinaryPopup = ({
                   <div className={styles.modalInputLabel}>{content}</div>
                 </div>
                 <div className={styles.modalButtonContainer}>
-                  <PrimaryButton
-                    buttonText={buttonText}
-                    onClick={() => {
-                      onClick();
-                    }}
-                  />
+                  <PrimaryButton buttonText={buttonText} onClick={onClick} />
 
                   {onClickCancel && (
                     <SecondaryButton
                       buttonText="Don't Delete"
-                      onClick={() => {
-                        onClickCancel();
-                      }}
+                      onClick={onClickCancel}
                     />
                   )}
                 </div>

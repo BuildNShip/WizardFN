@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+*:focus {
+  outline: none;
+}
+
 :root {
   --primary-color: #262626;
   --secondary-color: #1f1f1f;

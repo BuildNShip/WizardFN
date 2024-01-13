@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { privateGateway } from '../services/apiGateways';
 import { buildVerse } from '../services/urls';
 
@@ -10,7 +11,6 @@ export const getCollections = async (
       .get(buildVerse.getCollections(projectId))
       .then((response) => {
         setCollections(response.data.response.collections);
-        // console.log(response.data.response.collections);
       })
       .catch((error) => {
         console.log(error);
@@ -24,21 +24,27 @@ export const createCollections = async (
   collectionsModal: CollectionModals,
   setCollectionsModal: React.Dispatch<React.SetStateAction<CollectionModals>>,
 ) => {
-  privateGateway
-    .post(buildVerse.createCollection(projectId), {
-      title: title,
-    })
-    .then((response) => {
-      setCollectionsModal({
-        ...collectionsModal,
-        isCreateCollectionModalOpen: false,
+  if (projectId) {
+    privateGateway
+      .post(buildVerse.createCollection(projectId), {
+        title: title,
+      })
+      .then((response) => {
+        setCollectionsModal({
+          ...collectionsModal,
+          isCreateCollectionModalOpen: false,
+        });
+        getCollections(projectId, setCollections);
+        console.log(response);
+        toast.success('Collection created successfully');
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('Collection creation failed');
       });
-      getCollections(projectId, setCollections);
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  } else {
+    toast.error('Please select a project');
+  }
 };
 
 export const editCollection = async (
